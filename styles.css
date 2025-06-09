@@ -5,20 +5,54 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #ff0000;
+    --secondary-color: #00ff00;
+    --background-color: #0a0a0a;
+    --text-color: #ffffff;
+    --accent-color: #ff3333;
+    --dark-overlay: rgba(0, 0, 0, 0.85);
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Special Elite', cursive;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Header ve Navigasyon */
 header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid var(--primary-color);
 }
 
 nav {
@@ -31,9 +65,23 @@ nav {
 }
 
 .logo {
-    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-text {
+    font-size: 2rem;
     font-weight: bold;
-    color: #2c3e50;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.member-count {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    margin-top: 0.2rem;
 }
 
 .nav-links {
@@ -47,109 +95,320 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: #2c3e50;
+    color: var(--text-color);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #3498db;
+    color: var(--primary-color);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 /* Ana Bölümler */
 main {
     margin-top: 80px;
+    position: relative;
+    z-index: 2;
 }
 
 section {
     padding: 4rem 5%;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 }
 
 /* Hero Bölümü */
 .hero {
     text-align: center;
     padding: 6rem 5%;
-    background: linear-gradient(135deg, #3498db, #2c3e50);
-    color: white;
+    position: relative;
+    overflow: hidden;
 }
 
-.hero h1 {
-    font-size: 3rem;
+.glitch-container {
+    margin-bottom: 2rem;
+}
+
+.glitch {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    text-shadow: 0.05em 0 0 var(--primary-color),
+                -0.05em -0.05em 0 var(--secondary-color);
+    animation: glitch 1s infinite;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.warning {
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary-color);
+    padding: 1rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.warning i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.stat-item {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    min-width: 200px;
+}
+
+.stat-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+/* Üyelik Bölümü */
+.membership {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
 }
 
-.cta-button {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
+.requirements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.requirement-item {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.requirement-item:hover {
+    transform: translateY(-5px);
+}
+
+.requirement-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.join-button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-family: 'Special Elite', cursive;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 2rem auto;
+    border-radius: 5px;
 }
 
-.cta-button:hover {
-    background-color: #c0392b;
+.join-button:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
 }
 
-/* Hakkımda Bölümü */
-.about {
-    background-color: #f9f9f9;
+/* Forum Bölümü */
+.forum {
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
-.about h2 {
-    text-align: center;
+.forum-preview {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--primary-color);
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.forum-stats {
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 2rem;
-    color: #2c3e50;
 }
 
-.about-content {
+.stat {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
+}
+
+.stat i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.forum-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.category {
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.category:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+.category i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
 }
 
 /* İletişim Bölümü */
 .contact {
-    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.contact h2 {
-    margin-bottom: 2rem;
-    color: #2c3e50;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
+.contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
+    margin-top: 2rem;
 }
 
-.social-icon {
+.contact-item {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.contact-item i {
     font-size: 2rem;
-    color: #2c3e50;
-    transition: color 0.3s ease;
-}
-
-.social-icon:hover {
-    color: #3498db;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
 /* Footer */
 footer {
-    background-color: #2c3e50;
-    color: white;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: var(--text-color);
+    padding: 2rem 5%;
+    border-top: 1px solid var(--primary-color);
+}
+
+.disclaimer {
     text-align: center;
-    padding: 2rem;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--primary-color);
+}
+
+/* Animasyonlar */
+@keyframes glitch {
+    0% {
+        text-shadow: 0.05em 0 0 var(--primary-color),
+                    -0.05em -0.05em 0 var(--secondary-color);
+    }
+    14% {
+        text-shadow: 0.05em 0 0 var(--primary-color),
+                    -0.05em -0.05em 0 var(--secondary-color);
+    }
+    15% {
+        text-shadow: -0.05em -0.025em 0 var(--primary-color),
+                    0.025em 0.025em 0 var(--secondary-color);
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 var(--primary-color),
+                    0.025em 0.025em 0 var(--secondary-color);
+    }
+    50% {
+        text-shadow: 0.025em 0.05em 0 var(--primary-color),
+                    0.05em 0 0 var(--secondary-color);
+    }
+    99% {
+        text-shadow: 0.025em 0.05em 0 var(--primary-color),
+                    0.05em 0 0 var(--secondary-color);
+    }
+    100% {
+        text-shadow: -0.025em 0 0 var(--primary-color),
+                    -0.025em -0.025em 0 var(--secondary-color);
+    }
 }
 
 /* Responsive Tasarım */
@@ -158,15 +417,31 @@ footer {
         display: none;
     }
     
-    .hero h1 {
-        font-size: 2rem;
+    .glitch {
+        font-size: 2.5rem;
     }
     
-    .hero p {
-        font-size: 1rem;
+    .stats {
+        flex-direction: column;
+        align-items: center;
     }
     
-    section {
-        padding: 3rem 5%;
+    .stat-item {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .requirements {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-methods {
+        grid-template-columns: 1fr;
     }
 } 

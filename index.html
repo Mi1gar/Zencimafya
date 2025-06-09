@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benim Web Sitem</title>
+    <title>Zencimafya - Gizli Örgüt</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="overlay"></div>
     <header>
         <nav>
-            <div class="logo">Web Sitem</div>
+            <div class="logo">
+                <span class="logo-text">Zencimafya</span>
+                <span class="member-count">331 Üye</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="#anasayfa">Ana Sayfa</a></li>
-                <li><a href="#hakkimda">Hakkımda</a></li>
+                <li><a href="#uyelik">Üyelik</a></li>
+                <li><a href="#forum">Forum</a></li>
                 <li><a href="#iletisim">İletişim</a></li>
             </ul>
         </nav>
@@ -21,30 +27,127 @@
 
     <main>
         <section id="anasayfa" class="hero">
-            <h1>Hoş Geldiniz</h1>
-            <p>Modern ve şık web siteme hoş geldiniz!</p>
-            <button class="cta-button">Daha Fazla</button>
+            <div class="glitch-container">
+                <h1 class="glitch" data-text="ZENCIMAFYA">ZENCIMAFYA</h1>
+            </div>
+            <p class="tagline">Gölgelerin Efendileri</p>
+            <div class="warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Bu site sadece parodi amaçlıdır. Gerçek bir mafya örgütü ile ilgisi yoktur.</span>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <span>331 Aktif Üye</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Gizli Operasyonlar</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-globe"></i>
+                    <span>Global Ağ</span>
+                </div>
+            </div>
         </section>
 
-        <section id="hakkimda" class="about">
-            <h2>Hakkımda</h2>
-            <div class="about-content">
-                <p>Bu bölümde kendiniz hakkında bilgi verebilirsiniz.</p>
+        <section id="uyelik" class="membership">
+            <h2>Üyelik Kriterleri</h2>
+            <div class="requirements">
+                <div class="requirement-item">
+                    <i class="fas fa-user-secret"></i>
+                    <h3>Gizlilik</h3>
+                    <p>Mutlak sessizlik ve sadakat</p>
+                </div>
+                <div class="requirement-item">
+                    <i class="fas fa-brain"></i>
+                    <h3>Zeka</h3>
+                    <p>Stratejik düşünme yeteneği</p>
+                </div>
+                <div class="requirement-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Sadakat</h3>
+                    <p>Örgüte bağlılık ve güven</p>
+                </div>
+            </div>
+            <button class="join-button">Üyelik Başvurusu</button>
+        </section>
+
+        <section id="forum" class="forum">
+            <h2>Gizli Forum</h2>
+            <div class="forum-preview">
+                <div class="forum-stats">
+                    <div class="stat">
+                        <i class="fas fa-comments"></i>
+                        <span>1,337 Aktif Konu</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-user-ninja"></i>
+                        <span>331 Gizli Üye</span>
+                    </div>
+                </div>
+                <div class="forum-categories">
+                    <div class="category">
+                        <i class="fas fa-mask"></i>
+                        <span>Operasyonlar</span>
+                    </div>
+                    <div class="category">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Stratejiler</span>
+                    </div>
+                    <div class="category">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Güvenlik</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="iletisim" class="contact">
-            <h2>İletişim</h2>
-            <div class="social-links">
-                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <h2>Güvenli İletişim</h2>
+            <div class="contact-methods">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Şifreli Mesaj</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-key"></i>
+                    <span>Güvenli Kanal</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-user-secret"></i>
+                    <span>Ajan Bağlantısı</span>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Web Sitem. Tüm hakları saklıdır.</p>
+        <div class="disclaimer">
+            <p>⚠️ Bu site tamamen kurgusaldır ve parodi amaçlıdır. Gerçek bir mafya örgütü ile ilgisi yoktur.</p>
+        </div>
+        <div class="footer-content">
+            <p>&copy; 2024 Zencimafya - Tüm Hakları Saklıdır</p>
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Glitch efekti için
+        document.addEventListener('DOMContentLoaded', function() {
+            const glitchText = document.querySelector('.glitch');
+            setInterval(() => {
+                glitchText.style.textShadow = `
+                    ${Math.random() * 10 - 5}px ${Math.random() * 10 - 5}px 0 rgba(255,0,0,0.7),
+                    ${Math.random() * 10 - 5}px ${Math.random() * 10 - 5}px 0 rgba(0,255,0,0.7),
+                    ${Math.random() * 10 - 5}px ${Math.random() * 10 - 5}px 0 rgba(0,0,255,0.7)
+                `;
+            }, 100);
+        });
+    </script>
 </body>
 </html> 
