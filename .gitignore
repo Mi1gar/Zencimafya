@@ -1,0 +1,24 @@
+# Sistem dosyaları
+.DS_Store
+Thumbs.db
+
+# IDE dosyaları
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Geçici dosyalar
+*.log
+*.tmp
+*.temp
+
+# Bağımlılık dizinleri
+node_modules/
+vendor/
+
+# Derleme çıktıları
+dist/
+build/
+*.min.css
+*.min.js 
