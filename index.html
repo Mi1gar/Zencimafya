@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zencimafya - Gizli Örgüt</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>ZENCIMAFYA - Gizli Örgüt</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <script>
-        // Giriş kontrolü
-        if (!localStorage.getItem('username') || !localStorage.getItem('password')) {
+        // Oturum kontrolü: Giriş yapılmamışsa login.html'e yönlendir
+        if (!localStorage.getItem('isLoggedIn')) {
             window.location.href = 'login.html';
         }
 
@@ -46,7 +46,7 @@
             <div class="glitch-container">
                 <h1 class="glitch" data-text="ZENCIMAFYA">ZENCIMAFYA</h1>
             </div>
-            <p class="tagline">Gölgelerin Efendileri</p>
+            <div class="tagline">We Were Never Here.</div>
             <div class="stats">
                 <div class="stat-item">
                     <i class="fas fa-users"></i>

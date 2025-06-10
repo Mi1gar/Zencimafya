@@ -9,63 +9,33 @@
 <body>
     <!-- Yükleme Ekranı -->
     <div id="loading-screen" class="loading-screen">
-        <!-- components/ui/loading-screen.html içeriği buraya gelecek -->
+        <div class="loading-spinner"></div>
+        <div class="loading-text">SİSTEM BAŞLATILIYOR...</div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
     </div>
 
-    <!-- Terminal Container -->
-    <div class="terminal-container">
+    <!-- Terminal Konteyneri -->
+    <div id="terminal-container" class="terminal-container" style="opacity: 0;">
         <!-- Terminal Başlık -->
-        <div id="terminal-header">
-            <!-- components/terminal/terminal-header.html içeriği buraya gelecek -->
-        </div>
+        <div id="terminal-header"></div>
 
         <!-- Terminal Çıktı -->
-        <div id="terminal-output">
-            <!-- components/terminal/terminal-output.html içeriği buraya gelecek -->
-        </div>
+        <div id="terminal-output" class="terminal-output"></div>
 
         <!-- Giriş Formu -->
-        <div id="login-container" class="login-container" style="display: none;">
-            <!-- components/auth/login-form.html içeriği buraya gelecek -->
+        <div id="login-container" class="login-container">
+            <div id="login-form"></div>
         </div>
 
         <!-- Kimlik Doğrulama Mesajları -->
-        <div id="auth-messages">
-            <!-- components/auth/auth-messages.html içeriği buraya gelecek -->
-        </div>
+        <div id="auth-messages" class="auth-messages"></div>
 
         <!-- Hata Mesajları -->
-        <div id="error-messages">
-            <!-- components/ui/error-messages.html içeriği buraya gelecek -->
-        </div>
+        <div id="error-messages" class="error-messages"></div>
     </div>
 
     <script src="assets/js/login.js"></script>
-    <script>
-        // Bileşenleri yükle
-        async function loadComponents() {
-            const components = {
-                'loading-screen': 'components/ui/loading-screen.html',
-                'terminal-header': 'components/terminal/terminal-header.html',
-                'terminal-output': 'components/terminal/terminal-output.html',
-                'login-container': 'components/auth/login-form.html',
-                'auth-messages': 'components/auth/auth-messages.html',
-                'error-messages': 'components/ui/error-messages.html'
-            };
-
-            for (const [id, path] of Object.entries(components)) {
-                try {
-                    const response = await fetch(path);
-                    const content = await response.text();
-                    document.getElementById(id).innerHTML = content;
-                } catch (error) {
-                    console.error(`${path} bileşeni yüklenirken hata:`, error);
-                }
-            }
-        }
-
-        // Sayfa yüklendiğinde bileşenleri yükle
-        window.addEventListener('load', loadComponents);
-    </script>
 </body>
 </html> 
