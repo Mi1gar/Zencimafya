@@ -424,7 +424,22 @@ footer {
 
 /* Mobil Uyumluluk */
 @media screen and (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
     /* Header ve Navigasyon */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.95);
+    }
+
     header nav {
         padding: 10px;
         flex-direction: column;
@@ -433,47 +448,92 @@ footer {
 
     .logo {
         margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .logo-text {
+        font-size: 24px;
+    }
+
+    .member-count {
+        font-size: 12px;
+        display: block;
+        margin-top: 5px;
     }
 
     .nav-links {
         width: 100%;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 5px;
+        padding: 0;
+        margin: 0;
     }
 
     .nav-links li {
         width: 100%;
         text-align: center;
+        margin: 0;
+        padding: 0;
     }
 
     .nav-links a {
         display: block;
-        padding: 10px;
+        padding: 12px;
         font-size: 14px;
+        border-radius: 4px;
+        background: rgba(0, 255, 0, 0.1);
+        margin: 2px 0;
     }
 
     /* Hero Bölümü */
     .hero {
-        padding: 40px 20px;
+        padding: 80px 20px 40px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .glitch-container {
+        margin-bottom: 20px;
     }
 
     .glitch-container h1 {
         font-size: 32px;
+        margin: 0;
+        padding: 0;
     }
 
     .tagline {
         font-size: 18px;
+        margin: 10px 0 20px;
     }
 
     .stats {
         flex-direction: column;
         gap: 15px;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
     .stat-item {
         width: 100%;
         padding: 15px;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+    }
+
+    .stat-item i {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .stat-item span {
+        font-size: 14px;
     }
 
     /* Üyelik Bölümü */
@@ -481,13 +541,49 @@ footer {
         padding: 40px 20px;
     }
 
+    .membership h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
     .requirements {
         flex-direction: column;
         gap: 20px;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
     .requirement-item {
         width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+    }
+
+    .requirement-item i {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .requirement-item h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .requirement-item p {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .join-button {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px;
+        font-size: 16px;
+        margin-top: 20px;
+        border-radius: 8px;
+        -webkit-appearance: none;
     }
 
     /* Forum Bölümü */
@@ -495,18 +591,62 @@ footer {
         padding: 40px 20px;
     }
 
+    .forum h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
     .forum-preview {
         flex-direction: column;
         gap: 20px;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
     .forum-stats {
         width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .stat {
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .stat i {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .stat span {
+        font-size: 12px;
+        display: block;
     }
 
     .forum-categories {
+        display: grid;
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 10px;
+    }
+
+    .category {
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .category i {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .category span {
+        font-size: 14px;
     }
 
     /* İletişim Bölümü */
@@ -514,33 +654,87 @@ footer {
         padding: 40px 20px;
     }
 
+    .contact h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
     .contact-methods {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
     .contact-item {
         width: 100%;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .contact-item i {
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+
+    .contact-item span {
+        font-size: 14px;
     }
 
     /* Footer */
     footer {
         padding: 20px;
+        background: rgba(0, 0, 0, 0.95);
     }
 
     .footer-content {
         flex-direction: column;
         gap: 15px;
         text-align: center;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .footer-content p {
+        font-size: 12px;
+        margin: 0;
     }
 
     .social-links {
+        display: flex;
         justify-content: center;
+        gap: 15px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 255, 0, 0.1);
+        border-radius: 50%;
     }
 }
 
 /* Küçük mobil cihazlar için ek optimizasyonlar */
 @media screen and (max-width: 480px) {
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .member-count {
+        font-size: 11px;
+    }
+
+    .nav-links a {
+        padding: 10px;
+        font-size: 13px;
+    }
+
     .glitch-container h1 {
         font-size: 28px;
     }
@@ -550,7 +744,7 @@ footer {
     }
 
     .stat-item {
-        padding: 10px;
+        padding: 12px;
     }
 
     .stat-item i {
@@ -558,32 +752,97 @@ footer {
     }
 
     .stat-item span {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .requirement-item h3 {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .requirement-item p {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .join-button {
-        padding: 10px 20px;
+        padding: 12px;
         font-size: 14px;
+    }
+
+    .forum h2,
+    .contact h2,
+    .membership h2 {
+        font-size: 20px;
+    }
+
+    .stat i {
+        font-size: 20px;
+    }
+
+    .stat span {
+        font-size: 11px;
+    }
+
+    .category i {
+        font-size: 20px;
+    }
+
+    .category span {
+        font-size: 13px;
+    }
+
+    .contact-item i {
+        font-size: 28px;
+    }
+
+    .contact-item span {
+        font-size: 13px;
+    }
+
+    .social-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
     }
 }
 
 /* Yatay mod için özel düzenlemeler */
 @media screen and (max-height: 500px) and (orientation: landscape) {
+    header {
+        position: relative;
+    }
+
+    header nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .logo {
+        margin-bottom: 0;
+        width: auto;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        width: auto;
+    }
+
+    .nav-links li {
+        width: auto;
+    }
+
+    .nav-links a {
+        padding: 8px 15px;
+    }
+
     .hero {
         padding: 20px;
+        min-height: auto;
     }
 
     .stats {
         flex-direction: row;
         flex-wrap: wrap;
+        max-width: none;
     }
 
     .stat-item {
@@ -593,6 +852,7 @@ footer {
     .requirements {
         flex-direction: row;
         flex-wrap: wrap;
+        max-width: none;
     }
 
     .requirement-item {
@@ -602,6 +862,7 @@ footer {
     .contact-methods {
         flex-direction: row;
         flex-wrap: wrap;
+        max-width: none;
     }
 
     .contact-item {
@@ -611,28 +872,41 @@ footer {
 
 /* Dokunmatik cihazlar için özel düzenlemeler */
 @media (hover: none) {
-    .nav-links a:hover {
-        transform: none;
+    .nav-links a,
+    .join-button,
+    .social-icon {
+        -webkit-tap-highlight-color: transparent;
     }
 
-    .nav-links a:active {
-        transform: scale(0.98);
-    }
-
-    .join-button:hover {
-        transform: none;
-    }
-
-    .join-button:active {
-        transform: scale(0.98);
-    }
-
-    .social-icon:hover {
-        transform: none;
-    }
-
+    .nav-links a:active,
+    .join-button:active,
     .social-icon:active {
-        transform: scale(0.95);
+        transform: scale(0.98);
+        background: rgba(0, 255, 0, 0.2);
+    }
+}
+
+/* iOS için özel düzenlemeler */
+@supports (-webkit-touch-callout: none) {
+    .hero {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* iPhone X ve üstü için güvenli alan düzenlemeleri */
+@supports (padding: max(0px)) {
+    header {
+        padding-top: max(10px, env(safe-area-inset-top));
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+    }
+
+    .nav-links {
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+    footer {
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
     }
 }
 

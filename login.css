@@ -1024,72 +1024,109 @@ body {
 
 /* Mobil Uyumluluk */
 @media screen and (max-width: 768px) {
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background: #000;
+    }
+
     .terminal-container {
-        width: 95%;
-        height: 95vh;
-        margin: 2.5vh auto;
-        padding: 10px;
-        font-size: 14px;
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+        font-size: 13px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
 
     .terminal-header {
-        padding: 8px;
-        font-size: 12px;
+        padding: 5px 10px;
+        font-size: 11px;
+        position: sticky;
+        top: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 100;
     }
 
     .terminal-title {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .terminal-status {
-        font-size: 10px;
+        font-size: 9px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .terminal-body {
-        padding: 10px;
-        font-size: 12px;
-        line-height: 1.4;
+        padding: 8px;
+        font-size: 11px;
+        line-height: 1.3;
+        height: calc(100vh - 40px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .login-container {
-        width: 95%;
-        padding: 15px;
+        width: 100%;
+        padding: 10px;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .login-form {
         width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
     .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     .form-group input {
-        padding: 10px;
+        width: 100%;
+        padding: 12px;
         font-size: 14px;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        border-radius: 4px;
     }
 
     .login-button {
-        padding: 10px 20px;
+        width: 100%;
+        padding: 12px;
         font-size: 14px;
+        margin-top: 10px;
+        border-radius: 4px;
+        -webkit-appearance: none;
     }
 
     .warning-text {
-        font-size: 12px;
-        padding: 10px;
+        font-size: 11px;
+        padding: 8px;
+        margin: 8px 0;
     }
 
     .warning-text p {
-        margin: 5px 0;
+        margin: 4px 0;
+        line-height: 1.3;
     }
 
     /* Terminal efektleri mobil için optimize edildi */
-    .terminal-container::before {
-        opacity: 0.05;
-    }
-
+    .terminal-container::before,
     .terminal-container::after {
-        opacity: 0.05;
+        opacity: 0.03;
     }
 
     .dead-pixel {
@@ -1108,117 +1145,198 @@ body {
 
     /* Face glitch efekti mobil için optimize edildi */
     .face-glitch {
-        width: 100px;
-        height: 100px;
-        opacity: 0.3;
+        width: 80px;
+        height: 80px;
+        opacity: 0.2;
+    }
+
+    /* Terminal çıktısı için özel düzenlemeler */
+    .terminal-output {
+        font-size: 11px;
+        line-height: 1.3;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    /* Loading ekranı için özel düzenlemeler */
+    .loading-screen {
+        width: 100%;
+        height: 100vh;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .loading-bar {
+        width: 100%;
+        height: 3px;
+    }
+
+    .loading-text {
+        font-size: 11px;
+        margin-top: 10px;
     }
 }
 
 /* Küçük mobil cihazlar için ek optimizasyonlar */
 @media screen and (max-width: 480px) {
     .terminal-container {
-        width: 100%;
-        height: 100vh;
-        margin: 0;
-        border-radius: 0;
+        font-size: 12px;
     }
 
     .terminal-header {
-        padding: 5px;
+        padding: 4px 8px;
     }
 
     .terminal-title {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .terminal-status {
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .terminal-body {
-        padding: 8px;
-        font-size: 11px;
+        padding: 6px;
+        font-size: 10px;
     }
 
     .login-container {
-        width: 100%;
-        padding: 10px;
+        padding: 8px;
     }
 
     .form-group input {
-        padding: 8px;
+        padding: 10px;
         font-size: 13px;
     }
 
     .login-button {
-        padding: 8px 15px;
+        padding: 10px;
         font-size: 13px;
+    }
+
+    .warning-text {
+        font-size: 10px;
+        padding: 6px;
     }
 
     /* Terminal mesajları için özel düzenlemeler */
     .terminal-output {
-        font-size: 11px;
-        line-height: 1.3;
+        font-size: 10px;
     }
 
     /* Glitch efektleri daha hafif */
     .glitch-container::before,
     .glitch-container::after {
-        opacity: 0.03;
+        opacity: 0.02;
     }
 
     /* Face glitch efekti daha küçük */
     .face-glitch {
-        width: 80px;
-        height: 80px;
-        opacity: 0.2;
+        width: 60px;
+        height: 60px;
+        opacity: 0.15;
     }
 }
 
 /* Yatay mod için özel düzenlemeler */
 @media screen and (max-height: 500px) and (orientation: landscape) {
     .terminal-container {
-        height: 95vh;
-        margin: 2.5vh auto;
+        height: 100vh;
     }
 
     .terminal-header {
-        padding: 5px;
+        padding: 3px 6px;
     }
 
     .terminal-body {
-        padding: 5px;
+        padding: 4px;
+        height: calc(100vh - 30px);
     }
 
     .login-container {
-        padding: 10px;
+        padding: 6px;
     }
 
     .form-group {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .form-group input {
-        padding: 5px;
+        padding: 8px;
     }
 
     .login-button {
-        padding: 5px 15px;
+        padding: 8px;
+    }
+
+    .warning-text {
+        padding: 4px;
+        margin: 4px 0;
     }
 }
 
 /* Dokunmatik cihazlar için özel düzenlemeler */
 @media (hover: none) {
-    .login-button:hover {
-        transform: none;
+    .login-button {
+        -webkit-tap-highlight-color: transparent;
     }
 
     .login-button:active {
         transform: scale(0.98);
+        background: #003300;
+    }
+
+    .form-group input {
+        -webkit-tap-highlight-color: transparent;
     }
 
     .form-group input:focus {
         outline: none;
         border-color: #00ff00;
+    }
+
+    /* iOS için özel düzenlemeler */
+    @supports (-webkit-touch-callout: none) {
+        .terminal-container {
+            height: -webkit-fill-available;
+        }
+
+        .terminal-body {
+            height: calc(-webkit-fill-available - 40px);
+        }
+
+        .login-container {
+            height: -webkit-fill-available;
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+/* Yüksek DPI ekranlar için optimizasyon */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .terminal-container {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* iPhone X ve üstü için güvenli alan düzenlemeleri */
+@supports (padding: max(0px)) {
+    .terminal-container {
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+        padding-top: max(10px, env(safe-area-inset-top));
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+    .terminal-header {
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+        padding-top: max(5px, env(safe-area-inset-top));
+    }
+
+    .terminal-body {
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
     }
 } 
