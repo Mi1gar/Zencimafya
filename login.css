@@ -1,0 +1,1023 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'VT323', monospace;
+    background: #000;
+    color: #0f0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Glitch container */
+.glitch-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 0;
+}
+
+.glitch-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.95),
+        rgba(0, 0, 0, 0.95) 1px,
+        rgba(0, 0, 0, 1) 1px,
+        rgba(0, 0, 0, 1) 2px
+    );
+    animation: scan 6s linear infinite;
+    pointer-events: none;
+}
+
+.glitch-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.95),
+        rgba(0, 0, 0, 0.95) 1px,
+        rgba(0, 0, 0, 1) 1px,
+        rgba(0, 0, 0, 1) 2px
+    );
+    animation: scan-horizontal 6s linear infinite;
+    pointer-events: none;
+}
+
+/* Ölü pixel efektleri */
+.dead-pixel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: #fff;
+    opacity: 0.8;
+    animation: deadPixel 0.2s infinite;
+}
+
+.dead-pixel-cluster {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    opacity: 0.6;
+    animation: deadPixelCluster 0.3s infinite;
+}
+
+.dead-pixel-line {
+    position: absolute;
+    height: 1px;
+    background: #fff;
+    opacity: 0.4;
+    animation: deadPixelLine 0.4s infinite;
+}
+
+/* Animasyonlar */
+@keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes scan-horizontal {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes deadPixel {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.2; }
+}
+
+@keyframes deadPixelCluster {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(1.2); }
+}
+
+@keyframes deadPixelLine {
+    0%, 100% { opacity: 0.4; transform: scaleX(1); }
+    50% { opacity: 0.2; transform: scaleX(1.1); }
+}
+
+/* Glitch efekti */
+.glitch {
+    position: relative;
+    animation: glitch 0.1s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+/* Korkunç surat efekti */
+.face-glitch {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,40 Q50,20 70,40 M30,60 Q50,80 70,60 M40,50 L60,50" stroke="%230f0" fill="none" stroke-width="2"/></svg>') no-repeat center;
+    opacity: 0;
+    animation: faceGlitch 0.2s infinite;
+    pointer-events: none;
+    z-index: 0;
+    filter: drop-shadow(0 0 3px #0f0);
+}
+
+@keyframes faceGlitch {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* Surat Pozisyonları */
+.face-1 { top: 20%; left: 15%; }
+.face-2 { top: 40%; right: 25%; }
+.face-3 { bottom: 30%; left: 35%; }
+.face-4 { top: 60%; right: 15%; }
+.face-5 { bottom: 20%; right: 40%; }
+
+/* Glitch Container Animasyonları */
+.glitch-container::before,
+.glitch-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.8;
+    mix-blend-mode: difference;
+}
+
+.glitch-container::before {
+    animation: glitch-anim-1 0.3s infinite;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255, 0, 0, 0.1) 25%, 
+        transparent 50%, 
+        rgba(0, 255, 0, 0.1) 75%, 
+        transparent 100%
+    );
+}
+
+.glitch-container::after {
+    animation: glitch-anim-2 0.4s infinite;
+    background: linear-gradient(-45deg, 
+        transparent 0%, 
+        rgba(0, 0, 255, 0.1) 25%, 
+        transparent 50%, 
+        rgba(255, 0, 255, 0.1) 75%, 
+        transparent 100%
+    );
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        transform: translate(0);
+        opacity: 0.8;
+    }
+    20% {
+        transform: translate(-2px, 2px);
+        opacity: 0.9;
+    }
+    40% {
+        transform: translate(-2px, -2px);
+        opacity: 0.7;
+    }
+    60% {
+        transform: translate(2px, 2px);
+        opacity: 0.9;
+    }
+    80% {
+        transform: translate(2px, -2px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 0.8;
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        transform: translate(0);
+        opacity: 0.7;
+    }
+    20% {
+        transform: translate(2px, -2px);
+        opacity: 0.9;
+    }
+    40% {
+        transform: translate(-2px, -2px);
+        opacity: 0.7;
+    }
+    60% {
+        transform: translate(2px, 2px);
+        opacity: 0.9;
+    }
+    80% {
+        transform: translate(-2px, 2px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 0.7;
+    }
+}
+
+/* CRT Efekti */
+.crt::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.27861;
+    }
+    5% {
+        opacity: 0.34769;
+    }
+    10% {
+        opacity: 0.23604;
+    }
+    15% {
+        opacity: 0.90626;
+    }
+    20% {
+        opacity: 0.18128;
+    }
+    25% {
+        opacity: 0.83891;
+    }
+    30% {
+        opacity: 0.65583;
+    }
+    35% {
+        opacity: 0.67807;
+    }
+    40% {
+        opacity: 0.26559;
+    }
+    45% {
+        opacity: 0.84693;
+    }
+    50% {
+        opacity: 0.96019;
+    }
+    55% {
+        opacity: 0.08594;
+    }
+    60% {
+        opacity: 0.20313;
+    }
+    65% {
+        opacity: 0.71988;
+    }
+    70% {
+        opacity: 0.53455;
+    }
+    75% {
+        opacity: 0.37288;
+    }
+    80% {
+        opacity: 0.71428;
+    }
+    85% {
+        opacity: 0.70419;
+    }
+    90% {
+        opacity: 0.7003;
+    }
+    95% {
+        opacity: 0.36108;
+    }
+    100% {
+        opacity: 0.24387;
+    }
+}
+
+/* Giriş Ekranı */
+#login-screen {
+    display: none;
+    position: relative;
+    z-index: 3;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2),
+                0 0 40px rgba(0, 255, 0, 0.1),
+                0 0 60px rgba(0, 255, 0, 0.05);
+    max-width: 500px;
+    width: 90%;
+    animation: border-flicker 2s infinite;
+}
+
+@keyframes border-flicker {
+    0% {
+        border-color: #0f0;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.2),
+                    0 0 40px rgba(0, 255, 0, 0.1),
+                    0 0 60px rgba(0, 255, 0, 0.05);
+    }
+    2% {
+        border-color: #0f0;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.2),
+                    0 0 40px rgba(0, 255, 0, 0.1),
+                    0 0 60px rgba(0, 255, 0, 0.05);
+    }
+    4% {
+        border-color: transparent;
+        box-shadow: none;
+    }
+    6% {
+        border-color: #0f0;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.2),
+                    0 0 40px rgba(0, 255, 0, 0.1),
+                    0 0 60px rgba(0, 255, 0, 0.05);
+    }
+    8% {
+        border-color: transparent;
+        box-shadow: none;
+    }
+    10% {
+        border-color: #0f0;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.2),
+                    0 0 40px rgba(0, 255, 0, 0.1),
+                    0 0 60px rgba(0, 255, 0, 0.05);
+    }
+    100% {
+        border-color: #0f0;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.2),
+                    0 0 40px rgba(0, 255, 0, 0.1),
+                    0 0 60px rgba(0, 255, 0, 0.05);
+    }
+}
+
+.login-content {
+    position: relative;
+    z-index: 3;
+}
+
+.warning-text {
+    margin-bottom: 2rem;
+    text-align: center;
+    line-height: 1.6;
+    text-shadow: 0 0 5px #0f0;
+    animation: text-flicker 3s infinite;
+}
+
+@keyframes text-flicker {
+    0% {
+        text-shadow: 0 0 5px #0f0;
+    }
+    2% {
+        text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+    }
+    4% {
+        text-shadow: none;
+    }
+    6% {
+        text-shadow: 0 0 5px #0f0;
+    }
+    8% {
+        text-shadow: none;
+    }
+    10% {
+        text-shadow: 0 0 5px #0f0;
+    }
+    100% {
+        text-shadow: 0 0 5px #0f0;
+    }
+}
+
+.warning-text p {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.error-text {
+    color: #f00;
+    text-shadow: 0 0 5px #f00;
+    animation: error-flicker 2s infinite;
+}
+
+@keyframes error-flicker {
+    0% {
+        text-shadow: 0 0 5px #f00;
+    }
+    2% {
+        text-shadow: 0 0 5px #f00, 0 0 10px #f00;
+    }
+    4% {
+        text-shadow: none;
+    }
+    6% {
+        text-shadow: 0 0 5px #f00;
+    }
+    8% {
+        text-shadow: none;
+    }
+    10% {
+        text-shadow: 0 0 5px #f00;
+    }
+    100% {
+        text-shadow: 0 0 5px #f00;
+    }
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #0f0;
+    padding: 0.5rem;
+    animation: input-flicker 4s infinite;
+}
+
+@keyframes input-flicker {
+    0% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+    2% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2), 0 0 10px rgba(0, 255, 0, 0.1);
+    }
+    4% {
+        border-color: transparent;
+        box-shadow: none;
+    }
+    6% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+    8% {
+        border-color: transparent;
+        box-shadow: none;
+    }
+    10% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+    100% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+}
+
+.prompt {
+    color: #0f0;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    animation: prompt-blink 1s infinite;
+}
+
+@keyframes prompt-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+input {
+    background: none;
+    border: none;
+    color: #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    width: 100%;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(0, 255, 0, 0.5);
+}
+
+#login-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: #0f0;
+    color: #000;
+    border: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+#login-btn:hover {
+    background-color: #00ff00;
+    box-shadow: 0 0 20px #0f0;
+}
+
+#login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: button-shine 3s infinite;
+}
+
+@keyframes button-shine {
+    0% {
+        left: -100%;
+    }
+    20% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Yükleme Ekranı */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+#loading-screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px #0f0;
+    animation: title-flicker 2s infinite;
+}
+
+@keyframes title-flicker {
+    0% {
+        text-shadow: 0 0 10px #0f0;
+    }
+    2% {
+        text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+    }
+    4% {
+        text-shadow: none;
+    }
+    6% {
+        text-shadow: 0 0 10px #0f0;
+    }
+    8% {
+        text-shadow: none;
+    }
+    10% {
+        text-shadow: 0 0 10px #0f0;
+    }
+    100% {
+        text-shadow: 0 0 10px #0f0;
+    }
+}
+
+.progress-container {
+    margin-top: 2rem;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    background-color: #111;
+    border: 1px solid #0f0;
+    margin: 1rem auto;
+    position: relative;
+    overflow: hidden;
+    animation: progress-border-flicker 2s infinite;
+}
+
+@keyframes progress-border-flicker {
+    0% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+    2% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2), 0 0 10px rgba(0, 255, 0, 0.1);
+    }
+    4% {
+        border-color: transparent;
+        box-shadow: none;
+    }
+    6% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+    8% {
+        border-color: transparent;
+        box-shadow: none;
+    }
+    10% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+    100% {
+        border-color: #0f0;
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+    }
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background-color: #0f0;
+    transition: width 3s linear;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.progress-text {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    animation: text-flicker 3s infinite;
+}
+
+/* Login form stilleri */
+.login-container {
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 2rem;
+    border: 1px solid #0f0;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.login-form h2 {
+    color: #0f0;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    color: #0f0;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-shadow: 0 0 3px #0f0;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    background: #000;
+    border: 1px solid #0f0;
+    color: #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0f0;
+    box-shadow: 0 0 5px #0f0;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 3px #0f0;
+}
+
+.login-btn:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* Konum bilgisi */
+.location-info {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    color: #0f0;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    z-index: 1;
+    text-shadow: 0 0 3px #0f0;
+}
+
+/* Terminal genel stilleri */
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    font-family: 'VT323', monospace;
+    color: #0f0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Terminal yükleme ekranı */
+.terminal-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.terminal-content {
+    padding: 20px;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.terminal-header {
+    border-bottom: 1px solid #0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.terminal-title {
+    font-size: 1.2rem;
+    color: #0f0;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.terminal-status {
+    color: #0f0;
+    font-size: 1rem;
+    animation: blink 1s infinite;
+}
+
+.terminal-body {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    white-space: pre;
+    text-shadow: 0 0 3px #0f0;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    font-family: 'VT323', monospace;
+}
+
+.terminal-text::before {
+    content: '>';
+    margin-right: 10px;
+    color: #0f0;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    background: #0f0;
+    animation: blink 1s infinite;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* Terminal container */
+.terminal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Login form stilleri */
+.login-form-container {
+    margin-top: 20px;
+}
+
+.login-form {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border: 1px solid #0f0;
+    width: 400px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #0f0;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    text-shadow: 0 0 3px #0f0;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    background: #000;
+    border: 1px solid #0f0;
+    color: #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    text-shadow: 0 0 3px #0f0;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0f0;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 3px #0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 0, 0.2),
+        transparent
+    );
+    animation: shine 2s infinite;
+}
+
+/* Animasyonlar */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Terminal tarama efekti */
+.terminal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.03),
+        rgba(0, 255, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    animation: scan 6s linear infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+} 

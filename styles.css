@@ -16,14 +16,11 @@
 
 body {
     font-family: 'Special Elite', cursive;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background: url('main_wallpapaper.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-attachment: fixed;
+    color: #fff;
+    line-height: 1.6;
+    min-height: 100vh;
     position: relative;
 }
 
@@ -164,20 +161,8 @@ section {
     text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
-.warning {
-    background-color: rgba(255, 0, 0, 0.1);
-    border: 1px solid var(--primary-color);
-    padding: 1rem;
-    margin: 2rem auto;
-    max-width: 600px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.warning i {
-    color: var(--primary-color);
-    font-size: 1.5rem;
+.warning, .disclaimer {
+    display: none;
 }
 
 .stats {
@@ -345,15 +330,6 @@ footer {
     color: var(--text-color);
     padding: 2rem 5%;
     border-top: 1px solid var(--primary-color);
-}
-
-.disclaimer {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background-color: rgba(255, 0, 0, 0.1);
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
 }
 
 .footer-content {

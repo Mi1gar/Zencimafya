@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <script>
+        // Giriş kontrolü
+        if (localStorage.getItem('zencimafya_logged_in') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 <body>
     <div class="overlay"></div>
@@ -21,6 +27,7 @@
                 <li><a href="#uyelik">Üyelik</a></li>
                 <li><a href="#forum">Forum</a></li>
                 <li><a href="#iletisim">İletişim</a></li>
+                <li><a href="#" id="logout-btn" onclick="logout()">Çıkış Yap</a></li>
             </ul>
         </nav>
     </header>
@@ -31,10 +38,6 @@
                 <h1 class="glitch" data-text="ZENCIMAFYA">ZENCIMAFYA</h1>
             </div>
             <p class="tagline">Gölgelerin Efendileri</p>
-            <div class="warning">
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>Bu site sadece parodi amaçlıdır. Gerçek bir mafya örgütü ile ilgisi yoktur.</span>
-            </div>
             <div class="stats">
                 <div class="stat-item">
                     <i class="fas fa-users"></i>
@@ -123,9 +126,6 @@
     </main>
 
     <footer>
-        <div class="disclaimer">
-            <p>⚠️ Bu site tamamen kurgusaldır ve parodi amaçlıdır. Gerçek bir mafya örgütü ile ilgisi yoktur.</p>
-        </div>
         <div class="footer-content">
             <p>&copy; 2024 Zencimafya - Tüm Hakları Saklıdır</p>
             <div class="social-links">
@@ -148,6 +148,13 @@
                 `;
             }, 100);
         });
+
+        // Çıkış fonksiyonu
+        function logout() {
+            localStorage.removeItem('zencimafya_logged_in');
+            localStorage.removeItem('zencimafya_username');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html> 
