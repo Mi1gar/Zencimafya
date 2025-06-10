@@ -1,0 +1,279 @@
+<!-- Siber Dashboard Bileşeni -->
+<div class="cyber-dashboard">
+    <div class="dashboard-header">
+        <div class="system-status">
+            <span class="status-text">[ SİSTEM DURUMU: GÜVENLİ DEĞİL ]</span>
+            <div class="status-indicator"></div>
+        </div>
+        <div class="terminal-time" id="terminal-time"></div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="cyber-card access-logs">
+            <div class="card-header">
+                <span class="card-title">[ SON ERİŞİM KAYITLARI ]</span>
+                <div class="card-glitch"></div>
+            </div>
+            <div class="log-container">
+                <div class="log-entry">
+                    <span class="timestamp">[ 23:59:59 ]</span>
+                    <span class="log-text">[ ŞÜPHELİ GİRİŞ DENEMESİ TESPİT EDİLDİ ]</span>
+                </div>
+                <div class="log-entry">
+                    <span class="timestamp">[ 23:58:45 ]</span>
+                    <span class="log-text">[ SİSTEM GÜVENLİK DUVARI ATLATILDI ]</span>
+                </div>
+                <div class="log-entry">
+                    <span class="timestamp">[ 23:57:12 ]</span>
+                    <span class="log-text">[ VERİ SIZINTISI TESPİT EDİLDİ ]</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cyber-card system-metrics">
+            <div class="card-header">
+                <span class="card-title">[ SİSTEM METRİKLERİ ]</span>
+                <div class="card-glitch"></div>
+            </div>
+            <div class="metrics-container">
+                <div class="metric">
+                    <span class="metric-label">[ CPU YÜKÜ ]</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 87%"></div>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">[ BELLEK KULLANIMI ]</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">[ AĞ TRAFİĞİ ]</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 78%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cyber-card security-alerts">
+            <div class="card-header">
+                <span class="card-title">[ GÜVENLİK UYARILARI ]</span>
+                <div class="card-glitch"></div>
+            </div>
+            <div class="alerts-container">
+                <div class="alert critical">
+                    <span class="alert-icon">⚠</span>
+                    <span class="alert-text">[ KRİTİK: SİSTEM GÜVENLİĞİ AŞILDI ]</span>
+                </div>
+                <div class="alert warning">
+                    <span class="alert-icon">!</span>
+                    <span class="alert-text">[ UYARI: ŞÜPHELİ IP ADRESLERİ TESPİT EDİLDİ ]</span>
+                </div>
+                <div class="alert info">
+                    <span class="alert-icon">i</span>
+                    <span class="alert-text">[ BİLGİ: GÜVENLİK PROTOKOLLERİ DEVRE DIŞI ]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-footer">
+        <div class="footer-text">
+            <span>[ SİSTEM ID: XK-7429 ]</span>
+            <span>[ SON GÜNCELLEME: 23:59:59 ]</span>
+            <span>[ GÜVENLİK SEVİYESİ: KRİTİK ]</span>
+        </div>
+    </div>
+</div>
+
+<style>
+.cyber-dashboard {
+    background: var(--cyber-dark);
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Courier New', monospace;
+    color: var(--neon-green);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    background: var(--neon-red);
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cyber-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--neon-green);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: 1px solid var(--neon-green);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.card-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--neon-green);
+    opacity: 0;
+    animation: glitch 2s infinite;
+}
+
+.log-entry, .metric, .alert {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-left: 2px solid var(--neon-green);
+}
+
+.timestamp {
+    color: var(--neon-red);
+    margin-right: 1rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--neon-green);
+    margin-top: 0.5rem;
+}
+
+.progress {
+    height: 100%;
+    background: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green);
+    animation: progress-pulse 2s infinite;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.alert.critical {
+    color: var(--neon-red);
+    border-left-color: var(--neon-red);
+}
+
+.alert.warning {
+    color: #ff0;
+    border-left-color: #ff0;
+}
+
+.alert.info {
+    color: #0ff;
+    border-left-color: #0ff;
+}
+
+.dashboard-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-top: 1px solid var(--neon-green);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-text {
+    display: flex;
+    gap: 2rem;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes progress-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); opacity: 0; }
+    20% { transform: translate(-2px, 2px); opacity: 0.1; }
+    40% { transform: translate(-2px, -2px); opacity: 0; }
+    60% { transform: translate(2px, 2px); opacity: 0.1; }
+    80% { transform: translate(2px, -2px); opacity: 0; }
+    100% { transform: translate(0); opacity: 0; }
+}
+
+/* Terminal Saat Animasyonu */
+.terminal-time {
+    font-family: 'Courier New', monospace;
+    color: var(--neon-green);
+    text-shadow: 0 0 5px var(--neon-green);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-text {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+</style>
+
+<script>
+// Terminal Saati
+function updateTerminalTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('tr-TR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    document.getElementById('terminal-time').textContent = `[ ${timeString} ]`;
+}
+
+setInterval(updateTerminalTime, 1000);
+updateTerminalTime();
+</script> 

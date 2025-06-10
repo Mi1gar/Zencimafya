@@ -1,0 +1,63 @@
+<!-- Matrix Yağmur Efekti -->
+<canvas id="matrix-rain"></canvas>
+
+<style>
+#matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.15;
+}
+</style>
+
+<script>
+const canvas = document.getElementById('matrix-rain');
+const ctx = canvas.getContext('2d');
+
+// Canvas boyutunu ayarla
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Karakterleri oluştur
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+const charArray = chars.split('');
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = [];
+
+// Drops dizisini başlat
+for (let i = 0; i < columns; i++) {
+    drops[i] = 1;
+}
+
+// Matrix yağmur animasyonu
+function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#0F0';
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = charArray[Math.floor(Math.random() * charArray.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+
+// Pencere yeniden boyutlandırıldığında canvas'ı güncelle
+window.addEventListener('resize', resizeCanvas);
+
+// Animasyonu başlat
+resizeCanvas();
+setInterval(draw, 33);
+</script> 

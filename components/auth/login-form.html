@@ -1,12 +1,410 @@
-<!-- Giriş Formu Bileşeni -->
-<form id="login-form" class="login-form">
-    <div class="form-group">
-        <label for="username">KULLANICI ADI</label>
-        <input type="text" id="username" name="username" required autocomplete="off">
-    </div>
-    <div class="form-group">
-        <label for="password">ŞİFRE</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit" class="login-button">GİRİŞ YAP</button>
-</form> 
+<!-- Gizli Erişim Noktası -->
+<div class="mafia-overlay"></div>
+<div class="secret-container">
+    <form id="login-form" class="mafia-form">
+        <div class="mafia-header">
+            <div class="mafia-logo">
+                <span class="logo-text">[ REDACTED ]</span>
+                <div class="logo-glitch"></div>
+            </div>
+            <div class="security-level">
+                <span class="level-text">[ GÜVENLİK SEVİYESI: MAXIMUM ]</span>
+                <div class="level-indicator"></div>
+            </div>
+        </div>
+
+        <div class="form-group mafia-input-group">
+            <div class="input-wrapper">
+                <label for="username" class="mafia-label">[ KOD ADI ]</label>
+                <input type="text" id="username" name="username" required autocomplete="off" class="mafia-input">
+                <div class="input-scanner"></div>
+            </div>
+            <div class="input-status">
+                <span class="status-dot"></span>
+                <span class="status-text">[ DOĞRULAMA BEKLENIYOR ]</span>
+            </div>
+        </div>
+
+        <div class="form-group mafia-input-group">
+            <div class="input-wrapper">
+                <label for="password" class="mafia-label">[ GİZLİ ŞİFRE ]</label>
+                <input type="password" id="password" name="password" required class="mafia-input">
+                <div class="input-scanner"></div>
+            </div>
+            <div class="input-status">
+                <span class="status-dot"></span>
+                <span class="status-text">[ ŞİFRELEME AKTİF ]</span>
+            </div>
+        </div>
+
+        <div class="mafia-verification">
+            <div class="verification-step">
+                <span class="step-icon">[ * ]</span>
+                <span class="step-text">[ IP ADRESİ DOĞRULANIYOR ]</span>
+            </div>
+            <div class="verification-step">
+                <span class="step-icon">[ * ]</span>
+                <span class="step-text">[ VPN KONTROLÜ ]</span>
+            </div>
+            <div class="verification-step">
+                <span class="step-icon">[ * ]</span>
+                <span class="step-text">[ KONUM DOĞRULAMASI ]</span>
+            </div>
+        </div>
+
+        <button type="submit" class="mafia-button">
+            <span class="button-text">[ ERİŞİM İZNİ İSTE ]</span>
+            <div class="button-scanner"></div>
+        </button>
+
+        <div class="mafia-warning">
+            <span class="warning-icon">⚠</span>
+            <span class="warning-text">[ UYARI: İZİNSİZ ERİŞİM DENEMELERİ ÖLÜMCÜL SONUÇLAR DOĞURABİLİR ]</span>
+        </div>
+    </form>
+</div>
+
+<style>
+:root {
+    --mafia-dark: #0a0a0a;
+    --mafia-red: #8b0000;
+    --mafia-gold: #ffd700;
+    --mafia-accent: #800000;
+}
+
+body {
+    background: var(--mafia-dark);
+    font-family: 'Courier New', monospace;
+    color: var(--mafia-gold);
+    overflow: hidden;
+}
+
+.mafia-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, rgba(139, 0, 0, 0.1) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(139, 0, 0, 0.1) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(139, 0, 0, 0.1) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(139, 0, 0, 0.1) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    z-index: -1;
+}
+
+.secret-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--mafia-red);
+    box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+    position: relative;
+}
+
+.mafia-header {
+    border-bottom: 2px solid var(--mafia-red);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mafia-logo {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--mafia-red);
+}
+
+.logo-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--mafia-red);
+    opacity: 0;
+    animation: glitch 2s infinite;
+}
+
+.security-level {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.level-indicator {
+    width: 10px;
+    height: 10px;
+    background: var(--mafia-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--mafia-red);
+    animation: pulse 1s infinite;
+}
+
+.mafia-input-group {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.mafia-input {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid var(--mafia-red);
+    color: var(--mafia-gold);
+    font-family: 'Courier New', monospace;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.mafia-input:focus {
+    box-shadow: 0 0 20px var(--mafia-red);
+    outline: none;
+}
+
+.input-scanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(139, 0, 0, 0.2) 50%, 
+        transparent 100%);
+    animation: scan 2s linear infinite;
+    pointer-events: none;
+}
+
+.input-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--mafia-red);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--mafia-red);
+    border-radius: 50%;
+    animation: blink 1s infinite;
+}
+
+.mafia-verification {
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid var(--mafia-red);
+    background: rgba(139, 0, 0, 0.1);
+}
+
+.verification-step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.mafia-button {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 2px solid var(--mafia-red);
+    color: var(--mafia-gold);
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mafia-button:hover {
+    background: var(--mafia-red);
+    box-shadow: 0 0 30px var(--mafia-red);
+}
+
+.button-scanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 215, 0, 0.2) 50%, 
+        transparent 100%);
+    animation: scan 1.5s linear infinite;
+    pointer-events: none;
+}
+
+.mafia-warning {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--mafia-red);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--mafia-red);
+    font-size: 0.9rem;
+    animation: warning-pulse 2s infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); opacity: 0; }
+    20% { transform: translate(-2px, 2px); opacity: 0.1; }
+    40% { transform: translate(-2px, -2px); opacity: 0; }
+    60% { transform: translate(2px, 2px); opacity: 0.1; }
+    80% { transform: translate(2px, -2px); opacity: 0; }
+    100% { transform: translate(0); opacity: 0; }
+}
+
+@keyframes warning-pulse {
+    0% { box-shadow: 0 0 10px var(--mafia-red); }
+    50% { box-shadow: 0 0 20px var(--mafia-red); }
+    100% { box-shadow: 0 0 10px var(--mafia-red); }
+}
+</style>
+
+<script>
+const API_URL = 'http://localhost:3000/api';
+
+// Form gönderimi
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const submitButton = document.querySelector('.mafia-button');
+    const buttonText = submitButton.querySelector('.button-text');
+    
+    try {
+        // Buton durumunu güncelle
+        buttonText.textContent = '[ GİRİŞ YAPILIYOR... ]';
+        submitButton.disabled = true;
+        
+        // Doğrulama adımlarını simüle et
+        const verificationSteps = document.querySelectorAll('.verification-step');
+        for (let step of verificationSteps) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            step.querySelector('.step-icon').textContent = '[ ✓ ]';
+            step.querySelector('.step-text').style.color = '#008000';
+        }
+        
+        // API'ye istek at
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || '[ GİRİŞ HATASI ]');
+        }
+        
+        // Token'ı localStorage'a kaydet
+        localStorage.setItem('mafia_token', data.token);
+        localStorage.setItem('mafia_user', JSON.stringify(data.user));
+        
+        // Başarılı giriş
+        buttonText.textContent = '[ GİRİŞ BAŞARILI ]';
+        submitButton.style.background = '#008000';
+        
+        // Ana sayfaya yönlendir
+        setTimeout(() => {
+            window.location.href = '/dashboard.html';
+        }, 1500);
+        
+    } catch (error) {
+        // Hata durumunda
+        buttonText.textContent = '[ GİRİŞ BAŞARISIZ ]';
+        submitButton.style.background = '#8b0000';
+        
+        // Hata mesajını göster
+        const warning = document.querySelector('.mafia-warning');
+        warning.querySelector('.warning-text').textContent = error.message;
+        warning.style.display = 'flex';
+        
+        // 3 saniye sonra formu sıfırla
+        setTimeout(() => {
+            buttonText.textContent = '[ ERİŞİM İZNİ İSTE ]';
+            submitButton.style.background = 'transparent';
+            submitButton.disabled = false;
+            warning.style.display = 'none';
+            
+            // Doğrulama adımlarını sıfırla
+            verificationSteps.forEach(step => {
+                step.querySelector('.step-icon').textContent = '[ * ]';
+                step.querySelector('.step-text').style.color = '';
+            });
+        }, 3000);
+    }
+});
+
+// Input doğrulama animasyonları
+document.querySelectorAll('.mafia-input').forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.querySelector('.input-status .status-text').textContent = '[ DOĞRULAMA BAŞLATILDI ]';
+    });
+    
+    input.addEventListener('blur', function() {
+        this.parentElement.querySelector('.input-status .status-text').textContent = '[ DOĞRULAMA TAMAMLANDI ]';
+    });
+});
+
+// Buton hover efekti
+const button = document.querySelector('.mafia-button');
+button.addEventListener('mouseover', function() {
+    if (!this.disabled) {
+        this.querySelector('.button-text').textContent = '[ ERİŞİM İZNİ ONAYLANIYOR... ]';
+    }
+});
+
+button.addEventListener('mouseout', function() {
+    if (!this.disabled) {
+        this.querySelector('.button-text').textContent = '[ ERİŞİM İZNİ İSTE ]';
+    }
+});
+
+// Sayfa yüklendiğinde token kontrolü
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('mafia_token');
+    if (token) {
+        // Token varsa ana sayfaya yönlendir
+        window.location.href = '/dashboard.html';
+    }
+});
+</script> 

@@ -1,0 +1,177 @@
+<!-- Mafya Arka Plan Efektleri -->
+<div class="mafia-background">
+    <div class="blood-splatter"></div>
+    <div class="security-grid"></div>
+    <div class="surveillance-cameras">
+        <div class="camera camera-1"></div>
+        <div class="camera camera-2"></div>
+        <div class="camera camera-3"></div>
+        <div class="camera camera-4"></div>
+    </div>
+</div>
+
+<style>
+.mafia-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--mafia-dark);
+    overflow: hidden;
+}
+
+.blood-splatter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
+    filter: blur(20px);
+    animation: blood-pulse 10s infinite;
+}
+
+.security-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, rgba(139, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(139, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+}
+
+.surveillance-cameras {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.camera {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--mafia-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--mafia-red);
+}
+
+.camera::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: var(--mafia-red);
+    border-radius: 50%;
+    animation: camera-scan 4s infinite;
+}
+
+.camera-1 {
+    top: 10%;
+    left: 10%;
+    animation: camera-rotate-1 8s infinite;
+}
+
+.camera-2 {
+    top: 10%;
+    right: 10%;
+    animation: camera-rotate-2 6s infinite;
+}
+
+.camera-3 {
+    bottom: 10%;
+    left: 10%;
+    animation: camera-rotate-3 7s infinite;
+}
+
+.camera-4 {
+    bottom: 10%;
+    right: 10%;
+    animation: camera-rotate-4 9s infinite;
+}
+
+@keyframes blood-pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+}
+
+@keyframes grid-move {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(50px); }
+}
+
+@keyframes camera-scan {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    25% { transform: translate(-50%, -50%) rotate(90deg); }
+    50% { transform: translate(-50%, -50%) rotate(180deg); }
+    75% { transform: translate(-50%, -50%) rotate(270deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes camera-rotate-1 {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(45deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-45deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes camera-rotate-2 {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-45deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(45deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes camera-rotate-3 {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-30deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(30deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes camera-rotate-4 {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(30deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-30deg); }
+    100% { transform: rotate(0deg); }
+}
+</style>
+
+<script>
+// Kamera hareketi simülasyonu
+document.querySelectorAll('.camera').forEach(camera => {
+    setInterval(() => {
+        const randomX = Math.random() * 10 - 5;
+        const randomY = Math.random() * 10 - 5;
+        camera.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }, 2000);
+});
+
+// Güvenlik ızgarası efektini güncelle
+const securityGrid = document.querySelector('.security-grid');
+let gridOffset = 0;
+
+function updateGrid() {
+    gridOffset = (gridOffset + 1) % 50;
+    securityGrid.style.backgroundPosition = `0 ${gridOffset}px`;
+    requestAnimationFrame(updateGrid);
+}
+
+updateGrid();
+</script> 

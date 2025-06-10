@@ -1,0 +1,479 @@
+<!-- Gizli Operasyon Merkezi -->
+<div class="mafia-dashboard">
+    <div class="dashboard-header">
+        <div class="organization-info">
+            <span class="org-name">[ ORGANİZASYON: REDACTED ]</span>
+            <div class="org-status">
+                <span class="status-text">[ DURUM: AKTİF ]</span>
+                <div class="status-indicator"></div>
+            </div>
+        </div>
+        <div class="operation-time" id="operation-time"></div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="mafia-card operations">
+            <div class="card-header">
+                <span class="card-title">[ AKTİF OPERASYONLAR ]</span>
+                <div class="card-seal"></div>
+            </div>
+            <div class="operations-list">
+                <div class="operation-item critical">
+                    <span class="operation-code">[ OP-7429 ]</span>
+                    <span class="operation-status">[ DEVAM EDİYOR ]</span>
+                    <span class="operation-details">[ YÜKSEK ÖNCELİKLİ ]</span>
+                </div>
+                <div class="operation-item warning">
+                    <span class="operation-code">[ OP-8135 ]</span>
+                    <span class="operation-status">[ BEKLEMEDE ]</span>
+                    <span class="operation-details">[ GÜVENLİK ONAYI BEKLENİYOR ]</span>
+                </div>
+                <div class="operation-item success">
+                    <span class="operation-code">[ OP-6291 ]</span>
+                    <span class="operation-status">[ TAMAMLANDI ]</span>
+                    <span class="operation-details">[ TÜM KANITLAR İMHA EDİLDİ ]</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mafia-card territories">
+            <div class="card-header">
+                <span class="card-title">[ BÖLGE KONTROLÜ ]</span>
+                <div class="card-seal"></div>
+            </div>
+            <div class="territory-map">
+                <div class="map-grid">
+                    <div class="territory-cell active">[ A1 ]</div>
+                    <div class="territory-cell secure">[ A2 ]</div>
+                    <div class="territory-cell warning">[ A3 ]</div>
+                    <div class="territory-cell danger">[ A4 ]</div>
+                    <div class="territory-cell secure">[ B1 ]</div>
+                    <div class="territory-cell active">[ B2 ]</div>
+                    <div class="territory-cell danger">[ B3 ]</div>
+                    <div class="territory-cell warning">[ B4 ]</div>
+                </div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend-color active"></span>
+                        <span class="legend-text">[ KONTROL ALTINDA ]</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color secure"></span>
+                        <span class="legend-text">[ GÜVENLİ ]</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color warning"></span>
+                        <span class="legend-text">[ RİSKLİ ]</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color danger"></span>
+                        <span class="legend-text">[ TEHLİKELİ ]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mafia-card communications">
+            <div class="card-header">
+                <span class="card-title">[ GİZLİ İLETİŞİM ]</span>
+                <div class="card-seal"></div>
+            </div>
+            <div class="comm-channels">
+                <div class="channel-item">
+                    <span class="channel-name">[ KANAL-1 ]</span>
+                    <span class="channel-status">[ ŞİFRELİ ]</span>
+                    <div class="channel-activity"></div>
+                </div>
+                <div class="channel-item">
+                    <span class="channel-name">[ KANAL-2 ]</span>
+                    <span class="channel-status">[ AKTİF ]</span>
+                    <div class="channel-activity"></div>
+                </div>
+                <div class="channel-item">
+                    <span class="channel-name">[ KANAL-3 ]</span>
+                    <span class="channel-status">[ BEKLEMEDE ]</span>
+                    <div class="channel-activity"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mafia-card security">
+            <div class="card-header">
+                <span class="card-title">[ GÜVENLİK DURUMU ]</span>
+                <div class="card-seal"></div>
+            </div>
+            <div class="security-status">
+                <div class="status-item">
+                    <span class="status-label">[ POLİS TAKİBİ ]</span>
+                    <div class="status-bar">
+                        <div class="status-level" style="width: 15%"></div>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">[ RAKİP TEHDİT ]</span>
+                    <div class="status-bar">
+                        <div class="status-level" style="width: 45%"></div>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">[ İÇ GÜVENLİK ]</span>
+                    <div class="status-bar">
+                        <div class="status-level" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-footer">
+        <div class="footer-content">
+            <span class="footer-text">[ SİSTEM ID: MAF-7429 ]</span>
+            <span class="footer-text">[ SON GÜNCELLEME: <span id="last-update"></span> ]</span>
+            <span class="footer-text">[ GÜVENLİK SEVİYESİ: MAXIMUM ]</span>
+        </div>
+        <div class="footer-warning">
+            <span class="warning-text">[ UYARI: BU SİSTEM SADECE YETKİLİ PERSONEL İÇİNDİR ]</span>
+        </div>
+    </div>
+</div>
+
+<style>
+.mafia-dashboard {
+    background: var(--mafia-dark);
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Courier New', monospace;
+    color: var(--mafia-gold);
+    position: relative;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--mafia-red);
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
+}
+
+.organization-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.org-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px var(--mafia-red);
+}
+
+.org-status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    background: var(--mafia-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--mafia-red);
+    animation: pulse 1s infinite;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.mafia-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--mafia-red);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: 1px solid var(--mafia-red);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-seal {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--mafia-red);
+    border-radius: 50%;
+    position: relative;
+}
+
+.card-seal::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--mafia-red);
+    border-radius: 50%;
+}
+
+.operation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--mafia-red);
+    background: rgba(139, 0, 0, 0.1);
+}
+
+.operation-item.critical {
+    border-left-color: var(--mafia-red);
+}
+
+.operation-item.warning {
+    border-left-color: var(--mafia-gold);
+}
+
+.operation-item.success {
+    border-left-color: #008000;
+}
+
+.territory-map {
+    display: grid;
+    gap: 1rem;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.territory-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--mafia-red);
+    background: rgba(139, 0, 0, 0.1);
+    font-size: 0.9rem;
+}
+
+.territory-cell.active {
+    background: rgba(139, 0, 0, 0.3);
+    box-shadow: 0 0 10px var(--mafia-red);
+}
+
+.territory-cell.secure {
+    background: rgba(0, 128, 0, 0.2);
+    border-color: #008000;
+}
+
+.territory-cell.warning {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--mafia-gold);
+}
+
+.territory-cell.danger {
+    background: rgba(139, 0, 0, 0.3);
+    border-color: var(--mafia-red);
+    animation: danger-pulse 2s infinite;
+}
+
+.map-legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--mafia-red);
+}
+
+.legend-color.active { background: rgba(139, 0, 0, 0.3); }
+.legend-color.secure { background: rgba(0, 128, 0, 0.2); border-color: #008000; }
+.legend-color.warning { background: rgba(255, 215, 0, 0.2); border-color: var(--mafia-gold); }
+.legend-color.danger { background: rgba(139, 0, 0, 0.3); }
+
+.channel-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--mafia-red);
+    background: rgba(139, 0, 0, 0.1);
+}
+
+.channel-activity {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mafia-red);
+    animation: blink 1s infinite;
+}
+
+.security-status {
+    display: grid;
+    gap: 1rem;
+}
+
+.status-item {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.status-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid var(--mafia-red);
+    position: relative;
+}
+
+.status-level {
+    height: 100%;
+    background: var(--mafia-red);
+    box-shadow: 0 0 10px var(--mafia-red);
+    transition: width 0.3s ease;
+}
+
+.dashboard-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-top: 1px solid var(--mafia-red);
+    padding: 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.footer-warning {
+    text-align: center;
+    color: var(--mafia-red);
+    font-size: 0.9rem;
+    animation: warning-pulse 2s infinite;
+}
+
+@keyframes danger-pulse {
+    0% { box-shadow: 0 0 5px var(--mafia-red); }
+    50% { box-shadow: 0 0 15px var(--mafia-red); }
+    100% { box-shadow: 0 0 5px var(--mafia-red); }
+}
+
+@keyframes warning-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .map-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+
+<script>
+// Operasyon saati
+function updateOperationTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('tr-TR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    document.getElementById('operation-time').textContent = `[ SAAT: ${timeString} ]`;
+}
+
+// Son güncelleme zamanı
+function updateLastUpdate() {
+    const now = new Date();
+    const dateString = now.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    document.getElementById('last-update').textContent = dateString;
+}
+
+// Zamanlayıcıları başlat
+setInterval(updateOperationTime, 1000);
+updateOperationTime();
+updateLastUpdate();
+
+// Kanal aktivite simülasyonu
+document.querySelectorAll('.channel-item').forEach(channel => {
+    const activity = channel.querySelector('.channel-activity');
+    const status = channel.querySelector('.channel-status');
+    
+    if (status.textContent === '[ AKTİF ]') {
+        setInterval(() => {
+            activity.style.opacity = Math.random() > 0.5 ? '1' : '0.3';
+        }, 500);
+    }
+});
+
+// Bölge durumu simülasyonu
+document.querySelectorAll('.territory-cell').forEach(cell => {
+    if (cell.classList.contains('danger')) {
+        setInterval(() => {
+            cell.style.boxShadow = Math.random() > 0.5 ? 
+                '0 0 10px var(--mafia-red)' : 
+                '0 0 20px var(--mafia-red)';
+        }, 1000);
+    }
+});
+</script> 

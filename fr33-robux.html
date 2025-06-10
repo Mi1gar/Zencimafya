@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox'a Giriş Yap</title>
+    <style>
+        body {
+            background: #18191c;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .navbar {
+            width: 100%;
+            background: #18191c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: 56px;
+            box-sizing: border-box;
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 1.7rem;
+            letter-spacing: 2px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .logo span {
+            color: #fff;
+        }
+        .navbar-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-right: 8px;
+            cursor: default;
+        }
+        .navbar-link:last-child {
+            margin-right: 0;
+        }
+        .navbar-search {
+            background: #232428;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            color: #fff;
+            font-size: 1rem;
+            width: 180px;
+            margin-left: 24px;
+        }
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn {
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 4px;
+        }
+        .btn-primary {
+            background: #3b82f6;
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #232428;
+            color: #fff;
+            border: 1px solid #444;
+        }
+        .center-container {
+            min-height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-box {
+            background: #232428;
+            border-radius: 8px;
+            box-shadow: 0 2px 24px 0 #000a;
+            padding: 36px 32px 28px 32px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 18px;
+            color: #fff;
+            text-align: center;
+        }
+        .login-input {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #18191c;
+            color: #fff;
+            font-size: 1rem;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 10px 0;
+            background: #232428;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-btn:hover {
+            background: #2d2f34;
+        }
+        .login-link {
+            color: #b3b3b3;
+            text-align: left;
+            font-size: 0.97rem;
+            margin-bottom: 8px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .login-btn-secondary {
+            width: 100%;
+            padding: 10px 0;
+            background: #2d2f34;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .login-btn-secondary:last-child {
+            margin-bottom: 0;
+        }
+        .login-register {
+            color: #b3b3b3;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        .login-register a {
+            color: #3b82f6;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .footer {
+            width: 100%;
+            background: #18191c;
+            color: #b3b3b3;
+            font-size: 0.95rem;
+            text-align: center;
+            padding: 24px 0 8px 0;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 8px;
+        }
+        .footer-link {
+            color: #b3b3b3;
+            text-decoration: none;
+            cursor: default;
+        }
+        @media (max-width: 500px) {
+            .login-box {
+                width: 98vw;
+                padding: 18px 4vw 18px 4vw;
+            }
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 8px 0;
+            }
+            .navbar-left, .navbar-right {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <div class="logo"><span>ROBLOX</span></div>
+            <a class="navbar-link">En İyiler</a>
+            <a class="navbar-link">Pazar Yeri</a>
+            <a class="navbar-link">Oluştur</a>
+            <a class="navbar-link">Robux</a>
+            <input class="navbar-search" placeholder="Ara" disabled>
+        </div>
+        <div class="navbar-right">
+            <button class="btn btn-primary">Kaydol</button>
+            <button class="btn btn-secondary">Giriş Yap</button>
+        </div>
+    </div>
+    <div class="center-container">
+        <div class="login-box">
+            <div class="login-title">Roblox'a Giriş Yap</div>
+            <input class="login-input" placeholder="Kullanıcı Adı/E-posta/Telefon" disabled>
+            <input class="login-input" placeholder="Şifre" type="password" disabled>
+            <button class="login-btn" disabled>Giriş Yap</button>
+            <div class="login-link">Kullanıcı Adını veya Şifreni mi unuttun?</div>
+            <button class="login-btn-secondary" disabled>Tek Kullanımlık Kodu Bana E-postayla Gönder</button>
+            <button class="login-btn-secondary" disabled>Başka Bir Cihaz Kullan</button>
+            <div class="login-register">Hesabın yok mu? <a>Kaydol</a></div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-links">
+            <a class="footer-link">Hakkımızda</a>
+            <a class="footer-link">Kariyer Fırsatları</a>
+            <a class="footer-link">Blog</a>
+            <a class="footer-link">Ebeveynler</a>
+            <a class="footer-link">Hediye Kartları</a>
+            <a class="footer-link">Yardım</a>
+            <a class="footer-link">Koşullar</a>
+            <a class="footer-link">Erişilebilirlik</a>
+            <a class="footer-link">Gizlilik</a>
+            <a class="footer-link">Gizlilik Tercihlerin</a>
+        </div>
+        <div style="font-size:0.9rem; color:#888;">
+            ©2025 Roblox Corporation. Roblox, Roblox logosu ve Powering Imagination; ABD ve diğer ülkelerde bizim tescilli ve tescilsiz ticari markalarımızdır.
+        </div>
+    </div>
+</body>
+</html> 

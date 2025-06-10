@@ -1,0 +1,400 @@
+<!-- Gizli Para Transfer Sistemi -->
+<div class="mafia-transfer">
+    <div class="transfer-header">
+        <span class="header-title">[ GİZLİ FİNANS AĞI ]</span>
+        <div class="security-level">
+            <span class="level-text">[ GÜVENLİK: MAXIMUM ]</span>
+            <div class="level-indicator"></div>
+        </div>
+    </div>
+
+    <div class="transfer-container">
+        <div class="account-info">
+            <div class="account-header">
+                <span class="account-title">[ HESAP BİLGİLERİ ]</span>
+                <div class="account-seal"></div>
+            </div>
+            <div class="account-details">
+                <div class="detail-item">
+                    <span class="detail-label">[ HESAP KODU ]</span>
+                    <span class="detail-value">[ ACC-7429 ]</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">[ BAKİYE ]</span>
+                    <span class="detail-value">[ ******** ]</span>
+                    <button class="mafia-button reveal-button">
+                        <span class="button-text">[ GÖSTER ]</span>
+                    </button>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">[ SON İŞLEM ]</span>
+                    <span class="detail-value">[ 23:45:12 ]</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="transfer-form">
+            <div class="form-header">
+                <span class="form-title">[ PARA TRANSFERİ ]</span>
+                <div class="form-seal"></div>
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label class="form-label">[ ALICI KODU ]</label>
+                    <div class="input-wrapper">
+                        <input type="text" class="mafia-input" placeholder="[ KOD GİRİN... ]">
+                        <div class="input-scanner"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">[ TRANSFER MİKTARI ]</label>
+                    <div class="input-wrapper">
+                        <input type="text" class="mafia-input" placeholder="[ MİKTAR GİRİN... ]">
+                        <div class="input-scanner"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">[ TRANSFER NOTU ]</label>
+                    <div class="input-wrapper">
+                        <input type="text" class="mafia-input" placeholder="[ NOT GİRİN... ]">
+                        <div class="input-scanner"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">[ ŞİFRELEME SEVİYESİ ]</label>
+                    <div class="encryption-levels">
+                        <button class="encryption-button active">[ STANDART ]</button>
+                        <button class="encryption-button">[ GÜÇLÜ ]</button>
+                        <button class="encryption-button">[ MAXIMUM ]</button>
+                    </div>
+                </div>
+                <button class="mafia-button transfer-button">
+                    <span class="button-text">[ TRANSFER BAŞLAT ]</span>
+                    <div class="button-scanner"></div>
+                </button>
+            </div>
+        </div>
+
+        <div class="transfer-history">
+            <div class="history-header">
+                <span class="history-title">[ SON İŞLEMLER ]</span>
+                <div class="history-seal"></div>
+            </div>
+            <div class="history-list">
+                <div class="history-item">
+                    <span class="history-time">[ 23:45:12 ]</span>
+                    <span class="history-code">[ ACC-8135 ]</span>
+                    <span class="history-amount">[ +$50,000 ]</span>
+                    <span class="history-status success">[ TAMAMLANDI ]</span>
+                </div>
+                <div class="history-item">
+                    <span class="history-time">[ 23:40:05 ]</span>
+                    <span class="history-code">[ ACC-6291 ]</span>
+                    <span class="history-amount">[ -$25,000 ]</span>
+                    <span class="history-status pending">[ BEKLEMEDE ]</span>
+                </div>
+                <div class="history-item">
+                    <span class="history-time">[ 23:35:18 ]</span>
+                    <span class="history-code">[ ACC-7429 ]</span>
+                    <span class="history-amount">[ +$100,000 ]</span>
+                    <span class="history-status success">[ TAMAMLANDI ]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="transfer-footer">
+        <div class="footer-info">
+            <span class="info-text">[ SON GÜNCELLEME: <span id="last-update"></span> ]</span>
+            <span class="info-text">[ ŞİFRELEME: AKTİF ]</span>
+        </div>
+        <div class="footer-warning">
+            <span class="warning-text">[ UYARI: TÜM İŞLEMLER OTOMATİK OLARAK ŞİFRELENİR VE İZ BIRAKMAZ ]</span>
+        </div>
+    </div>
+</div>
+
+<style>
+.mafia-transfer {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--mafia-red);
+    box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+    padding: 1.5rem;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.transfer-header {
+    border-bottom: 1px solid var(--mafia-red);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.security-level {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.level-indicator {
+    width: 10px;
+    height: 10px;
+    background: var(--mafia-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--mafia-red);
+    animation: pulse 1s infinite;
+}
+
+.transfer-container {
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    gap: 1rem;
+    flex: 1;
+    overflow: hidden;
+}
+
+.account-info, .transfer-form, .transfer-history {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--mafia-red);
+    padding: 1rem;
+}
+
+.account-header, .form-header, .history-header {
+    border-bottom: 1px solid var(--mafia-red);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-seal, .form-seal, .history-seal {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--mafia-red);
+    border-radius: 50%;
+    position: relative;
+}
+
+.account-seal::before, .form-seal::before, .history-seal::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--mafia-red);
+    border-radius: 50%;
+}
+
+.account-details {
+    display: grid;
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid var(--mafia-red);
+}
+
+.detail-label {
+    color: var(--mafia-gold);
+}
+
+.reveal-button {
+    width: 100px;
+    font-size: 0.9rem;
+}
+
+.form-content {
+    display: grid;
+    gap: 1rem;
+}
+
+.form-group {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.form-label {
+    color: var(--mafia-gold);
+}
+
+.encryption-levels {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.encryption-button {
+    flex: 1;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--mafia-red);
+    color: var(--mafia-gold);
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.encryption-button:hover {
+    background: rgba(139, 0, 0, 0.2);
+}
+
+.encryption-button.active {
+    background: var(--mafia-red);
+    box-shadow: 0 0 10px var(--mafia-red);
+}
+
+.transfer-button {
+    margin-top: 1rem;
+}
+
+.history-list {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.history-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid var(--mafia-red);
+    align-items: center;
+}
+
+.history-time {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.history-code {
+    color: var(--mafia-gold);
+}
+
+.history-amount {
+    font-weight: bold;
+}
+
+.history-status {
+    padding: 0.3rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+.history-status.success {
+    background: rgba(0, 128, 0, 0.2);
+    color: #008000;
+}
+
+.history-status.pending {
+    background: rgba(255, 215, 0, 0.2);
+    color: var(--mafia-gold);
+}
+
+.transfer-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--mafia-red);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-warning {
+    text-align: center;
+    color: var(--mafia-red);
+    font-size: 0.9rem;
+    animation: warning-pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes warning-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@media (max-width: 1200px) {
+    .transfer-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .account-info, .transfer-history {
+        display: none;
+    }
+}
+</style>
+
+<script>
+// Son güncelleme zamanını güncelle
+function updateLastUpdate() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('tr-TR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    document.getElementById('last-update').textContent = timeString;
+}
+
+// Bakiye gösterme/gizleme
+document.querySelector('.reveal-button').addEventListener('click', function() {
+    const balance = document.querySelector('.detail-value');
+    const button = this.querySelector('.button-text');
+    
+    if (balance.textContent === '[ ******** ]') {
+        balance.textContent = '[ $1,000,000 ]';
+        button.textContent = '[ GİZLE ]';
+    } else {
+        balance.textContent = '[ ******** ]';
+        button.textContent = '[ GÖSTER ]';
+    }
+});
+
+// Şifreleme seviyesi seçimi
+document.querySelectorAll('.encryption-button').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.encryption-button').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        this.classList.add('active');
+    });
+});
+
+// Transfer başlatma
+document.querySelector('.transfer-button').addEventListener('click', function() {
+    const button = this.querySelector('.button-text');
+    button.textContent = '[ TRANSFER ŞİFRELENİYOR... ]';
+    
+    setTimeout(() => {
+        button.textContent = '[ TRANSFER BAŞLAT ]';
+        updateLastUpdate();
+    }, 2000);
+});
+
+// İlk yükleme
+updateLastUpdate();
+setInterval(updateLastUpdate, 60000);
+</script> 
