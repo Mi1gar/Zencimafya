@@ -420,4 +420,227 @@ footer {
     .contact-methods {
         grid-template-columns: 1fr;
     }
+}
+
+/* Mobil Uyumluluk */
+@media screen and (max-width: 768px) {
+    /* Header ve Navigasyon */
+    header nav {
+        padding: 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Hero Bölümü */
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .glitch-container h1 {
+        font-size: 32px;
+    }
+
+    .tagline {
+        font-size: 18px;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stat-item {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* Üyelik Bölümü */
+    .membership {
+        padding: 40px 20px;
+    }
+
+    .requirements {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .requirement-item {
+        width: 100%;
+    }
+
+    /* Forum Bölümü */
+    .forum {
+        padding: 40px 20px;
+    }
+
+    .forum-preview {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .forum-stats {
+        width: 100%;
+    }
+
+    .forum-categories {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* İletişim Bölümü */
+    .contact {
+        padding: 40px 20px;
+    }
+
+    .contact-methods {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-item {
+        width: 100%;
+    }
+
+    /* Footer */
+    footer {
+        padding: 20px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
+
+/* Küçük mobil cihazlar için ek optimizasyonlar */
+@media screen and (max-width: 480px) {
+    .glitch-container h1 {
+        font-size: 28px;
+    }
+
+    .tagline {
+        font-size: 16px;
+    }
+
+    .stat-item {
+        padding: 10px;
+    }
+
+    .stat-item i {
+        font-size: 20px;
+    }
+
+    .stat-item span {
+        font-size: 14px;
+    }
+
+    .requirement-item h3 {
+        font-size: 18px;
+    }
+
+    .requirement-item p {
+        font-size: 14px;
+    }
+
+    .join-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Yatay mod için özel düzenlemeler */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        padding: 20px;
+    }
+
+    .stats {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .stat-item {
+        width: calc(50% - 10px);
+    }
+
+    .requirements {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .requirement-item {
+        width: calc(50% - 10px);
+    }
+
+    .contact-methods {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contact-item {
+        width: calc(50% - 10px);
+    }
+}
+
+/* Dokunmatik cihazlar için özel düzenlemeler */
+@media (hover: none) {
+    .nav-links a:hover {
+        transform: none;
+    }
+
+    .nav-links a:active {
+        transform: scale(0.98);
+    }
+
+    .join-button:hover {
+        transform: none;
+    }
+
+    .join-button:active {
+        transform: scale(0.98);
+    }
+
+    .social-icon:hover {
+        transform: none;
+    }
+
+    .social-icon:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Yüksek DPI ekranlar için optimizasyon */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .glitch-container h1 {
+        text-shadow: 2px 2px 0 rgba(255,0,0,0.7),
+                     -2px -2px 0 rgba(0,255,0,0.7),
+                     2px -2px 0 rgba(0,0,255,0.7);
+    }
 } 

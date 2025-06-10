@@ -9,9 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <script>
         // Giriş kontrolü
-        if (localStorage.getItem('zencimafya_logged_in') !== 'true') {
+        if (!localStorage.getItem('username') || !localStorage.getItem('password')) {
             window.location.href = 'login.html';
         }
+
+        // Kullanıcı adını göster
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('username');
+            const memberCount = document.querySelector('.member-count');
+            if (username) {
+                memberCount.innerHTML = `${username} | 331 Üye`;
+            }
+        });
     </script>
 </head>
 <body>
@@ -151,9 +160,12 @@
 
         // Çıkış fonksiyonu
         function logout() {
-            localStorage.removeItem('zencimafya_logged_in');
-            localStorage.removeItem('zencimafya_username');
-            window.location.href = 'login.html';
+            if (confirm('Çıkış yapmak istediğinizden emin misiniz?')) {
+                localStorage.removeItem('username');
+                localStorage.removeItem('password');
+                localStorage.removeItem('lastLogin');
+                window.location.href = 'login.html';
+            }
         }
     </script>
 </body>
