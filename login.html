@@ -2,171 +2,70 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ZENCIMAFYA - Giriş</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENCİMAFYA - Giriş</title>
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
-    <div class="terminal-loading" id="loadingScreen">
-        <div class="terminal-content">
-            <div class="terminal-header">
-                <span class="terminal-title">ZENCIMAFYA Terminal v1.0</span>
-                <span class="terminal-status">[GÜVENLİ MOD: TOR + VPN AKTİF]</span>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-text" id="terminalOutput"></div>
-                <div class="terminal-cursor">_</div>
-            </div>
+    <!-- Yükleme Ekranı -->
+    <div id="loading-screen" class="loading-screen">
+        <!-- components/ui/loading-screen.html içeriği buraya gelecek -->
+    </div>
+
+    <!-- Terminal Container -->
+    <div class="terminal-container">
+        <!-- Terminal Başlık -->
+        <div id="terminal-header">
+            <!-- components/terminal/terminal-header.html içeriği buraya gelecek -->
+        </div>
+
+        <!-- Terminal Çıktı -->
+        <div id="terminal-output">
+            <!-- components/terminal/terminal-output.html içeriği buraya gelecek -->
+        </div>
+
+        <!-- Giriş Formu -->
+        <div id="login-container" class="login-container" style="display: none;">
+            <!-- components/auth/login-form.html içeriği buraya gelecek -->
+        </div>
+
+        <!-- Kimlik Doğrulama Mesajları -->
+        <div id="auth-messages">
+            <!-- components/auth/auth-messages.html içeriği buraya gelecek -->
+        </div>
+
+        <!-- Hata Mesajları -->
+        <div id="error-messages">
+            <!-- components/ui/error-messages.html içeriği buraya gelecek -->
         </div>
     </div>
 
-    <div class="terminal-container" id="loginContainer" style="display: none;">
-        <div class="terminal-content">
-            <div class="terminal-header">
-                <span class="terminal-title">ZENCIMAFYA Terminal v1.0</span>
-                <span class="terminal-status">[GÜVENLİ MOD: TOR + VPN AKTİF]</span>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-text" id="loginOutput"></div>
-                <div class="login-form-container">
-                    <form class="login-form" id="loginForm">
-                        <div class="form-group" id="usernameGroup" style="display: none;">
-                            <label for="username">KULLANICI ADI:</label>
-                            <input type="text" id="username" name="username" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">ŞİFRE:</label>
-                            <input type="password" id="password" name="password" autocomplete="off">
-                        </div>
-                        <button type="submit" class="login-btn">GİRİŞ YAP</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="location-info" id="locationInfo"></div>
-
+    <script src="assets/js/login.js"></script>
     <script>
-        const terminalOutput = document.getElementById('terminalOutput');
-        const loginOutput = document.getElementById('loginOutput');
-        const loadingScreen = document.getElementById('loadingScreen');
-        const loginContainer = document.getElementById('loginContainer');
-        const usernameGroup = document.getElementById('usernameGroup');
-        const loginForm = document.getElementById('loginForm');
+        // Bileşenleri yükle
+        async function loadComponents() {
+            const components = {
+                'loading-screen': 'components/ui/loading-screen.html',
+                'terminal-header': 'components/terminal/terminal-header.html',
+                'terminal-output': 'components/terminal/terminal-output.html',
+                'login-container': 'components/auth/login-form.html',
+                'auth-messages': 'components/auth/auth-messages.html',
+                'error-messages': 'components/ui/error-messages.html'
+            };
 
-        const messages = [
-            { text: "ZENCIMAFYA-AĞI: GİRİŞ MODÜLÜ BAŞLATILIYOR...", delay: 1000, newLine: true },
-            { text: "TOR AĞI: GİZLİ SERVİS BAĞLANTISI KURULUYOR.", delay: 1500, status: "[BAĞLANTI KURULDU]", newLine: true },
-            { text: "VPN TUNNEL: ÇOKLU KATMAN ŞİFRELEME AKTİF..", delay: 1500, status: "[TUNNEL ACTIVE]", newLine: true },
-            { text: "IP MASKELEME: ÇOKLU PROXY ZİNCİRİ KURULUYOR", delay: 1500, status: "[MASKELEME AKTİF]", newLine: true },
-            { text: "GPS SPOOFING: KONUM TAKİP ENGELLEME AKTİF...", delay: 1500, status: "[ENGELLEME AKTİF]", newLine: true },
-            { text: "AĞ İZLEME: DEEP PACKET INSPECTION BAŞLATILIYOR", delay: 1500, status: "[İZLEME AKTİF]", newLine: true },
-            { text: "GÜVENLİK PROTOKOLÜ: AES-256 ŞİFRELEME AKTİF", delay: 1500, status: "[ŞİFRELEME AKTİF]", newLine: true },
-            { text: "SSL/TLS: END-TO-END ENCRYPTION KURULUYOR...", delay: 1500, status: "[ENCRYPTION ACTIVE]", newLine: true },
-            { text: "FIREWALL: DEEP PACKET FILTERING AKTİF EDİLDİ", delay: 1500, status: "[FİLTRELEME AKTİF]", newLine: true },
-            { text: "ANTİ-TRACKING: BROWSER FINGERPRINT KORUMASI..", delay: 1500, status: "[KORUMA AKTİF]", newLine: true },
-            { text: "DNS LEAK KORUMASI: DNSSEC AKTİF EDİLDİ......", delay: 1500, status: "[KORUMA AKTİF]", newLine: true },
-            { text: "GÜVENLİK PROTOKOLÜ: RSA-4096 ANAHTAR ÜRETİMİ", delay: 1500, status: "[ANAHTAR ÜRETİLDİ]", newLine: true },
-            { text: "AĞ GÜVENLİĞİ: MAC ADDRESS SPOOFING AKTİF....", delay: 1500, status: "[SPOOFING AKTİF]", newLine: true },
-            { text: "SİSTEM GÜVENLİĞİ: KERNEL-LEVEL KORUMA AKTİF.", delay: 1500, status: "[KORUMA AKTİF]", newLine: true }
-        ];
-
-        let currentMessageIndex = 0;
-        let isTyping = false;
-
-        function typeWriter(text, element, status = "", delay = 50, newLine = false) {
-            if (isTyping) return Promise.resolve();
-            isTyping = true;
-
-            return new Promise((resolve) => {
-                let i = 0;
-                const interval = setInterval(() => {
-                    if (i < text.length) {
-                        if (newLine && i === 0) {
-                            element.innerHTML = element.innerHTML.replace(/_$/, '') + '\n' + text.charAt(i) + '_';
-                        } else {
-                            element.innerHTML = element.innerHTML.replace(/_$/, '') + text.charAt(i) + '_';
-                        }
-                        i++;
-                    } else {
-                        if (status) {
-                            setTimeout(() => {
-                                element.innerHTML = element.innerHTML.replace(/_$/, '') + ` ${status}_`;
-                                clearInterval(interval);
-                                isTyping = false;
-                                resolve();
-                            }, 500);
-                        } else {
-                            element.innerHTML = element.innerHTML.replace(/_$/, '') + '_';
-                            clearInterval(interval);
-                            isTyping = false;
-                            resolve();
-                        }
-                    }
-                }, delay);
-            });
-        }
-
-        async function showLoadingMessages() {
-            terminalOutput.innerHTML = 'ZENCIMAFYA Terminal v1.0\n[GÜVENLİ MOD: TOR + VPN AKTİF]\n_';
-            for (const message of messages) {
-                await typeWriter(message.text, terminalOutput, message.status, 50, message.newLine);
-                await new Promise(resolve => setTimeout(resolve, message.delay));
-            }
-
-            const knownUser = localStorage.getItem('username');
-            if (knownUser) {
-                await typeWriter(`SİSTEM: KULLANICI DOĞRULANDI [${knownUser}]`, terminalOutput, "", 50, true);
-                await typeWriter("GÜVENLİK PROTOKOLÜ: İKİ FAKTÖRLÜ DOĞRULAMA GEREKLİ", terminalOutput, "", 50, true);
-            } else {
-                await typeWriter("SİSTEM: YENİ KULLANICI TESPİT EDİLDİ", terminalOutput, "", 50, true);
-                await typeWriter("GÜVENLİK PROTOKOLÜ: KULLANICI DOĞRULAMASI GEREKLİ", terminalOutput, "", 50, true);
-                usernameGroup.style.display = 'block';
-            }
-
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                loginContainer.style.display = 'block';
-                if (knownUser) {
-                    loginOutput.innerHTML = `> SİSTEM KULLANICISI: ${knownUser}_\n> İKİ FAKTÖRLÜ DOĞRULAMA BEKLENİYOR..._`;
-                } else {
-                    loginOutput.innerHTML = "> SİSTEM: YENİ KULLANICI DOĞRULAMASI BAŞLATILIYOR..._";
+            for (const [id, path] of Object.entries(components)) {
+                try {
+                    const response = await fetch(path);
+                    const content = await response.text();
+                    document.getElementById(id).innerHTML = content;
+                } catch (error) {
+                    console.error(`${path} bileşeni yüklenirken hata:`, error);
                 }
-            }, 1000);
+            }
         }
 
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (!localStorage.getItem('username') && !username) {
-                loginOutput.innerHTML += "> HATA: KULLANICI ADI GEREKLİ<br>";
-                return;
-            }
-
-            if (!password) {
-                loginOutput.innerHTML += "> HATA: ŞİFRE GEREKLİ<br>";
-                return;
-            }
-
-            loginOutput.innerHTML += "> GİRİŞ DOĞRULANIYOR...<br>";
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            loginOutput.innerHTML += "> GÜVENLİK PROTOKOLÜ: GİRİŞ BAŞARILI<br>";
-            loginOutput.innerHTML += "> YÖNLENDİRİLİYORSUNUZ...<br>";
-
-            if (!localStorage.getItem('username')) {
-                localStorage.setItem('username', username);
-            }
-
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
-        });
-
-        showLoadingMessages();
+        // Sayfa yüklendiğinde bileşenleri yükle
+        window.addEventListener('load', loadComponents);
     </script>
 </body>
 </html> 
