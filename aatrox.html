@@ -318,30 +318,42 @@
             opacity: 1;
         }
         .why-aatrox-item {
+            position: relative;
             min-height: 100vh;
             width: 100vw;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 60px 20px;
-            isolation: isolate;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+        .why-aatrox-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .why-aatrox-item.visible .why-aatrox-bg {
+            opacity: 0.45;
         }
         .why-aatrox-bg {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            min-width: 100vw;
+            min-height: 100vh;
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             opacity: 0;
             transition: opacity 0.7s ease;
-            filter: brightness(1.4) contrast(1.1) saturate(1.2);
-            z-index: -1;
+            z-index: 0;
+            filter: brightness(1.2) contrast(1.1) saturate(1.2);
             pointer-events: none;
-        }
-        .why-aatrox-item.visible .why-aatrox-bg {
-            opacity: 0.45;
+            object-fit: cover;
         }
         .why-aatrox-content {
             position: relative;
@@ -589,21 +601,118 @@
         return randomImage;
     }
 
+    // Resim yükleme durumunu takip et
+    const imageLoadStatus = new Map();
+
+    // Resmi önceden yükle ve durumunu kontrol et
+    async function preloadImage(src) {
+        if (imageLoadStatus.has(src)) {
+            return imageLoadStatus.get(src);
+        }
+
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => {
+                imageLoadStatus.set(src, true);
+                resolve(true);
+            };
+            img.onerror = () => {
+                imageLoadStatus.set(src, false);
+                reject(new Error(`Resim yüklenemedi: ${src}`));
+            };
+            img.src = src;
+        });
+    }
+
+    // Arkaplan resmini güvenli bir şekilde değiştir
+    async function setBackgroundImage(bgElement, src) {
+        if (!bgElement || !src) return;
+
+        try {
+            // Resmi önceden yükle
+            await preloadImage(src);
+            
+            // Resim yüklendiyse arkaplanı değiştir
+            bgElement.style.backgroundImage = `url('${src}')`;
+            bgElement.style.opacity = '0';
+            
+            // Kısa bir gecikme ile opacity'yi ayarla
+            requestAnimationFrame(() => {
+                bgElement.style.opacity = '0.45';
+            });
+        } catch (error) {
+            console.error('Arkaplan değiştirilirken hata:', error);
+            // Hata durumunda varsayılan arka plan rengini kullan
+            bgElement.style.backgroundImage = 'none';
+            bgElement.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+        }
+    }
+
+    // Intersection Observer ayarları
+    const observerOptions = {
+        root: null,
+        rootMargin: '-10% 0px',
+        threshold: 0.3
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(async (entry) => {
+            const item = entry.target;
+            const bg = item.querySelector('.why-aatrox-bg');
+            
+            if (entry.isIntersecting) {
+                item.classList.add('visible');
+                
+                if (bg) {
+                    // Önceki arkaplanı yumuşak şekilde kaldır
+                    document.querySelectorAll('.why-aatrox-bg').forEach(otherBg => {
+                        if (otherBg !== bg) {
+                            otherBg.style.opacity = '0';
+                        }
+                    });
+                    
+                    // Resim yüklü değilse veya farklı bir resim yüklenecekse
+                    const newSrc = item.dataset.item === '2' ? 'resimleraatrox/Aatrox_33.jpg' : getRandomImage();
+                    if (newSrc) {
+                        // Resmi önceden yükle
+                        const tempImg = new Image();
+                        tempImg.onload = function() {
+                            // Önce opacity'yi 0 yap
+                            bg.style.opacity = '0';
+                            // Arkaplanı değiştir
+                            bg.style.backgroundImage = `url('${newSrc}')`;
+                            // Kısa bir gecikme ile opacity'yi ayarla
+                            setTimeout(() => {
+                                bg.style.opacity = '0.45';
+                            }, 50);
+                        };
+                        tempImg.src = newSrc;
+                    }
+                }
+            } else {
+                item.classList.remove('visible');
+                if (bg) {
+                    bg.style.opacity = '0';
+                }
+            }
+        });
+    }, observerOptions);
+
     // Sayfa yüklendiğinde resimleri yükle
     document.addEventListener('DOMContentLoaded', async () => {
         await loadBackgroundImages();
         createMatches();
         
         // Her bölümü gözlemle ve başlangıç resimlerini ayarla
-        document.querySelectorAll('.why-aatrox-item').forEach(item => {
+        document.querySelectorAll('.why-aatrox-item').forEach(async (item) => {
             const bg = item.querySelector('.why-aatrox-bg');
             if (bg) {
-                // Başlangıç resmini ayarla
                 const initialSrc = item.dataset.item === '2' ? 'resimleraatrox/Aatrox_33.jpg' : getRandomImage();
                 if (initialSrc) {
                     const tempImg = new Image();
                     tempImg.onload = function() {
-                        bg.src = initialSrc;
+                        bg.style.backgroundImage = `url('${initialSrc}')`;
+                        bg.style.opacity = '0';
                     };
                     tempImg.src = initialSrc;
                 }
@@ -743,63 +852,11 @@
         window.location.href = 'clip.html';
     };
 
-    // Intersection Observer ayarları
-    const observerOptions = {
-        root: null,
-        rootMargin: '-10% 0px',
-        threshold: 0.3
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const item = entry.target;
-            const bg = item.querySelector('.why-aatrox-bg');
-            
-            if (entry.isIntersecting) {
-                item.classList.add('visible');
-                
-                if (bg) {
-                    // Önceki arkaplanı yumuşak şekilde kaldır
-                    document.querySelectorAll('.why-aatrox-bg').forEach(otherBg => {
-                        if (otherBg !== bg) {
-                            otherBg.style.opacity = '0';
-                        }
-                    });
-                    
-                    // Resim yüklü değilse veya farklı bir resim yüklenecekse
-                    const newSrc = item.dataset.item === '2' ? 'resimleraatrox/Aatrox_33.jpg' : getRandomImage();
-                    if (bg.src !== newSrc) {
-                        // Resmi önceden yükle
-                        const tempImg = new Image();
-                        tempImg.onload = function() {
-                            bg.src = newSrc;
-                            requestAnimationFrame(() => {
-                                bg.style.opacity = '0.45';
-                            });
-                        };
-                        tempImg.src = newSrc;
-                    } else {
-                        // Resim zaten yüklüyse direkt göster
-                        requestAnimationFrame(() => {
-                            bg.style.opacity = '0.45';
-                        });
-                    }
-                }
-            } else {
-                item.classList.remove('visible');
-                if (bg) {
-                    requestAnimationFrame(() => {
-                        bg.style.opacity = '0';
-                    });
-                }
-            }
-        });
-    }, observerOptions);
-
     // Menüdeki 'Neden Aatrox?' tuşuna tıklayınca smooth scroll
     document.getElementById('whyAatroxBtn').onclick = async function() {
         // Resimleri yeniden yükle
         await loadBackgroundImages();
+        imageLoadStatus.clear();
         
         // Son kullanılan resmi sıfırla
         lastUsedImage = null;
@@ -818,15 +875,18 @@
         historySection.style.display = 'none';
         
         // Tüm arkaplan resimlerini yeniden yükle
-        document.querySelectorAll('.why-aatrox-item').forEach(item => {
+        document.querySelectorAll('.why-aatrox-item').forEach(async (item) => {
             const bg = item.querySelector('.why-aatrox-bg');
             if (bg) {
                 const newSrc = item.dataset.item === '2' ? 'resimleraatrox/Aatrox_33.jpg' : getRandomImage();
-                const tempImg = new Image();
-                tempImg.onload = function() {
-                    bg.src = newSrc;
-                };
-                tempImg.src = newSrc;
+                if (newSrc) {
+                    const tempImg = new Image();
+                    tempImg.onload = function() {
+                        bg.style.backgroundImage = `url('${newSrc}')`;
+                        bg.style.opacity = '0';
+                    };
+                    tempImg.src = newSrc;
+                }
             }
         });
         
