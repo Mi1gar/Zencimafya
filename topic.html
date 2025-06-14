@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZENCİMAFYA - Konu Detayı</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/forum.css">
+    <link rel="stylesheet" href="assets/css/topic.css">
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/forum.js"></script>
+</head>
+<body>
+    <!-- Yükleme Ekranı -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">SİSTEM BAŞLATILIYOR...</div>
+    </div>
+
+    <!-- Ana Konteyner -->
+    <div id="main-container" class="main-container">
+        <!-- Üst Menü -->
+        <header class="header">
+            <div class="logo">ZENCİMAFYA</div>
+            <nav class="nav">
+                <a href="index.html" class="nav-item">Ana Sayfa</a>
+                <a href="forum.html" class="nav-item">Forum</a>
+                <a href="#" class="nav-item">Kurallar</a>
+                <a href="#" class="nav-item">Hakkında</a>
+            </nav>
+            <div class="user-menu">
+                <div id="user-info" class="user-info">
+                    <img id="user-avatar" src="assets/images/default-avatar.png" alt="Avatar" class="avatar">
+                    <span id="username" class="username"></span>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="#" id="profile-link">Profilim</a>
+                    <a href="#" id="settings-link">Ayarlar</a>
+                    <a href="#" id="logout-link">Çıkış Yap</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Ana İçerik -->
+        <main class="main-content">
+            <!-- Konu Başlık -->
+            <div class="topic-header">
+                <div class="topic-header-content">
+                    <h1 id="topic-title" class="topic-title">Konu Başlığı</h1>
+                    <div class="topic-meta">
+                        <span class="author">
+                            <img id="author-avatar" src="assets/images/default-avatar.png" alt="Avatar" class="author-avatar">
+                            <span id="author-name">Yazar Adı</span>
+                        </span>
+                        <span class="date" id="topic-date">Tarih</span>
+                        <span class="views" id="topic-views">
+                            <i class="fas fa-eye"></i> 0 görüntülenme
+                        </span>
+                    </div>
+                </div>
+                <div class="topic-actions">
+                    <button id="edit-topic-btn" class="action-btn" style="display: none;">
+                        <i class="fas fa-edit"></i> Düzenle
+                    </button>
+                    <button id="delete-topic-btn" class="action-btn delete" style="display: none;">
+                        <i class="fas fa-trash"></i> Sil
+                    </button>
+                </div>
+            </div>
+
+            <!-- Konu İçerik -->
+            <div class="topic-content">
+                <div id="topic-body" class="topic-body">
+                    <!-- Konu içeriği JavaScript ile doldurulacak -->
+                </div>
+                <div id="topic-tags" class="topic-tags">
+                    <!-- Etiketler JavaScript ile doldurulacak -->
+                </div>
+            </div>
+
+            <!-- Yorumlar -->
+            <div class="comments-section">
+                <h2 class="section-title">Yorumlar</h2>
+                <div id="comments-list" class="comments-list">
+                    <!-- Yorumlar JavaScript ile doldurulacak -->
+                </div>
+
+                <!-- Yorum Formu -->
+                <div class="comment-form-container">
+                    <form id="comment-form" class="comment-form">
+                        <textarea id="comment-content" class="comment-textarea" placeholder="Yorumunuzu yazın..." required></textarea>
+                        <button type="submit" class="submit-btn">Yorum Yap</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Alt Bilgi -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ZENCİMAFYA</h3>
+                    <p>Güvenli ve anonim forum platformu</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hızlı Bağlantılar</h3>
+                    <a href="#">Kurallar</a>
+                    <a href="#">Gizlilik Politikası</a>
+                    <a href="#">İletişim</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Bağlantı Durumu</h3>
+                    <div class="connection-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">TOR + VPN AKTİF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ZENCİMAFYA. Tüm hakları saklıdır.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Düzenleme Modal -->
+    <div id="edit-topic-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Konuyu Düzenle</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="edit-topic-form" class="modal-form">
+                <div class="form-group">
+                    <label for="edit-topic-title">Başlık</label>
+                    <input type="text" id="edit-topic-title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-topic-category">Kategori</label>
+                    <select id="edit-topic-category" name="category" required>
+                        <!-- Kategoriler JavaScript ile doldurulacak -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-topic-content">İçerik</label>
+                    <textarea id="edit-topic-content" name="content" rows="10" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-topic-tags">Etiketler (virgülle ayırın)</label>
+                    <input type="text" id="edit-topic-tags" name="tags" placeholder="örnek, etiketler">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">İptal</button>
+                    <button type="submit" class="submit-btn">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sayfa değişkenleri
+        let currentTopic = null;
+        let currentUser = null;
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Token kontrolü
+            if (!auth.isAuthenticated()) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Yükleme ekranını göster
+            showLoadingScreen();
+            
+            try {
+                // URL'den konu ID'sini al
+                const urlParams = new URLSearchParams(window.location.search);
+                const topicId = urlParams.get('id');
+                
+                if (!topicId) {
+                    throw new Error('Konu ID\'si bulunamadı');
+                }
+
+                // Kullanıcı bilgilerini güncelle
+                currentUser = auth.getCurrentUser();
+                updateUserInfo();
+                
+                // Konuyu yükle
+                await loadTopic(topicId);
+                
+                // Yorumları yükle
+                await loadComments(topicId);
+                
+                // Event listener'ları ekle
+                setupEventListeners();
+            } catch (error) {
+                console.error('Sayfa yükleme hatası:', error);
+                showError('Sayfa yüklenirken bir hata oluştu');
+            } finally {
+                // Yükleme ekranını gizle
+                hideLoadingScreen();
+            }
+        });
+
+        // Yükleme ekranını göster
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('visible');
+            }
+        }
+
+        // Yükleme ekranını gizle
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.remove('visible');
+            }
+        }
+
+        // Kullanıcı bilgilerini güncelle
+        function updateUserInfo() {
+            if (currentUser) {
+                const usernameElement = document.getElementById('username');
+                const avatarElement = document.getElementById('user-avatar');
+                
+                if (usernameElement) {
+                    usernameElement.textContent = currentUser.username;
+                }
+                
+                if (avatarElement && currentUser.avatar) {
+                    avatarElement.src = currentUser.avatar;
+                }
+            }
+        }
+
+        // Konuyu yükle
+        async function loadTopic(topicId) {
+            try {
+                currentTopic = forum.getTopic(topicId);
+                
+                if (!currentTopic) {
+                    throw new Error('Konu bulunamadı');
+                }
+
+                // Görüntülenme sayısını artır
+                forum.incrementViewCount(topicId);
+                
+                // Başlık ve meta bilgileri güncelle
+                document.title = `${currentTopic.title} - ZENCİMAFYA`;
+                document.getElementById('topic-title').textContent = currentTopic.title;
+                document.getElementById('author-name').textContent = currentTopic.author.username;
+                document.getElementById('topic-date').textContent = new Date(currentTopic.createdAt).toLocaleDateString();
+                document.getElementById('topic-views').innerHTML = `<i class="fas fa-eye"></i> ${currentTopic.viewCount} görüntülenme`;
+                
+                // Yazar avatarını güncelle
+                const authorAvatar = document.getElementById('author-avatar');
+                if (authorAvatar && currentTopic.author.avatar) {
+                    authorAvatar.src = currentTopic.author.avatar;
+                }
+                
+                // Konu içeriğini güncelle
+                document.getElementById('topic-body').innerHTML = currentTopic.content;
+                
+                // Etiketleri güncelle
+                const tagsContainer = document.getElementById('topic-tags');
+                if (currentTopic.tags && currentTopic.tags.length > 0) {
+                    tagsContainer.innerHTML = currentTopic.tags.map(tag => `
+                        <span class="tag">${tag}</span>
+                    `).join('');
+                } else {
+                    tagsContainer.innerHTML = '';
+                }
+                
+                // Düzenleme ve silme butonlarını göster/gizle
+                const editBtn = document.getElementById('edit-topic-btn');
+                const deleteBtn = document.getElementById('delete-topic-btn');
+                
+                if (currentUser && (currentUser.id === currentTopic.author.id || currentUser.role === 'admin')) {
+                    editBtn.style.display = 'inline-flex';
+                    deleteBtn.style.display = 'inline-flex';
+                }
+            } catch (error) {
+                console.error('Konu yükleme hatası:', error);
+                showError('Konu yüklenirken bir hata oluştu');
+            }
+        }
+
+        // Yorumları yükle
+        async function loadComments(topicId) {
+            const commentsList = document.getElementById('comments-list');
+            if (!commentsList) return;
+
+            try {
+                const comments = forum.getComments(topicId);
+                
+                if (comments.length === 0) {
+                    commentsList.innerHTML = '<div class="no-comments">Henüz yorum yapılmamış. İlk yorumu siz yapın!</div>';
+                    return;
+                }
+                
+                commentsList.innerHTML = comments.map(comment => `
+                    <div class="comment-card" data-id="${comment.id}">
+                        <div class="comment-header">
+                            <div class="comment-author">
+                                <img src="${comment.author.avatar || 'assets/images/default-avatar.png'}" alt="Avatar" class="author-avatar">
+                                <span class="author-name">${comment.author.username}</span>
+                            </div>
+                            <div class="comment-meta">
+                                <span class="comment-date">${new Date(comment.createdAt).toLocaleDateString()}</span>
+                                ${currentUser && (currentUser.id === comment.author.id || currentUser.role === 'admin') ? `
+                                    <div class="comment-actions">
+                                        <button class="edit-comment-btn" data-id="${comment.id}">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="delete-comment-btn" data-id="${comment.id}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                        <div class="comment-content">${comment.content}</div>
+                    </div>
+                `).join('');
+
+                // Yorum düzenleme ve silme butonlarına event listener'lar ekle
+                document.querySelectorAll('.edit-comment-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const commentId = btn.dataset.id;
+                        showEditCommentModal(commentId);
+                    });
+                });
+
+                document.querySelectorAll('.delete-comment-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const commentId = btn.dataset.id;
+                        if (confirm('Bu yorumu silmek istediğinizden emin misiniz?')) {
+                            deleteComment(commentId);
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error('Yorum yükleme hatası:', error);
+                showError('Yorumlar yüklenirken bir hata oluştu');
+            }
+        }
+
+        // Yorum sil
+        async function deleteComment(commentId) {
+            try {
+                forum.deleteComment(commentId);
+                await loadComments(currentTopic.id);
+                showSuccess('Yorum başarıyla silindi');
+            } catch (error) {
+                console.error('Yorum silme hatası:', error);
+                showError('Yorum silinirken bir hata oluştu');
+            }
+        }
+
+        // Yorum düzenleme modalını göster
+        function showEditCommentModal(commentId) {
+            const comment = forum.getComment(commentId);
+            if (!comment) return;
+
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Yorumu Düzenle</h2>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <form class="modal-form edit-comment-form">
+                        <div class="form-group">
+                            <label for="edit-comment-content">Yorum</label>
+                            <textarea id="edit-comment-content" name="content" rows="5" required>${comment.content}</textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn">İptal</button>
+                            <button type="submit" class="submit-btn">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+            modal.style.display = 'block';
+
+            const form = modal.querySelector('.edit-comment-form');
+            const closeBtn = modal.querySelector('.close-modal');
+            const cancelBtn = modal.querySelector('.cancel-btn');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const content = document.getElementById('edit-comment-content').value.trim();
+                
+                try {
+                    forum.updateComment(commentId, content);
+                    modal.remove();
+                    await loadComments(currentTopic.id);
+                    showSuccess('Yorum başarıyla güncellendi');
+                } catch (error) {
+                    console.error('Yorum güncelleme hatası:', error);
+                    showError('Yorum güncellenirken bir hata oluştu');
+                }
+            });
+
+            closeBtn.addEventListener('click', () => modal.remove());
+            cancelBtn.addEventListener('click', () => modal.remove());
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
+            });
+        }
+
+        // Event listener'ları ekle
+        function setupEventListeners() {
+            // Çıkış yapma
+            const logoutLink = document.getElementById('logout-link');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    auth.logout();
+                    window.location.href = 'login.html';
+                });
+            }
+
+            // Profil sayfası
+            const profileLink = document.getElementById('profile-link');
+            if (profileLink) {
+                profileLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (currentUser) {
+                        window.location.href = `profile.html?id=${currentUser.id}`;
+                    }
+                });
+            }
+
+            // Ayarlar sayfası
+            const settingsLink = document.getElementById('settings-link');
+            if (settingsLink) {
+                settingsLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'settings.html';
+                });
+            }
+
+            // Konu düzenleme
+            const editTopicBtn = document.getElementById('edit-topic-btn');
+            const editTopicModal = document.getElementById('edit-topic-modal');
+            const editTopicForm = document.getElementById('edit-topic-form');
+            
+            if (editTopicBtn && editTopicModal) {
+                editTopicBtn.addEventListener('click', () => {
+                    // Form alanlarını doldur
+                    document.getElementById('edit-topic-title').value = currentTopic.title;
+                    document.getElementById('edit-topic-content').value = currentTopic.content;
+                    document.getElementById('edit-topic-tags').value = currentTopic.tags.join(', ');
+                    
+                    // Kategorileri yükle
+                    const categorySelect = document.getElementById('edit-topic-category');
+                    const categories = forum.getCategories();
+                    categorySelect.innerHTML = categories.map(category => `
+                        <option value="${category.id}" ${category.id === currentTopic.category ? 'selected' : ''}>
+                            ${category.name}
+                        </option>
+                    `).join('');
+                    
+                    editTopicModal.style.display = 'block';
+                });
+            }
+            
+            if (editTopicForm) {
+                editTopicForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const title = document.getElementById('edit-topic-title').value.trim();
+                    const category = document.getElementById('edit-topic-category').value;
+                    const content = document.getElementById('edit-topic-content').value.trim();
+                    const tags = document.getElementById('edit-topic-tags').value
+                        .split(',')
+                        .map(tag => tag.trim())
+                        .filter(tag => tag);
+                    
+                    try {
+                        forum.updateTopic(currentTopic.id, {
+                            title,
+                            category,
+                            content,
+                            tags
+                        });
+                        
+                        editTopicModal.style.display = 'none';
+                        await loadTopic(currentTopic.id);
+                        showSuccess('Konu başarıyla güncellendi');
+                    } catch (error) {
+                        console.error('Konu güncelleme hatası:', error);
+                        showError('Konu güncellenirken bir hata oluştu');
+                    }
+                });
+            }
+
+            // Konu silme
+            const deleteTopicBtn = document.getElementById('delete-topic-btn');
+            if (deleteTopicBtn) {
+                deleteTopicBtn.addEventListener('click', async () => {
+                    if (confirm('Bu konuyu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!')) {
+                        try {
+                            forum.deleteTopic(currentTopic.id);
+                            window.location.href = 'forum.html';
+                        } catch (error) {
+                            console.error('Konu silme hatası:', error);
+                            showError('Konu silinirken bir hata oluştu');
+                        }
+                    }
+                });
+            }
+
+            // Yorum formu
+            const commentForm = document.getElementById('comment-form');
+            if (commentForm) {
+                commentForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const content = document.getElementById('comment-content').value.trim();
+                    if (!content) return;
+                    
+                    try {
+                        forum.addComment(currentTopic.id, content);
+                        document.getElementById('comment-content').value = '';
+                        await loadComments(currentTopic.id);
+                        showSuccess('Yorumunuz başarıyla eklendi');
+                    } catch (error) {
+                        console.error('Yorum ekleme hatası:', error);
+                        showError('Yorum eklenirken bir hata oluştu');
+                    }
+                });
+            }
+
+            // Modal kapatma
+            const closeModal = document.querySelector('.close-modal');
+            const cancelBtn = document.querySelector('.cancel-btn');
+            
+            if (closeModal && editTopicModal) {
+                closeModal.addEventListener('click', () => {
+                    editTopicModal.style.display = 'none';
+                });
+            }
+            
+            if (cancelBtn && editTopicModal) {
+                cancelBtn.addEventListener('click', () => {
+                    editTopicModal.style.display = 'none';
+                });
+            }
+            
+            if (editTopicModal) {
+                window.addEventListener('click', (e) => {
+                    if (e.target === editTopicModal) {
+                        editTopicModal.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Hata mesajı göster
+        function showError(message) {
+            // Hata mesajı gösterimi için bir modal veya toast eklenebilir
+            console.error(message);
+            alert(message);
+        }
+
+        // Başarı mesajı göster
+        function showSuccess(message) {
+            // Başarı mesajı gösterimi için bir modal veya toast eklenebilir
+            console.log(message);
+            alert(message);
+        }
+    </script>
+</body>
+</html> 

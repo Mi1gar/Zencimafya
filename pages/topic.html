@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konu Başlığı - Zencimafya Forum</title>
+    <link rel="stylesheet" href="../styles/topic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="forum-container">
+        <!-- Ana İçerik -->
+        <main class="main-content">
+            <!-- Konu Başlığı -->
+            <header class="topic-header">
+                <div class="topic-title-section">
+                    <h1>Konu Başlığı Buraya Gelecek</h1>
+                    <div class="topic-meta">
+                        <span class="category-badge">Kategori Adı</span>
+                        <span><i class="fas fa-user"></i> Yazar Adı</span>
+                        <span><i class="fas fa-clock"></i> 2 saat önce</span>
+                        <span><i class="fas fa-eye"></i> 1.2K görüntülenme</span>
+                    </div>
+                </div>
+                <div class="topic-actions">
+                    <button class="action-btn" id="shareBtn">
+                        <i class="fas fa-share-alt"></i>
+                        Paylaş
+                    </button>
+                    <button class="action-btn" id="bookmarkBtn">
+                        <i class="fas fa-bookmark"></i>
+                        Kaydet
+                    </button>
+                </div>
+            </header>
+
+            <!-- Mesajlar -->
+            <div class="posts-container">
+                <!-- Orijinal Post -->
+                <article class="post-item original-post">
+                    <div class="post-user">
+                        <img src="../assets/avatars/default.png" alt="Kullanıcı Avatarı" class="post-avatar">
+                        <div class="post-username">Yazar Adı</div>
+                        <div class="post-user-info">
+                            <div>Kayıt: 01.01.2024</div>
+                            <div>Mesaj: 150</div>
+                            <div>Konum: İstanbul</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <div class="post-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+                        <div class="post-actions">
+                            <button class="post-action-btn">
+                                <i class="fas fa-thumbs-up"></i>
+                                Beğen (45)
+                            </button>
+                            <button class="post-action-btn">
+                                <i class="fas fa-reply"></i>
+                                Yanıtla
+                            </button>
+                            <button class="post-action-btn">
+                                <i class="fas fa-flag"></i>
+                                Bildir
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Yanıtlar -->
+                <div class="replies-container">
+                    <!-- Yanıt 1 -->
+                    <article class="post-item">
+                        <div class="post-user">
+                            <img src="../assets/avatars/user1.png" alt="Kullanıcı Avatarı" class="post-avatar">
+                            <div class="post-username">Yanıtlayan Adı</div>
+                            <div class="post-user-info">
+                                <div>Kayıt: 15.01.2024</div>
+                                <div>Mesaj: 75</div>
+                                <div>Konum: Ankara</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-text">
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                            </div>
+                            <div class="post-actions">
+                                <button class="post-action-btn">
+                                    <i class="fas fa-thumbs-up"></i>
+                                    Beğen (12)
+                                </button>
+                                <button class="post-action-btn">
+                                    <i class="fas fa-reply"></i>
+                                    Yanıtla
+                                </button>
+                                <button class="post-action-btn">
+                                    <i class="fas fa-flag"></i>
+                                    Bildir
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Yanıt Formu -->
+            <div class="reply-form-container">
+                <form class="reply-form">
+                    <div class="form-header">
+                        <h3>Yanıt Yaz</h3>
+                        <div class="editor-toolbar">
+                            <button type="button" class="toolbar-btn">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn">
+                                <i class="fas fa-link"></i>
+                            </button>
+                            <button type="button" class="toolbar-btn">
+                                <i class="fas fa-image"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <textarea class="mafia-input" rows="6" placeholder="Yanıtınızı buraya yazın..."></textarea>
+                    <button type="submit" class="mafia-button">
+                        <span class="button-text">Yanıtı Gönder</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Sayfalama -->
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">...</button>
+                <button class="page-btn">10</button>
+            </div>
+        </main>
+
+        <!-- Yan Panel -->
+        <aside class="topic-sidebar">
+            <!-- Konu Bilgileri -->
+            <section class="sidebar-section">
+                <h3>Konu Bilgileri</h3>
+                <div class="info-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Oluşturulma: 01.02.2024</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Yanıt Sayısı: 45</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-eye"></i>
+                    <span>Görüntülenme: 1.2K</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Son Güncelleme: 2 saat önce</span>
+                </div>
+            </section>
+
+            <!-- Benzer Konular -->
+            <section class="sidebar-section">
+                <h3>Benzer Konular</h3>
+                <div class="similar-topics-list">
+                    <a href="#" class="similar-topic-item">
+                        <div class="similar-topic-title">Benzer Konu Başlığı 1</div>
+                        <div class="similar-topic-meta">
+                            <span><i class="fas fa-user"></i> Yazar1</span>
+                            <span><i class="fas fa-comments"></i> 25 yanıt</span>
+                        </div>
+                    </a>
+                    <a href="#" class="similar-topic-item">
+                        <div class="similar-topic-title">Benzer Konu Başlığı 2</div>
+                        <div class="similar-topic-meta">
+                            <span><i class="fas fa-user"></i> Yazar2</span>
+                            <span><i class="fas fa-comments"></i> 15 yanıt</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <!-- Paylaş Modalı -->
+    <div id="shareModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Konuyu Paylaş</h3>
+            <div class="share-options">
+                <button class="share-btn">
+                    <i class="fab fa-facebook"></i>
+                    Facebook
+                </button>
+                <button class="share-btn">
+                    <i class="fab fa-twitter"></i>
+                    Twitter
+                </button>
+                <button class="share-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                </button>
+                <button class="share-btn">
+                    <i class="fab fa-telegram"></i>
+                    Telegram
+                </button>
+            </div>
+            <div class="share-link">
+                <input type="text" value="https://zencimafya.com/topic/123" readonly>
+                <button class="copy-btn">
+                    <i class="fas fa-copy"></i>
+                    Kopyala
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Paylaş modalı
+        const shareBtn = document.getElementById('shareBtn');
+        const shareModal = document.getElementById('shareModal');
+        const copyBtn = document.querySelector('.copy-btn');
+
+        shareBtn.addEventListener('click', () => {
+            shareModal.style.display = 'block';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === shareModal) {
+                shareModal.style.display = 'none';
+            }
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const linkInput = document.querySelector('.share-link input');
+            linkInput.select();
+            document.execCommand('copy');
+            
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Kopyalandı!';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+            }, 2000);
+        });
+
+        // Kaydet butonu
+        const bookmarkBtn = document.getElementById('bookmarkBtn');
+        bookmarkBtn.addEventListener('click', () => {
+            const icon = bookmarkBtn.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.replace('far', 'fas');
+                bookmarkBtn.style.color = 'var(--accent-color)';
+            } else {
+                icon.classList.replace('fas', 'far');
+                bookmarkBtn.style.color = '';
+            }
+        });
+    </script>
+</body>
+</html> 

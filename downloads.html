@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosya İndirme - Zencimafya</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .download-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .download-item {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .download-button {
+            background: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .download-button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="download-container">
+        <h1>İndirilebilir Dosyalar</h1>
+        
+        <div class="download-item">
+            <div>
+                <h3>Örnek Dosya 1</h3>
+                <p>Dosya açıklaması buraya gelecek</p>
+            </div>
+            <a href="assets/downloads/ornek-dosya-1.zip" class="download-button" download>
+                İndir
+            </a>
+        </div>
+
+        <div class="download-item">
+            <div>
+                <h3>Örnek Dosya 2</h3>
+                <p>Dosya açıklaması buraya gelecek</p>
+            </div>
+            <a href="assets/downloads/ornek-dosya-2.pdf" class="download-button" download>
+                İndir
+            </a>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html> 

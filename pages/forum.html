@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mafia Forum</title>
+    <link rel="stylesheet" href="../styles/forum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="forum-container">
+        <!-- Üst Menü -->
+        <nav class="forum-nav">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-user-secret"></i>
+                    <span>MAFIA FORUM</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="active">Ana Sayfa</a>
+                    <a href="#categories">Kategoriler</a>
+                    <a href="#topics">Konular</a>
+                    <a href="#messages">Mesajlar</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Forum'da ara...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar">
+                        <img src="../assets/default-avatar.png" alt="Profil" id="userAvatar">
+                        <span class="notification-badge" id="notificationCount">0</span>
+                    </div>
+                    <div class="dropdown-menu">
+                        <a href="#profile"><i class="fas fa-user"></i> Profilim</a>
+                        <a href="#friends"><i class="fas fa-users"></i> Arkadaşlarım</a>
+                        <a href="#messages"><i class="fas fa-envelope"></i> Mesajlarım</a>
+                        <a href="#notifications"><i class="fas fa-bell"></i> Bildirimler</a>
+                        <a href="#settings"><i class="fas fa-cog"></i> Ayarlar</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Ana İçerik -->
+        <main class="forum-content">
+            <!-- Kategoriler -->
+            <section class="categories-section">
+                <div class="section-header">
+                    <h2>Kategoriler</h2>
+                    <button class="new-topic-btn" id="newTopicBtn">
+                        <i class="fas fa-plus"></i> Yeni Konu
+                    </button>
+                </div>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Kategoriler JavaScript ile doldurulacak -->
+                </div>
+            </section>
+
+            <!-- Son Konular -->
+            <section class="recent-topics">
+                <div class="section-header">
+                    <h2>Son Konular</h2>
+                    <div class="topic-filters">
+                        <select id="topicFilter">
+                            <option value="all">Tümü</option>
+                            <option value="popular">Popüler</option>
+                            <option value="latest">En Yeni</option>
+                            <option value="unanswered">Cevaplanmamış</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="topics-list" id="topicsList">
+                    <!-- Konular JavaScript ile doldurulacak -->
+                </div>
+            </section>
+
+            <!-- Aktif Kullanıcılar -->
+            <section class="active-users">
+                <div class="section-header">
+                    <h2>Aktif Kullanıcılar</h2>
+                </div>
+                <div class="users-list" id="activeUsersList">
+                    <!-- Aktif kullanıcılar JavaScript ile doldurulacak -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Yeni Konu Modal -->
+        <div class="modal" id="newTopicModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Yeni Konu Oluştur</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <form id="newTopicForm">
+                    <div class="form-group">
+                        <label for="topicCategory">Kategori</label>
+                        <select id="topicCategory" required>
+                            <!-- Kategoriler JavaScript ile doldurulacak -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="topicTitle">Başlık</label>
+                        <input type="text" id="topicTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topicContent">İçerik</label>
+                        <textarea id="topicContent" rows="6" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn">İptal</button>
+                        <button type="submit" class="submit-btn">Oluştur</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bildirimler Modal -->
+        <div class="modal" id="notificationsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Bildirimler</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="notifications-list" id="notificationsList">
+                    <!-- Bildirimler JavaScript ile doldurulacak -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/forum.js"></script>
+</body>
+</html> 

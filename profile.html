@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilim - Zencimafya Forum</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
+    <script src="assets/js/auth.js" defer></script>
+    <script src="assets/js/profile.js" defer></script>
+</head>
+<body>
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Profil yükleniyor...</div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <div class="terminal-container" style="display: none;">
+        <div class="terminal-header">
+            <div class="terminal-title">Zencimafya Forum - Profil</div>
+            <div class="terminal-status" id="connectionStatus">Bağlantı: Aktif</div>
+        </div>
+
+        <div class="terminal-output" id="terminalOutput">
+            <div class="output-line">Kullanıcı profili yükleniyor...</div>
+        </div>
+
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar-container">
+                    <div class="profile-avatar">
+                        <img id="userAvatar" src="assets/images/default-avatar.png" alt="Profil Resmi">
+                        <div class="avatar-overlay">
+                            <button class="avatar-edit-btn" onclick="document.getElementById('avatarInput').click()">
+                                <span class="edit-icon">📷</span>
+                            </button>
+                            <input type="file" id="avatarInput" accept="image/*" style="display: none">
+                        </div>
+                    </div>
+                    <div class="profile-level">
+                        <div class="level-badge" id="userLevel">Seviye 1</div>
+                        <div class="level-progress">
+                            <div class="progress-bar">
+                                <div class="progress" id="levelProgress"></div>
+                            </div>
+                            <span class="level-xp" id="userXP">0/1000 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-info">
+                    <div class="profile-name-section">
+                        <h2 id="username">Yükleniyor...</h2>
+                        <div class="profile-badges" id="userBadges">
+                            <!-- Rozetler buraya gelecek -->
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <p id="userRole" class="role-badge">Yükleniyor...</p>
+                        <p id="joinDate" class="join-date">Katılım: Yükleniyor...</p>
+                        <p id="lastSeen" class="last-seen">Son görülme: Yükleniyor...</p>
+                    </div>
+                    <div class="profile-bio">
+                        <textarea id="userBio" class="bio-input" placeholder="Kendinizden bahsedin..."></textarea>
+                        <button class="save-bio-btn" onclick="updateBio()">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-box">
+                    <h3>Konular</h3>
+                    <p id="topicCount">0</p>
+                    <div class="stat-trend up" id="topicTrend">+5%</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Yorumlar</h3>
+                    <p id="commentCount">0</p>
+                    <div class="stat-trend up" id="commentTrend">+12%</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Puan</h3>
+                    <p id="userPoints">0</p>
+                    <div class="stat-trend up" id="pointsTrend">+8%</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Çözümler</h3>
+                    <p id="solutionCount">0</p>
+                    <div class="stat-trend up" id="solutionTrend">+3%</div>
+                </div>
+            </div>
+
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="activity">Aktiviteler</button>
+                <button class="tab-btn" data-tab="achievements">Başarılar</button>
+                <button class="tab-btn" data-tab="security">Güvenlik</button>
+                <button class="tab-btn" data-tab="settings">Ayarlar</button>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="activity-tab">
+                    <div class="activity-feed">
+                        <h3>Son Aktiviteler</h3>
+                        <div class="activity-list" id="activityList">
+                            <!-- Aktiviteler buraya gelecek -->
+                        </div>
+                    </div>
+                    <div class="recent-topics">
+                        <h3>Son Konular</h3>
+                        <div class="topic-list" id="recentTopics">
+                            <!-- Konular buraya gelecek -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="achievements-tab">
+                    <div class="achievements-grid" id="achievementsGrid">
+                        <!-- Başarılar buraya gelecek -->
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="security-tab">
+                    <div class="security-settings">
+                        <h3>Güvenlik Ayarları</h3>
+                        <div class="settings-group">
+                            <label for="newPassword">Yeni Şifre:</label>
+                            <input type="password" id="newPassword" class="terminal-input" placeholder="Yeni şifrenizi girin">
+                        </div>
+                        <div class="settings-group">
+                            <label for="confirmPassword">Şifre Tekrar:</label>
+                            <input type="password" id="confirmPassword" class="terminal-input" placeholder="Şifrenizi tekrar girin">
+                        </div>
+                        <div class="settings-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="twoFactorAuth">
+                                İki Faktörlü Doğrulama
+                            </label>
+                        </div>
+                        <div class="settings-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="loginNotifications">
+                                Giriş Bildirimleri
+                            </label>
+                        </div>
+                        <button class="terminal-button" onclick="updateSecuritySettings()">Güvenlik Ayarlarını Güncelle</button>
+                    </div>
+                    <div class="login-history">
+                        <h3>Giriş Geçmişi</h3>
+                        <div class="history-list" id="loginHistory">
+                            <!-- Giriş geçmişi buraya gelecek -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="settings-tab">
+                    <div class="profile-settings">
+                        <h3>Profil Ayarları</h3>
+                        <div class="settings-group">
+                            <label for="displayName">Görünen Ad:</label>
+                            <input type="text" id="displayName" class="terminal-input" placeholder="Görünen adınızı girin">
+                        </div>
+                        <div class="settings-group">
+                            <label for="email">E-posta:</label>
+                            <input type="email" id="email" class="terminal-input" placeholder="E-posta adresinizi girin">
+                        </div>
+                        <div class="settings-group">
+                            <label for="theme">Tema:</label>
+                            <select id="theme" class="terminal-input">
+                                <option value="dark">Karanlık</option>
+                                <option value="light">Aydınlık</option>
+                                <option value="matrix">Matrix</option>
+                            </select>
+                        </div>
+                        <div class="settings-group">
+                            <label for="language">Dil:</label>
+                            <select id="language" class="terminal-input">
+                                <option value="tr">Türkçe</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                        <button class="terminal-button" onclick="updateProfileSettings()">Ayarları Kaydet</button>
+                    </div>
+                    <div class="notification-settings">
+                        <h3>Bildirim Ayarları</h3>
+                        <div class="settings-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="emailNotifications">
+                                E-posta Bildirimleri
+                            </label>
+                        </div>
+                        <div class="settings-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="topicNotifications">
+                                Konu Bildirimleri
+                            </label>
+                        </div>
+                        <div class="settings-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="mentionNotifications">
+                                Etiketleme Bildirimleri
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="terminal-button" onclick="window.location.href='index.html'">Ana Sayfa</button>
+                <button class="terminal-button" onclick="window.location.href='messages.html'">Mesajlar</button>
+                <button class="terminal-button" onclick="window.location.href='notifications.html'">Bildirimler</button>
+                <button class="terminal-button danger" onclick="auth.logout()">Çıkış Yap</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'SCRIPT') {
+                e.preventDefault();
+                console.error('Script yükleme hatası:', e);
+            }
+        }, true);
+
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const terminalContainer = document.querySelector('.terminal-container');
+            
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                terminalContainer.style.display = 'block';
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

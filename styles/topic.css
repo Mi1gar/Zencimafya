@@ -1,0 +1,378 @@
+/* Konu Sayfası Layout */
+.forum-container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+}
+
+/* Konu Başlığı */
+.topic-header {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.topic-title-section h1 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.topic-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--border-color);
+    font-size: 0.9rem;
+}
+
+.category-badge {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.topic-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* Mesajlar */
+.posts-container {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.post-item {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+}
+
+.post-item:last-child {
+    border-bottom: none;
+}
+
+.post-user {
+    text-align: center;
+}
+
+.post-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.post-username {
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.post-user-info {
+    font-size: 0.9rem;
+    color: var(--border-color);
+}
+
+.post-content {
+    position: relative;
+}
+
+.post-text {
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.post-action-btn {
+    background: none;
+    border: none;
+    color: var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.post-action-btn:hover {
+    color: var(--hover-color);
+}
+
+/* Orijinal Post */
+.original-post {
+    background-color: rgba(139, 0, 0, 0.1);
+}
+
+/* Yanıtlar */
+.replies-container {
+    padding: 1rem;
+}
+
+.reply-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+}
+
+/* Yanıt Formu */
+.reply-form-container {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.reply-form .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.editor-toolbar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.toolbar-btn {
+    background: none;
+    border: none;
+    color: var(--border-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.toolbar-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+/* Yan Panel */
+.topic-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.sidebar-section {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.sidebar-section h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.info-item i {
+    color: var(--accent-color);
+    width: 20px;
+}
+
+.similar-topics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.similar-topic-item {
+    padding: 0.75rem;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.similar-topic-item:hover {
+    background-color: var(--hover-color);
+}
+
+.similar-topic-title {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.similar-topic-meta {
+    font-size: 0.8rem;
+    color: var(--border-color);
+}
+
+/* Paylaş Modal */
+.share-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.share-btn {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.share-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.share-link {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.share-link input {
+    flex: 1;
+    padding: 0.75rem;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-color);
+}
+
+.copy-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Sayfalama */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+}
+
+.page-btn {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.page-btn:hover,
+.page-btn.active {
+    background-color: var(--accent-color);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 1200px) {
+    .forum-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .topic-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .post-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .post-user {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .post-avatar {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 0;
+    }
+    
+    .topic-header {
+        flex-direction: column;
+    }
+    
+    .topic-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .share-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .topic-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+} 

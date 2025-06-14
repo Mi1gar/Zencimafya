@@ -2,6 +2,7 @@
 const TYPING_SPEED = 30; // Yazma hızı (ms)
 const MESSAGE_DELAY = 800; // Mesajlar arası bekleme süresi (ms)
 const TRANSITION_DELAY = 500; // Geçiş süresi (ms)
+const API_URL = 'http://localhost:3000/api';
 
 // Terminal mesajları
 const terminalMessages = [
@@ -139,31 +140,88 @@ function showErrorMessage(message) {
 }
 
 // Giriş formu işlemleri
+async function handleLogin(username, password) {
+    try {
+        // Terminal mesajlarını güncelle
+        const output = document.querySelector('.terminal-output');
+        const line = document.createElement('div');
+        line.className = 'output-line';
+        output.appendChild(line);
+        await typeWriter(line, "KİMLİK DOĞRULAMA BAŞLATILIYOR...");
+        
+        // API'ye istek at
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Giriş başarısız');
+        }
+        
+        // Token'ı kaydet
+        localStorage.setItem('mafia_token', data.token);
+        
+        // Başarılı giriş mesajı
+        const successLine = document.createElement('div');
+        successLine.className = 'output-line success';
+        output.appendChild(successLine);
+        await typeWriter(successLine, "GİRİŞ BAŞARILI: YÖNLENDİRİLİYORSUNUZ...");
+        
+        // Ana sayfaya yönlendir
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2000);
+        
+    } catch (error) {
+        console.error('Giriş hatası:', error);
+        
+        // Hata mesajını göster
+        const errorLine = document.createElement('div');
+        errorLine.className = 'output-line error';
+        document.querySelector('.terminal-output').appendChild(errorLine);
+        await typeWriter(errorLine, `HATA: ${error.message}`);
+        
+        // Form'u sıfırla
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('username').focus();
+    }
+}
+
 function setupLoginForm() {
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const username = document.getElementById('username').value;
+            
+            const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
+            
             if (!username || !password) {
-                showAuthMessage('error');
-                showErrorMessage('HATA: KULLANICI ADI VEYA ŞİFRE BOŞ BIRAKILAMAZ');
+                const errorLine = document.createElement('div');
+                errorLine.className = 'output-line error';
+                document.querySelector('.terminal-output').appendChild(errorLine);
+                await typeWriter(errorLine, "HATA: KULLANICI ADI VEYA ŞİFRE BOŞ BIRAKILAMAZ");
                 return;
             }
-            try {
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                showAuthMessage('success');
-                // Oturum bilgisini kaydet
-                localStorage.setItem('isLoggedIn', 'true');
-                // Ana sayfaya yönlendirme
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
-            } catch (error) {
-                showAuthMessage('error');
-                showErrorMessage('HATA: GİRİŞ BAŞARISIZ');
-            }
+            
+            // Giriş butonunu devre dışı bırak
+            const submitButton = loginForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = "GİRİŞ YAPILIYOR...";
+            
+            // Giriş işlemini başlat
+            await handleLogin(username, password);
+            
+            // Butonu tekrar aktif et
+            submitButton.disabled = false;
+            submitButton.textContent = "GİRİŞ YAP";
         });
     }
 }
@@ -246,45 +304,23 @@ async function loadComponents() {
 // Sayfa başlatma süreci
 async function initializePage() {
     try {
-        console.log('Sayfa başlatılıyor...');
+        // Token kontrolü
+        const token = localStorage.getItem('mafia_token');
+        if (token) {
+            // Token varsa ana sayfaya yönlendir
+            window.location.href = 'index.html';
+            return;
+        }
         
-        // 1. Yükleme ekranını göster
-        await showLoadingScreen();
+        // Yükleme ekranını göster
+        showLoadingScreen();
         
-        // 2. İlerleme çubuğunu başlat
-        await animateProgressBar();
-        
-        // 3. Bileşenleri yükle
+        // Bileşenleri yükle
         await loadComponents();
         
-        // 4. Yükleme ekranını gizle
-        await hideLoadingScreen();
+        // Login formunu hazırla
+        setupLoginForm();
         
-        // 5. Terminal konteynerini göster
-        await showTerminal();
-        
-        // 6. Terminal mesajlarını göster
-        await showTerminalMessages();
-        
-        // 7. Giriş formunu göster
-        await showLoginForm();
-        
-        // 8. Kullanıcı oturumu kontrolü
-        const knownUser = localStorage.getItem('knownUser');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-
-        if (knownUser && usernameInput && passwordInput) {
-            usernameInput.value = knownUser;
-            usernameInput.readOnly = true;
-            passwordInput.focus();
-        } else if (usernameInput) {
-            usernameInput.focus();
-        }
-
-        pageState.isLoading = false;
-        console.log('Sayfa başlatma tamamlandı');
-
     } catch (error) {
         console.error('Sayfa başlatma hatası:', error);
         showErrorMessage('Sistem hatası: Sayfa başlatılamadı');
@@ -292,14 +328,4 @@ async function initializePage() {
 }
 
 // Sayfa yüklendiğinde başlat
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        showLoadingScreen();
-        await loadComponents();
-        setupLoginForm();
-        // ... mevcut kod ...
-    } catch (error) {
-        console.error('Sayfa yüklenirken hata:', error);
-        showErrorMessage('Sistem hatası: Sayfa yüklenemedi');
-    }
-}); 
+document.addEventListener('DOMContentLoaded', initializePage); 

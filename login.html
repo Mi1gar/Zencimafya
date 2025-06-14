@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZENCİMAFYA - Giriş</title>
     <link rel="stylesheet" href="assets/css/login.css">
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/login.js"></script>
 </head>
 <body>
     <!-- Yükleme Ekranı -->
@@ -17,25 +19,217 @@
     </div>
 
     <!-- Terminal Konteyneri -->
-    <div id="terminal-container" class="terminal-container" style="opacity: 0;">
+    <div id="terminal-container" class="terminal-container" style="display: none;">
         <!-- Terminal Başlık -->
-        <div id="terminal-header"></div>
+        <div class="terminal-header">
+            <div class="terminal-title">ZENCİMAFYA TERMİNAL</div>
+            <div class="terminal-status">[GÜVENLİ MOD: TOR + VPN AKTİF]</div>
+        </div>
 
         <!-- Terminal Çıktı -->
         <div id="terminal-output" class="terminal-output"></div>
 
         <!-- Giriş Formu -->
         <div id="login-container" class="login-container">
-            <div id="login-form"></div>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username">KULLANICI ADI</label>
+                    <input type="text" id="username" name="username" required autocomplete="off" class="terminal-input">
+                </div>
+                <div class="form-group">
+                    <label for="password">ŞİFRE</label>
+                    <input type="password" id="password" name="password" required class="terminal-input">
+                </div>
+                <button type="submit" class="login-button">GİRİŞ YAP</button>
+            </form>
         </div>
-
-        <!-- Kimlik Doğrulama Mesajları -->
-        <div id="auth-messages" class="auth-messages"></div>
 
         <!-- Hata Mesajları -->
         <div id="error-messages" class="error-messages"></div>
     </div>
 
-    <script src="assets/js/login.js"></script>
+    <script>
+        // Terminal animasyon ayarları
+        const TYPING_SPEED = 30;
+        const MESSAGE_DELAY = 800;
+        const TRANSITION_DELAY = 500;
+
+        // Terminal mesajları
+        const terminalMessages = [
+            "TOR BAĞLANTISI KURULUYOR...",
+            "VPN TÜNELİ AKTİF EDİLİYOR...",
+            "ÇOK KATMANLI ŞİFRELEME BAŞLATILIYOR...",
+            "GİZLİ SERVİS BAĞLANTISI KURULUYOR...",
+            "GÜVENLİK PROTOKOLLERİ YÜKLENİYOR...",
+            "KİMLİK DOĞRULAMA SİSTEMİ HAZIRLANIYOR..."
+        ];
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Token kontrolü
+            if (auth.isAuthenticated()) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Yükleme ekranını göster
+            showLoadingScreen();
+            
+            // Terminal mesajlarını göster
+            await showTerminalMessages();
+            
+            // Login formunu hazırla
+            setupLoginForm();
+        });
+
+        // Yükleme ekranını göster
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'flex';
+                animateProgressBar();
+            }
+        }
+
+        // İlerleme çubuğu animasyonu
+        function animateProgressBar() {
+            const progressBar = document.querySelector('.progress');
+            if (!progressBar) return;
+
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        hideLoadingScreen();
+                    }, 500);
+                } else {
+                    width += 1;
+                    progressBar.style.width = width + '%';
+                }
+            }, 20);
+        }
+
+        // Yükleme ekranını gizle
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+                showTerminal();
+            }
+        }
+
+        // Terminal konteynerini göster
+        function showTerminal() {
+            const terminalContainer = document.getElementById('terminal-container');
+            if (terminalContainer) {
+                terminalContainer.style.display = 'block';
+                setTimeout(() => {
+                    terminalContainer.style.opacity = '1';
+                }, 100);
+            }
+        }
+
+        // Terminal mesajlarını göster
+        async function showTerminalMessages() {
+            const output = document.getElementById('terminal-output');
+            if (!output) return;
+            
+            output.innerHTML = '';
+            for (const message of terminalMessages) {
+                const line = document.createElement('div');
+                line.className = 'output-line';
+                output.appendChild(line);
+                await typeWriter(line, message);
+                await new Promise(resolve => setTimeout(resolve, MESSAGE_DELAY));
+            }
+        }
+
+        // Yazı animasyonu
+        async function typeWriter(element, text) {
+            for (let i = 0; i < text.length; i++) {
+                element.textContent += text[i];
+                await new Promise(resolve => setTimeout(resolve, TYPING_SPEED));
+            }
+        }
+
+        // Login formunu hazırla
+        function setupLoginForm() {
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('username').value.trim();
+                    const password = document.getElementById('password').value;
+                    
+                    if (!username || !password) {
+                        showError('HATA: KULLANICI ADI VEYA ŞİFRE BOŞ BIRAKILAMAZ');
+                        return;
+                    }
+                    
+                    // Giriş butonunu devre dışı bırak
+                    const submitButton = loginForm.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.textContent = "GİRİŞ YAPILIYOR...";
+                    
+                    try {
+                        // Terminal mesajını göster
+                        const output = document.getElementById('terminal-output');
+                        const line = document.createElement('div');
+                        line.className = 'output-line';
+                        output.appendChild(line);
+                        await typeWriter(line, "KİMLİK DOĞRULAMA BAŞLATILIYOR...");
+                        
+                        // Giriş işlemini yap
+                        const result = await auth.login(username, password);
+                        
+                        if (result.success) {
+                            // Başarılı giriş mesajı
+                            const successLine = document.createElement('div');
+                            successLine.className = 'output-line success';
+                            output.appendChild(successLine);
+                            await typeWriter(successLine, "GİRİŞ BAŞARILI: YÖNLENDİRİLİYORSUNUZ...");
+                            
+                            // Ana sayfaya yönlendir
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 2000);
+                        } else {
+                            throw new Error(result.error);
+                        }
+                    } catch (error) {
+                        console.error('Giriş hatası:', error);
+                        showError(`HATA: ${error.message}`);
+                        
+                        // Form'u sıfırla
+                        document.getElementById('username').value = '';
+                        document.getElementById('password').value = '';
+                        document.getElementById('username').focus();
+                    } finally {
+                        // Butonu tekrar aktif et
+                        submitButton.disabled = false;
+                        submitButton.textContent = "GİRİŞ YAP";
+                    }
+                });
+            }
+        }
+
+        // Hata mesajı göster
+        function showError(message) {
+            const errorContainer = document.getElementById('error-messages');
+            if (errorContainer) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message active';
+                errorDiv.textContent = message;
+                errorContainer.appendChild(errorDiv);
+                
+                // 3 saniye sonra mesajı kaldır
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 3000);
+            }
+        }
+    </script>
 </body>
 </html> 
