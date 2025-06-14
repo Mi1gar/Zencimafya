@@ -570,6 +570,17 @@
             // Tam yolu ekle
             aatroxImages = aatroxImages.map(img => `resimleraatrox/${img}`);
             
+            // Eğer hiç resim bulunamazsa yedekleri ata
+            if (aatroxImages.length === 0) {
+                aatroxImages = [
+                    'resimleraatrox/Aatrox_7.jpg',
+                    'resimleraatrox/Aatrox_11.jpg',
+                    'resimleraatrox/Aatrox_30.jpg',
+                    'resimleraatrox/Aatrox_31.jpg',
+                    'resimleraatrox/Aatrox_33.jpg'
+                ];
+            }
+            
             console.log('Yüklenen resimler:', aatroxImages);
         } catch (error) {
             console.error('Resimler yüklenirken hata:', error);
@@ -586,16 +597,23 @@
 
     // Rastgele resim seçme fonksiyonu (tekrar etmeyecek şekilde)
     function getRandomImage() {
+        // Eğer resim dizisi boşsa yedekleri kullan
+        if (!aatroxImages || aatroxImages.length === 0) {
+            aatroxImages = [
+                'resimleraatrox/Aatrox_7.jpg',
+                'resimleraatrox/Aatrox_11.jpg',
+                'resimleraatrox/Aatrox_30.jpg',
+                'resimleraatrox/Aatrox_31.jpg',
+                'resimleraatrox/Aatrox_33.jpg'
+            ];
+        }
         if (aatroxImages.length === 0) return null;
         
         // Mevcut resimlerden son kullanılan hariç bir resim seç
         let availableImages = aatroxImages.filter(img => img !== lastUsedImage);
         if (availableImages.length === 0) {
-            // Eğer tüm resimler kullanıldıysa, son kullanılan hariç tüm resimleri tekrar kullanılabilir yap
-            availableImages = aatroxImages.filter(img => img !== lastUsedImage);
+            availableImages = aatroxImages;
         }
-        
-        // Rastgele bir resim seç
         const randomImage = availableImages[Math.floor(Math.random() * availableImages.length)];
         lastUsedImage = randomImage;
         return randomImage;
