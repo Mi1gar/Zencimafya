@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klip İzle | OrnnHUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .ph-header {
+            background: #101010;
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            height: 64px;
+            box-shadow: 0 2px 8px #0008;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .ph-logo {
+            font-family: 'Russo One', Arial, sans-serif;
+            font-size: 2.1rem;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-right: 18px;
+        }
+        .ph-logo span {
+            background: #ffb300;
+            color: #181818;
+            border-radius: 4px;
+            padding: 0 8px;
+            margin-left: 2px;
+        }
+        .ph-search {
+            margin-left: auto;
+            background: #222;
+            border-radius: 6px;
+            padding: 6px 12px;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        .ph-main {
+            max-width: 1500px;
+            margin: 32px auto 0 auto;
+            padding: 0 16px;
+            display: flex;
+            gap: 32px;
+        }
+        .left-col {
+            flex: 2.5;
+            min-width: 0;
+        }
+        .right-col {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .clip-player {
+            width: 100%;
+            background: #111;
+            border-radius: 12px;
+            box-shadow: 0 2px 24px #000a;
+            margin-bottom: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .clip-player video {
+            width: 100%;
+            max-height: 520px;
+            background: #111;
+            display: block;
+        }
+        .clip-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+            letter-spacing: 0.2px;
+        }
+        .clip-meta {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 0.98rem;
+            color: #bdbdbd;
+            margin-bottom: 6px;
+        }
+        .clip-meta .clip-duration {
+            background: #222;
+            color: #fff;
+            border-radius: 3px;
+            padding: 1px 7px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-left: auto;
+        }
+        .clip-buttons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 18px 0 10px 0;
+        }
+        .clip-btn {
+            background: #181818;
+            color: #fff;
+            border: 1.5px solid #222;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 1.01rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: background 0.18s, border 0.18s, color 0.18s;
+        }
+        .clip-btn:hover {
+            background: #222;
+            border: 1.5px solid #ffb300;
+            color: #ffb300;
+        }
+        .clip-channel {
+            color: #ffb300;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .clip-desc {
+            color: #aaa;
+            font-size: 1.01rem;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+        .subscribe-btn {
+            margin-top: 18px;
+            padding: 0.7rem 2.1rem;
+            font-size: 1.08rem;
+            font-family: 'Russo One', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(90deg, #ffb300 0%, #ff0055 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px 0 #ffb30055;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .subscribe-btn:hover {
+            background: linear-gradient(90deg, #ff0055 0%, #ffb300 100%);
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 4px 32px 0 #ff005599;
+        }
+        .suggested-title {
+            color: #fff;
+            font-size: 1.13rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            margin-top: 8px;
+            letter-spacing: 0.2px;
+        }
+        .suggested-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .suggested-card {
+            display: flex;
+            gap: 10px;
+            background: #181818;
+            border-radius: 7px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1.5px solid #222;
+            transition: border 0.18s, box-shadow 0.18s;
+        }
+        .suggested-card:hover {
+            border: 1.5px solid #ffb300;
+            box-shadow: 0 2px 12px #ffb30033;
+        }
+        .suggested-thumb {
+            width: 90px;
+            height: 60px;
+            object-fit: cover;
+            background: #111;
+            flex-shrink: 0;
+        }
+        .suggested-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+            min-width: 0;
+        }
+        .suggested-title2 {
+            color: #fff;
+            font-size: 0.98rem;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .suggested-meta {
+            color: #bdbdbd;
+            font-size: 0.91rem;
+            margin-top: 2px;
+        }
+        @media (max-width: 1100px) {
+            .ph-main { flex-direction: column; gap: 0; }
+            .right-col { max-width: 100vw; margin-top: 32px; }
+        }
+        @media (max-width: 700px) {
+            .ph-main { padding: 0 2vw; }
+            .clip-player { max-width: 98vw; }
+            .right-col { margin-top: 24px; }
+        }
+        .ph-controls {
+            width: 100%;
+            background: linear-gradient(to bottom, #000c 60%, #000f 100%);
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 0 0 2px 0;
+            z-index: 2;
+            user-select: none;
+        }
+        .ph-progress-bg {
+            width: 100%;
+            height: 6px;
+            background: #222;
+            position: relative;
+        }
+        .ph-progress {
+            height: 100%;
+            background: #ffb300;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        .ph-controls-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px 2px 12px;
+        }
+        .ph-ctrl-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.18rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .ph-ctrl-btn:hover {
+            background: #222;
+            color: #ffb300;
+        }
+        .ph-ctrl-btn.ph-orange {
+            color: #ffb300;
+            font-weight: 700;
+        }
+        .ph-time {
+            color: #fff;
+            font-size: 1.01rem;
+            min-width: 110px;
+            text-align: left;
+            font-variant-numeric: tabular-nums;
+        }
+        .ph-ctrl-spacer {
+            flex: 1;
+        }
+        .ad-banner {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px #0003;
+            padding: 10px 6px;
+            width: 120px;
+            height: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-banner img {
+            width: 100px;
+            height: 420px;
+            object-fit: contain;
+            display: block;
+        }
+        .ad-left {
+            left: 40px;
+        }
+        .ad-right {
+            right: 40px;
+        }
+        .ph-menu {
+            display: flex;
+            gap: 24px;
+            margin-left: 32px;
+        }
+        .ph-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .ph-menu a:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-banner ad-left"><img src="reklamlar/jinxbanner.png" alt="Jinx Banner"></div>
+    <div class="ad-banner ad-right"><img src="reklamlar/jinxbanner.png" alt="Jinx Banner"></div>
+    <div class="ph-header">
+        <div class="ph-logo">Ornn<span>HUB</span></div>
+        <nav class="ph-menu">
+            <a href="#" id="goHome">Ana Sayfa</a>
+        </nav>
+        <input class="ph-search" type="text" placeholder="Klip ara..." />
+    </div>
+    <div class="ph-main">
+        <div class="left-col">
+            <div class="clip-player">
+                <video id="clipVideo" poster="aatrox_mainpage.jpg"></video>
+                <div class="ph-controls">
+                    <div class="ph-progress-bg">
+                        <div class="ph-progress" id="phProgress"></div>
+                    </div>
+                    <div class="ph-controls-row">
+                        <button class="ph-ctrl-btn" id="phPlay"><span id="phPlayIcon">▶️</span></button>
+                        <span class="ph-time" id="phTime">00:00 / 00:00</span>
+                        <button class="ph-ctrl-btn" id="phMute"><span id="phMuteIcon">🔊</span></button>
+                        <div class="ph-ctrl-spacer"></div>
+                        <button class="ph-ctrl-btn ph-orange"><span>▶▶</span></button>
+                        <button class="ph-ctrl-btn ph-orange">720p HD ▼</button>
+                        <button class="ph-ctrl-btn"><span>⚙️</span></button>
+                        <button class="ph-ctrl-btn"><span>⛶</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="clip-title" id="clipTitle"></div>
+            <div class="clip-meta">
+                <span class="clip-views" id="clipViews"></span>
+                <span class="clip-date">1 gün önce</span>
+                <span class="clip-duration" id="clipDuration"></span>
+            </div>
+            <div class="clip-buttons">
+                <button class="clip-btn"><span>👍</span> Beğen</button>
+                <button class="clip-btn"><span>👎</span> Beğenme</button>
+                <button class="clip-btn"><span>⭐</span> Favorilere Ekle</button>
+                <button class="clip-btn"><span>🔗</span> Paylaş</button>
+            </div>
+            <div class="clip-channel" id="clipChannel"></div>
+            <div class="clip-desc" id="clipDesc"></div>
+            <button class="subscribe-btn" onclick="window.history.back()">Geri Dön</button>
+        </div>
+        <div class="right-col">
+            <div class="suggested-title">Önerilen Klipler</div>
+            <div class="suggested-list">
+                <div class="suggested-card" onclick="openClip('klipler/2.webm','Pentakill Anı','MortalReminder','Mortal Reminder#4248, Aatrox ile rakip takımı tek başına yok ediyor!','321 izlenme','3:21')">
+                    <img class="suggested-thumb" src="aatrox_mainpage.jpg" alt="Pentakill Anı">
+                    <div class="suggested-info">
+                        <div class="suggested-title2">Pentakill Anı</div>
+                        <div class="suggested-meta">MortalReminder · 321 izlenme</div>
+                    </div>
+                </div>
+                <div class="suggested-card" onclick="openClip('klipler/3.webm','Komik Anlar','MortalReminder','Takım arkadaşının base\'de dans etmesiyle başlayan eğlenceli anlar.','214 izlenme','2:14')">
+                    <img class="suggested-thumb" src="aatrox_mainpage.jpg" alt="Komik Anlar">
+                    <div class="suggested-info">
+                        <div class="suggested-title2">Komik Anlar</div>
+                        <div class="suggested-meta">MortalReminder · 214 izlenme</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // localStorage'dan bilgileri al ve sayfaya yerleştir
+    document.getElementById('clipVideo').src = localStorage.getItem('clip_src') || '';
+    document.getElementById('clipTitle').textContent = localStorage.getItem('clip_title') || '';
+    document.getElementById('clipChannel').textContent = localStorage.getItem('clip_channel') || '';
+    document.getElementById('clipViews').textContent = localStorage.getItem('clip_views') || '';
+    document.getElementById('clipDesc').textContent = localStorage.getItem('clip_desc') || '';
+    document.getElementById('clipDuration').textContent = localStorage.getItem('clip_duration') || '';
+
+    // Önerilen kliplerden birine tıklanınca aynı şekilde yönlendir
+    function openClip(src, title, channel, desc, views, duration) {
+        localStorage.setItem('clip_src', src);
+        localStorage.setItem('clip_title', title);
+        localStorage.setItem('clip_channel', channel);
+        localStorage.setItem('clip_desc', desc);
+        localStorage.setItem('clip_views', views);
+        localStorage.setItem('clip_duration', duration);
+        window.location.href = 'clip-watch.html';
+    }
+
+    // Video kontrol barı işlevleri
+    const video = document.getElementById('clipVideo');
+    const playBtn = document.getElementById('phPlay');
+    const playIcon = document.getElementById('phPlayIcon');
+    const muteBtn = document.getElementById('phMute');
+    const muteIcon = document.getElementById('phMuteIcon');
+    const timeLabel = document.getElementById('phTime');
+    const progressBar = document.getElementById('phProgress');
+
+    function formatTime(sec) {
+        sec = Math.floor(sec);
+        const m = Math.floor(sec / 60).toString().padStart(2, '0');
+        const s = (sec % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    function updateControls() {
+        timeLabel.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration || 0)}`;
+        progressBar.style.width = ((video.currentTime / (video.duration || 1)) * 100) + '%';
+        playIcon.textContent = video.paused ? '▶️' : '⏸️';
+        muteIcon.textContent = video.muted ? '🔇' : '🔊';
+    }
+
+    video.addEventListener('timeupdate', updateControls);
+    video.addEventListener('play', updateControls);
+    video.addEventListener('pause', updateControls);
+    video.addEventListener('volumechange', updateControls);
+    video.addEventListener('loadedmetadata', updateControls);
+
+    playBtn.onclick = () => {
+        if (video.paused) video.play();
+        else video.pause();
+    };
+    muteBtn.onclick = () => {
+        video.muted = !video.muted;
+    };
+    // Progress bar tıklama
+    document.querySelector('.ph-progress-bg').onclick = function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const percent = x / rect.width;
+        video.currentTime = percent * video.duration;
+    };
+    // Videonun üstüne tıklayınca oynat/duraklat
+    video.onclick = () => {
+        if (video.paused) video.play();
+        else video.pause();
+    };
+    // Ana Sayfa tuşu yönlendirme
+    document.getElementById('goHome').onclick = function(e) {
+        e.preventDefault();
+        window.location.href = 'aatrox.html';
+    };
+    </script>
+</body>
+</html> 

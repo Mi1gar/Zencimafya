@@ -263,6 +263,26 @@
             .match-row { flex-direction: column; align-items: flex-start; gap: 4px; }
             .match-stats { margin-left: 0; }
         }
+        .clips-btn {
+            margin-top: 10px;
+            padding: 0.9rem 2.2rem;
+            font-size: 1.15rem;
+            font-family: 'Russo One', 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(90deg, #00fff7 0%, #0072ff 50%, #ff00cc 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px 0 #00fff7cc;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .clips-btn:hover {
+            background: linear-gradient(90deg, #ff00cc 0%, #0072ff 50%, #00fff7 100%);
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 4px 32px 0 #ff00cc99;
+        }
     </style>
 </head>
 <body>
@@ -280,6 +300,7 @@
             <div class="center">
                 <div class="main-title">Mortal Reminder#4248</div>
                 <div class="subtitle">ANTARCTICAN 1000LP CH*LLENGER SUPERSECRET SERVER</div>
+                <button class="clips-btn" id="clipsBtn">Klipler</button>
             </div>
             <div class="scroll-down" id="scrollDown">
                 <svg viewBox="0 0 24 24">
@@ -391,6 +412,11 @@
         }
     }
     createMatches();
+
+    // Klipler butonuna tıklayınca yönlendir
+    document.getElementById('clipsBtn').onclick = function() {
+        window.location.href = 'clip.html';
+    };
     </script>
 </body>
 </html> 

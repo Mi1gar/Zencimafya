@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klipler | Mortal Reminder#4248</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .ph-header {
+            background: #101010;
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            height: 64px;
+            box-shadow: 0 2px 8px #0008;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .ph-logo {
+            font-family: 'Russo One', Arial, sans-serif;
+            font-size: 2.1rem;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-right: 18px;
+        }
+        .ph-logo span {
+            background: #ffb300;
+            color: #181818;
+            border-radius: 4px;
+            padding: 0 8px;
+            margin-left: 2px;
+        }
+        .ph-menu {
+            display: flex;
+            gap: 24px;
+            margin-left: 32px;
+        }
+        .ph-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+        }
+        .ph-menu a:hover {
+            opacity: 1;
+        }
+        .ph-search {
+            margin-left: auto;
+            background: #222;
+            border-radius: 6px;
+            padding: 6px 12px;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        .ph-main {
+            max-width: 1200px;
+            margin: 32px auto 0 auto;
+            padding: 0 16px;
+        }
+        .ph-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .ph-card {
+            background: #181818;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 6px #000a;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.18s, border 0.18s, transform 0.18s;
+            cursor: pointer;
+            max-width: 320px;
+            width: 100%;
+            border: 1.5px solid #222;
+        }
+        .ph-card:hover {
+            box-shadow: 0 4px 24px #000c;
+            border: 1.5px solid #ffb300;
+            transform: translateY(-3px) scale(1.01);
+        }
+        .ph-thumb-video {
+            width: 100%;
+            max-width: 320px;
+            height: 160px;
+            object-fit: cover;
+            background: #111;
+            border: none;
+            border-radius: 0;
+            display: block;
+            transition: filter 0.2s;
+        }
+        .ph-card:hover .ph-thumb-video {
+            filter: brightness(1.08) contrast(1.08);
+        }
+        .ph-card-content {
+            background: #000;
+            padding: 10px 10px 8px 10px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        .ph-channel {
+            color: #bdbdbd;
+            font-size: 0.93rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+            letter-spacing: 0.1px;
+        }
+        .ph-title {
+            font-size: 1.01rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #fff;
+            line-height: 1.25;
+            letter-spacing: 0.1px;
+        }
+        .ph-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.93rem;
+            color: #bdbdbd;
+            margin-bottom: 2px;
+        }
+        .ph-meta .ph-duration {
+            background: #222;
+            color: #fff;
+            border-radius: 3px;
+            padding: 1px 6px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            margin-left: auto;
+        }
+        .ph-desc {
+            color: #888;
+            font-size: 0.93rem;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+        @media (max-width: 700px) {
+            .ph-main { padding: 0 2vw; }
+            .ph-grid { flex-direction: column; align-items: center; }
+            .ph-card { max-width: 98vw; }
+        }
+        .ad-banner {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px #0003;
+            padding: 10px 6px;
+            width: 120px;
+            height: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-banner img {
+            width: 100px;
+            height: 420px;
+            object-fit: contain;
+            display: block;
+        }
+        .ad-left {
+            left: 40px;
+        }
+        .ad-right {
+            right: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-banner ad-left"><img src="reklamlar/jinxbanner.png" alt="Jinx Banner"></div>
+    <div class="ad-banner ad-right"><img src="reklamlar/jinxbanner.png" alt="Jinx Banner"></div>
+    <div class="ph-header">
+        <div class="ph-logo">Ornn<span>HUB</span></div>
+        <nav class="ph-menu">
+            <a href="#" id="goHome">Ana Sayfa</a>
+            <a href="#">Klipler</a>
+            <a href="#">Kategoriler</a>
+            <a href="#">Top 10</a>
+        </nav>
+        <input class="ph-search" type="text" placeholder="Klip ara..." />
+    </div>
+    <div class="ph-main">
+        <div class="ph-grid">
+            <div class="ph-card" onclick="openClip('klipler/2.webm','Pentakill Anı','MortalReminder','Mortal Reminder#4248, Aatrox ile rakip takımı tek başına yok ediyor!',document.getElementById('views1').textContent,'3:21')">
+                <video class="ph-thumb-video" src="klipler/2.webm" poster="aatrox_mainpage.jpg" preload="none" muted loop></video>
+                <div class="ph-card-content">
+                    <div class="ph-channel">MortalReminder</div>
+                    <div class="ph-title">Pentakill Anı</div>
+                    <div class="ph-meta">
+                        <span class="ph-views" id="views1"></span>
+                        <span class="ph-duration">3:21</span>
+                    </div>
+                    <div class="ph-desc">Mortal Reminder#4248, Aatrox ile rakip takımı tek başına yok ediyor!</div>
+                </div>
+            </div>
+            <div class="ph-card" onclick="openClip('klipler/3.webm','Komik Anlar','MortalReminder','Takım arkadaşının base\'de dans etmesiyle başlayan eğlenceli anlar.',document.getElementById('views2').textContent,'2:14')">
+                <video class="ph-thumb-video" src="klipler/3.webm" poster="aatrox_mainpage.jpg" preload="none" muted loop></video>
+                <div class="ph-card-content">
+                    <div class="ph-channel">MortalReminder</div>
+                    <div class="ph-title">Komik Anlar</div>
+                    <div class="ph-meta">
+                        <span class="ph-views" id="views2"></span>
+                        <span class="ph-duration">2:14</span>
+                    </div>
+                    <div class="ph-desc">Takım arkadaşının base'de dans etmesiyle başlayan eğlenceli anlar.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Hover'da video oynat/durdur
+    document.querySelectorAll('.ph-thumb-video').forEach(function(video) {
+        video.addEventListener('mouseenter', function() {
+            video.play();
+        });
+        video.addEventListener('mouseleave', function() {
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+    // İzlenme sayılarını rastgele ata
+    document.getElementById('views1').textContent = Math.floor(Math.random() * (920 - 15 + 1) + 15) + ' izlenme';
+    document.getElementById('views2').textContent = Math.floor(Math.random() * (920 - 15 + 1) + 15) + ' izlenme';
+
+    // Klip kartına tıklayınca bilgileri localStorage'a kaydet ve yönlendir
+    function openClip(src, title, channel, desc, views, duration) {
+        localStorage.setItem('clip_src', src);
+        localStorage.setItem('clip_title', title);
+        localStorage.setItem('clip_channel', channel);
+        localStorage.setItem('clip_desc', desc);
+        localStorage.setItem('clip_views', views);
+        localStorage.setItem('clip_duration', duration);
+        window.location.href = 'clip-watch.html';
+    }
+
+    // Ana Sayfa tuşu yönlendirme
+    document.getElementById('goHome').onclick = function(e) {
+        e.preventDefault();
+        window.location.href = 'aatrox.html';
+    };
+    </script>
+</body>
+</html> 
