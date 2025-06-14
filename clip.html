@@ -185,6 +185,9 @@
         .ad-right {
             right: 40px;
         }
+        @media (max-width: 1200px) {
+            .ad-banner { display: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -194,9 +197,6 @@
         <div class="ph-logo">Ornn<span>HUB</span></div>
         <nav class="ph-menu">
             <a href="#" id="goHome">Ana Sayfa</a>
-            <a href="#">Klipler</a>
-            <a href="#">Kategoriler</a>
-            <a href="#">Top 10</a>
         </nav>
         <input class="ph-search" type="text" placeholder="Klip ara..." />
     </div>
@@ -239,9 +239,17 @@
             video.currentTime = 0;
         });
     });
-    // İzlenme sayılarını rastgele ata
-    document.getElementById('views1').textContent = Math.floor(Math.random() * (920 - 15 + 1) + 15) + ' izlenme';
-    document.getElementById('views2').textContent = Math.floor(Math.random() * (920 - 15 + 1) + 15) + ' izlenme';
+    // İzlenme sayılarını sabit ve tutarlı yap
+    function getOrSetViews(key) {
+        let val = localStorage.getItem(key);
+        if (!val) {
+            val = Math.floor(Math.random() * (920 - 15 + 1) + 15);
+            localStorage.setItem(key, val);
+        }
+        return val;
+    }
+    document.getElementById('views1').textContent = getOrSetViews('views_klip2') + ' izlenme';
+    document.getElementById('views2').textContent = getOrSetViews('views_klip3') + ' izlenme';
 
     // Klip kartına tıklayınca bilgileri localStorage'a kaydet ve yönlendir
     function openClip(src, title, channel, desc, views, duration) {

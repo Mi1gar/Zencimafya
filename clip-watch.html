@@ -229,6 +229,9 @@
             .clip-player { max-width: 98vw; }
             .right-col { margin-top: 24px; }
         }
+        @media (max-width: 1200px) {
+            .ad-banner { display: none !important; }
+        }
         .ph-controls {
             width: 100%;
             background: linear-gradient(to bottom, #000c 60%, #000f 100%);
@@ -400,9 +403,22 @@
     document.getElementById('clipVideo').src = localStorage.getItem('clip_src') || '';
     document.getElementById('clipTitle').textContent = localStorage.getItem('clip_title') || '';
     document.getElementById('clipChannel').textContent = localStorage.getItem('clip_channel') || '';
-    document.getElementById('clipViews').textContent = localStorage.getItem('clip_views') || '';
     document.getElementById('clipDesc').textContent = localStorage.getItem('clip_desc') || '';
     document.getElementById('clipDuration').textContent = localStorage.getItem('clip_duration') || '';
+
+    // İzlenme sayısını sabit ve tutarlı yap
+    function getOrSetViews(key) {
+        let val = localStorage.getItem(key);
+        if (!val) {
+            val = Math.floor(Math.random() * (920 - 15 + 1) + 15);
+            localStorage.setItem(key, val);
+        }
+        return val;
+    }
+    // Klip kaynağına göre anahtar belirle
+    var src = localStorage.getItem('clip_src') || '';
+    var viewsKey = src.includes('3.webm') ? 'views_klip3' : 'views_klip2';
+    document.getElementById('clipViews').textContent = getOrSetViews(viewsKey) + ' izlenme';
 
     // Önerilen kliplerden birine tıklanınca aynı şekilde yönlendir
     function openClip(src, title, channel, desc, views, duration) {

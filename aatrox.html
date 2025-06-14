@@ -283,6 +283,156 @@
             transform: scale(1.06) translateY(-2px);
             box-shadow: 0 4px 32px 0 #ff00cc99;
         }
+        .load-more-btn {
+            background: linear-gradient(45deg, #ff0055, #ff9900);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.3);
+        }
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 85, 0.4);
+        }
+        .load-more-btn:active {
+            transform: translateY(1px);
+        }
+        .why-aatrox-section {
+            min-height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 0;
+            background: linear-gradient(to bottom, #222, #333);
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+        .why-aatrox-section.visible {
+            opacity: 1;
+        }
+        .why-aatrox-item {
+            min-height: 100vh;
+            width: 100vw;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            isolation: isolate;
+        }
+        .why-aatrox-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            filter: brightness(1.4) contrast(1.1) saturate(1.2);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .why-aatrox-item.visible .why-aatrox-bg {
+            opacity: 0.45;
+        }
+        .why-aatrox-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(20, 20, 20, 0.55);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 8px 48px rgba(0, 0, 0, 0.15),
+                        0 0 0 1px rgba(255, 0, 85, 0.2);
+            padding: 56px 40px;
+            text-align: center;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .why-aatrox-item.visible .why-aatrox-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .why-aatrox-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+            background: linear-gradient(45deg, #fff, #ff0055);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .why-aatrox-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff0055, transparent);
+        }
+        .why-aatrox-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+        .slide-indicator {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 0, 85, 0.1);
+        }
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+        }
+        .indicator-dot.active {
+            background: #ff0055;
+            box-shadow: 0 0 15px #ff0055;
+            transform: scale(1.3);
+            border-color: #ff0055;
+        }
+        .indicator-dot:hover {
+            background: rgba(255, 0, 85, 0.5);
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -292,10 +442,9 @@
     <div class="page-wrapper">
         <div class="main-content">
             <div class="menu">
+                <span id="whyAatroxBtn" style="cursor:pointer;">Neden Aatrox?</span>
                 <span>Hakkında</span>
                 <span>Başarılar</span>
-                <span>Medya</span>
-                <span>İletişim</span>
             </div>
             <div class="center">
                 <div class="main-title">Mortal Reminder#4248</div>
@@ -324,30 +473,178 @@
             <div class="history-container">
                 <div class="history-title">Son maçlar</div>
                 <div id="matchList"></div>
+                <button id="loadMoreBtn" class="load-more-btn" style="display: none;">Daha Fazla Göster</button>
+            </div>
+        </div>
+    </div>
+    <!-- Neden Aatrox? Bölümü -->
+    <div class="why-aatrox-section" id="whyAatroxSection">
+        <div class="why-aatrox-item" data-item="1">
+            <img src="" class="why-aatrox-bg" alt="Aatrox Background">
+            <div class="why-aatrox-content">
+                <h2 class="why-aatrox-title">Neden Aatrox?</h2>
+                <p class="why-aatrox-description">
+                    <span style="display:block;font-size:1.2rem;margin-bottom:24px;opacity:0.95;font-weight:500;">
+                        Selam. Aatrox main'im. Şimdi sakin olun, çünkü birazdan takımınıza neden bir savaş tanrısına ihtiyacınız olduğunu anlatacağım.😎
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="why-aatrox-item" data-item="2">
+            <img src="" class="why-aatrox-bg" alt="Aatrox Background">
+            <div class="why-aatrox-content">
+                <h2 class="why-aatrox-title">🔥 1. Aatrox = Takımın Geriye Dönüş Sigortasıdır</h2>
+                <p class="why-aatrox-description">
+                    "Early game'i verirsiniz, sıkıntı değil. Ben bir item çıkayım, R açıp tek başıma savaşı çeviririm.<br>
+                    Yani... sizin intlemenize bile toleransım var. <span style="opacity:0.7;font-size:0.95em;font-style:italic;">(ama lütfen abartmayın)</span>"
+                </p>
+            </div>
+        </div>
+        <div class="why-aatrox-item" data-item="3">
+            <img src="" class="why-aatrox-bg" alt="Aatrox Background">
+            <div class="why-aatrox-content">
+                <h2 class="why-aatrox-title">🧠 2. Aatrox Varken Engage'le Jungler'a Muhtaç Değilsiniz</h2>
+                <p class="why-aatrox-description">
+                    "Tankınız yoksa sorun değil. Girdiğim savaşta ölmüyorum zaten.<br>
+                    Jungler'ınız Lee Sin ama 0/5 mi? Umrumda değil.<br>
+                    Ben engage'liyorsam zaten savaş başlıyordur."
+                </p>
+            </div>
+        </div>
+        <div class="why-aatrox-item" data-item="4">
+            <img src="" class="why-aatrox-bg" alt="Aatrox Background">
+            <div class="why-aatrox-content">
+                <h2 class="why-aatrox-title">🧱 3. Karşıda Tank Mank Hiç Önemli Değil</h2>
+                <p class="why-aatrox-description">
+                    "Full tank Sion? Mundo? Zac?<br>
+                    Kardeşim ben %100 can çalıyorum, adamlar bana vurdukça ben sıfırdan doluyorum.<br>
+                    Benim için tank, büyük bir sağlık paketi."
+                </p>
+            </div>
+        </div>
+        <div class="why-aatrox-item" data-item="5">
+            <img src="" class="why-aatrox-bg" alt="Aatrox Background">
+            <div class="why-aatrox-content">
+                <h2 class="why-aatrox-title">💼 4. Sonuç</h2>
+                <p class="why-aatrox-description">
+                    "Aatrox, sadece bir üst koridor şampiyonu değildir.<br>
+                    Kendisi bir plan B, bir acil durum butonu, bir moral kaynağıdır.<br><br>
+                    Ben alayım, siz sadece eşlik edin.<br>
+                    Gerisini bana bırakın."
+                </p>
             </div>
         </div>
     </div>
     <script>
+    // Arkaplan resimleri dizisi
+    let aatroxImages = [];
+    let lastUsedImage = null;
+
+    // Klasördeki resimleri yükle
+    async function loadBackgroundImages() {
+        try {
+            const response = await fetch('resimleraatrox/');
+            const text = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
+            const links = doc.querySelectorAll('a');
+            
+            // Sadece resim dosyalarını al (.jpg, .jpeg, .png)
+            aatroxImages = Array.from(links)
+                .map(link => link.href)
+                .filter(href => /\.(jpg|jpeg|png)$/i.test(href))
+                .map(href => href.split('/').pop()); // Sadece dosya adını al
+            
+            // Tam yolu ekle
+            aatroxImages = aatroxImages.map(img => `resimleraatrox/${img}`);
+            
+            console.log('Yüklenen resimler:', aatroxImages);
+        } catch (error) {
+            console.error('Resimler yüklenirken hata:', error);
+            // Hata durumunda varsayılan resimleri kullan
+            aatroxImages = [
+                'resimleraatrox/Aatrox_7.jpg',
+                'resimleraatrox/Aatrox_11.jpg',
+                'resimleraatrox/Aatrox_30.jpg',
+                'resimleraatrox/Aatrox_31.jpg',
+                'resimleraatrox/Aatrox_33.jpg'
+            ];
+        }
+    }
+
+    // Rastgele resim seçme fonksiyonu (tekrar etmeyecek şekilde)
+    function getRandomImage() {
+        if (aatroxImages.length === 0) return null;
+        
+        // Mevcut resimlerden son kullanılan hariç bir resim seç
+        let availableImages = aatroxImages.filter(img => img !== lastUsedImage);
+        if (availableImages.length === 0) {
+            // Eğer tüm resimler kullanıldıysa, son kullanılan hariç tüm resimleri tekrar kullanılabilir yap
+            availableImages = aatroxImages.filter(img => img !== lastUsedImage);
+        }
+        
+        // Rastgele bir resim seç
+        const randomImage = availableImages[Math.floor(Math.random() * availableImages.length)];
+        lastUsedImage = randomImage;
+        return randomImage;
+    }
+
+    // Sayfa yüklendiğinde resimleri yükle
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadBackgroundImages();
+        createMatches();
+        
+        // Her bölümü gözlemle ve başlangıç resimlerini ayarla
+        document.querySelectorAll('.why-aatrox-item').forEach(item => {
+            const bg = item.querySelector('.why-aatrox-bg');
+            if (bg) {
+                // Başlangıç resmini ayarla
+                const initialSrc = item.dataset.item === '2' ? 'resimleraatrox/Aatrox_33.jpg' : getRandomImage();
+                if (initialSrc) {
+                    const tempImg = new Image();
+                    tempImg.onload = function() {
+                        bg.src = initialSrc;
+                    };
+                    tempImg.src = initialSrc;
+                }
+            }
+            observer.observe(item);
+        });
+    });
+
     // Scroll bildirimi kaybolsun
     window.addEventListener('scroll', function() {
         var scrollDown = document.getElementById('scrollDown');
         var bgImage = document.getElementById('bgImage');
         var video = document.querySelector('.bg-video');
         var historySection = document.getElementById('historySection');
+        var whyAatroxSection = document.getElementById('whyAatroxSection');
+        
         if(window.scrollY > 30) {
             scrollDown.classList.add('hide');
         } else {
             scrollDown.classList.remove('hide');
         }
+        
         // Arka plan ve geçmiş bölümü geçişi
         if(window.scrollY > window.innerHeight * 0.3) {
             bgImage.classList.add('active');
             video.style.opacity = '0';
             historySection.style.display = 'flex';
+            whyAatroxSection.style.display = 'block';
+            // Neden Aatrox bölümünü yumuşak göster
+            setTimeout(() => {
+                whyAatroxSection.classList.add('visible');
+            }, 50);
         } else {
             bgImage.classList.remove('active');
             video.style.opacity = '1';
             historySection.style.display = 'none';
+            whyAatroxSection.classList.remove('visible');
+            // Neden Aatrox bölümünü yumuşak gizle
+            setTimeout(() => {
+                whyAatroxSection.style.display = 'none';
+            }, 700); // Geçiş süresi kadar bekle
         }
     });
 
@@ -387,11 +684,33 @@
     function randomLP() {
         return '-' + (Math.floor(Math.random() * 15) + 5) + ' LP';
     }
-    // Maçları oluştur
+    let currentMatchCount = 0;
+    const matchesPerPage = 10;
+    const totalMatches = 18;
+
     function createMatches() {
         const matchList = document.getElementById('matchList');
-        matchList.innerHTML = '';
-        for(let i=0; i<18; i++) {
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        
+        // İlk 10 maçı göster
+        showMoreMatches();
+        
+        // Daha fazla göster butonu görünürlüğünü ayarla
+        loadMoreBtn.style.display = totalMatches > matchesPerPage ? 'block' : 'none';
+        
+        // Daha fazla göster butonu tıklama olayı
+        loadMoreBtn.onclick = showMoreMatches;
+    }
+
+    function showMoreMatches() {
+        const matchList = document.getElementById('matchList');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        
+        const remainingMatches = totalMatches - currentMatchCount;
+        const matchesToShow = Math.min(matchesPerPage, remainingMatches);
+        
+        for(let i = 0; i < matchesToShow; i++) {
+            const matchIndex = currentMatchCount + i;
             const daysAgo = Math.floor(Math.random() * 20) + 1;
             const match = document.createElement('div');
             match.className = 'match-row';
@@ -410,12 +729,124 @@
             `;
             matchList.appendChild(match);
         }
+        
+        currentMatchCount += matchesToShow;
+        
+        // Tüm maçlar gösterildiyse butonu gizle
+        if (currentMatchCount >= totalMatches) {
+            loadMoreBtn.style.display = 'none';
+        }
     }
-    createMatches();
 
     // Klipler butonuna tıklayınca yönlendir
     document.getElementById('clipsBtn').onclick = function() {
         window.location.href = 'clip.html';
+    };
+
+    // Intersection Observer ayarları
+    const observerOptions = {
+        root: null,
+        rootMargin: '-10% 0px',
+        threshold: 0.3
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const item = entry.target;
+            const bg = item.querySelector('.why-aatrox-bg');
+            
+            if (entry.isIntersecting) {
+                item.classList.add('visible');
+                
+                if (bg) {
+                    // Önceki arkaplanı yumuşak şekilde kaldır
+                    document.querySelectorAll('.why-aatrox-bg').forEach(otherBg => {
+                        if (otherBg !== bg) {
+                            otherBg.style.opacity = '0';
+                        }
+                    });
+                    
+                    // Resim yüklü değilse veya farklı bir resim yüklenecekse
+                    const newSrc = item.dataset.item === '2' ? 'resimleraatrox/Aatrox_33.jpg' : getRandomImage();
+                    if (bg.src !== newSrc) {
+                        // Resmi önceden yükle
+                        const tempImg = new Image();
+                        tempImg.onload = function() {
+                            bg.src = newSrc;
+                            requestAnimationFrame(() => {
+                                bg.style.opacity = '0.45';
+                            });
+                        };
+                        tempImg.src = newSrc;
+                    } else {
+                        // Resim zaten yüklüyse direkt göster
+                        requestAnimationFrame(() => {
+                            bg.style.opacity = '0.45';
+                        });
+                    }
+                }
+            } else {
+                item.classList.remove('visible');
+                if (bg) {
+                    requestAnimationFrame(() => {
+                        bg.style.opacity = '0';
+                    });
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Menüdeki 'Neden Aatrox?' tuşuna tıklayınca smooth scroll
+    document.getElementById('whyAatroxBtn').onclick = async function() {
+        // Resimleri yeniden yükle
+        await loadBackgroundImages();
+        
+        // Son kullanılan resmi sıfırla
+        lastUsedImage = null;
+        
+        // Önce bölümü görünür yap
+        const whyAatroxSection = document.getElementById('whyAatroxSection');
+        whyAatroxSection.style.display = 'block';
+        
+        // Video ve diğer arkaplanları ayarla
+        const bgImage = document.getElementById('bgImage');
+        const video = document.querySelector('.bg-video');
+        const historySection = document.getElementById('historySection');
+        
+        bgImage.classList.add('active');
+        video.style.opacity = '0';
+        historySection.style.display = 'none';
+        
+        // Tüm arkaplan resimlerini yeniden yükle
+        document.querySelectorAll('.why-aatrox-item').forEach(item => {
+            const bg = item.querySelector('.why-aatrox-bg');
+            if (bg) {
+                const newSrc = item.dataset.item === '2' ? 'resimleraatrox/Aatrox_33.jpg' : getRandomImage();
+                const tempImg = new Image();
+                tempImg.onload = function() {
+                    bg.src = newSrc;
+                };
+                tempImg.src = newSrc;
+            }
+        });
+        
+        // Bölümü yumuşak şekilde göster
+        setTimeout(() => {
+            whyAatroxSection.classList.add('visible');
+            
+            // İlk bölüme kaydır ve biraz daha aşağıda göster
+            const firstItem = document.querySelector('.why-aatrox-item[data-item="1"]');
+            if (firstItem) {
+                const offset = window.innerHeight * 0.2;
+                const elementPosition = firstItem.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 50);
     };
     </script>
 </body>
