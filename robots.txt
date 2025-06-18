@@ -1,0 +1,24 @@
+# Zencimafya robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /assets/sounds/
+Disallow: /assets/icons/
+Disallow: /assets/screenshots/
+
+# Özel arama motoru ayarları
+User-agent: Googlebot
+Allow: /assets/images/
+Allow: /assets/videos/
+
+User-agent: Bingbot
+Allow: /assets/images/
+Allow: /assets/videos/
+
+# Crawl-delay ayarları
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://zencimafya.com/sitemap.xml 

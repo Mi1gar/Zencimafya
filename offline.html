@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çevrimdışı - Zencimafya</title>
+    <meta name="description" content="Zencimafya Mafya Grubu - Çevrimdışı Sayfa">
+    <meta name="theme-color" content="#ff0000">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/glitch.css">
+    <link rel="stylesheet" href="/assets/css/crt.css">
+    <style>
+        .offline-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-color);
+        }
+
+        .offline-title {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            animation: glitch 1s infinite;
+        }
+
+        .offline-message {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .offline-icon {
+            font-size: 5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .retry-button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+        }
+
+        .retry-button:hover {
+            background: var(--primary-color);
+            color: var(--background-color);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .offline-status {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="crt-effect">
+    <div class="offline-container">
+        <div class="offline-icon">⚠️</div>
+        <h1 class="offline-title glitch-text">Çevrimdışı</h1>
+        <p class="offline-message">
+            İnternet bağlantınız kesilmiş görünüyor. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.
+            <br><br>
+            Zencimafya'ya erişmek için internet bağlantısı gereklidir.
+        </p>
+        <button class="retry-button" onclick="window.location.reload()">
+            Yeniden Dene
+        </button>
+        <div class="offline-status">
+            Son kontrol: <span id="last-check"></span>
+        </div>
+    </div>
+
+    <script>
+        // Son kontrol zamanını güncelle
+        function updateLastCheck() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('tr-TR');
+            document.getElementById('last-check').textContent = timeString;
+        }
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLastCheck();
+            
+            // Her 30 saniyede bir bağlantıyı kontrol et
+            setInterval(async () => {
+                try {
+                    const response = await fetch('/ping', { method: 'HEAD' });
+                    if (response.ok) {
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    updateLastCheck();
+                }
+            }, 30000);
+        });
+
+        // Çevrimiçi olduğunda sayfayı yenile
+        window.addEventListener('online', () => {
+            window.location.reload();
+        });
+    </script>
+</body>
+</html> 

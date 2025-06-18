@@ -1,389 +1,196 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZENCİMAFYA - Ana Sayfa</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/auth.js"></script>
-    <script src="assets/js/forum.js"></script>
+    <meta name="description" content="ZENCİMAFYA - Gölgelerin Efendileri">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="ZENCİMAFYA - Siber Güvenlik Forumu">
+    <meta property="og:description" content="Güvenli ve anonim siber güvenlik topluluğu">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zencimafya.com">
+    
+    <title>ZENCİMAFYA | Gölgelerin Efendileri</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/normalize.css">
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/glitch.css">
+    <link rel="stylesheet" href="/assets/css/crt.css">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/images/logo.svg" as="image">
+    <link rel="preload" href="/assets/fonts/creepster.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/terminal.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' wss: https:;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 </head>
-<body>
-    <!-- Yükleme Ekranı -->
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">SİSTEM BAŞLATILIYOR...</div>
-    </div>
+<body class="crt-effect">
+    <!-- Arkaplan Video -->
+    <video id="bg-video" class="bg-video" autoplay muted loop playsinline>
+        <source src="/assets/videos/smoke.mp4" type="video/mp4">
+    </video>
+
+    <!-- Glitch Overlay -->
+    <div class="glitch-overlay"></div>
 
     <!-- Ana Konteyner -->
-    <div id="main-container" class="main-container">
-        <!-- Üst Menü -->
-        <header class="header">
-            <div class="logo">ZENCİMAFYA</div>
-            <nav class="nav">
-                <a href="index.html" class="nav-item active">Ana Sayfa</a>
-                <a href="forum.html" class="nav-item">Forum</a>
-                <a href="#" class="nav-item">Kurallar</a>
-                <a href="#" class="nav-item">Hakkında</a>
-            </nav>
-            <div class="user-menu">
-                <div id="user-info" class="user-info">
-                    <img id="user-avatar" src="assets/images/default-avatar.png" alt="Avatar" class="avatar">
-                    <span id="username" class="username"></span>
-                </div>
-                <div class="dropdown-menu">
-                    <a href="#" id="profile-link">Profilim</a>
-                    <a href="#" id="settings-link">Ayarlar</a>
-                    <a href="#" id="logout-link">Çıkış Yap</a>
-                </div>
-            </div>
-        </header>
+    <div class="container">
+        <!-- Logo Glitch -->
+        <div class="logo-container">
+            <h1 class="glitch-text" data-text="ZENCİMAFYA">ZENCİMAFYA</h1>
+            <div class="subtitle">Gölgelerin Efendileri</div>
+        </div>
+
+        <!-- Giriş Mesajı -->
+        <div class="entry-message">
+            <div class="typewriter">Hoş geldin, cesur yürekli...</div>
+            <div class="flicker-text">Buraya girenlerin %80'i geri dönemez</div>
+        </div>
 
         <!-- Ana İçerik -->
         <main class="main-content">
-            <!-- Kategoriler -->
-            <section class="categories-section">
-                <h2 class="section-title">Kategoriler</h2>
-                <div id="categories-list" class="categories-list">
-                    <!-- Kategoriler JavaScript ile doldurulacak -->
+            <!-- Bölüm 1: Giriş -->
+            <section class="section blood-splatter">
+                <h2 class="section-title glitch-text" data-text="BİZ KİMİZ?">BİZ KİMİZ?</h2>
+                <div class="content-box">
+                    <p class="typing-text">
+                        Gölgelerin arasında yaşayan, karanlığın efendileri...
+                        Biz sadece bir mafya değiliz. Biz bir aile, bir güç, bir efsaneyiz.
+                    </p>
+                    <div class="blood-drip"></div>
                 </div>
             </section>
 
-            <!-- Son Konular -->
-            <section class="topics-section">
-                <h2 class="section-title">Son Konular</h2>
-                <div id="topics-list" class="topics-list">
-                    <!-- Konular JavaScript ile doldurulacak -->
+            <!-- Bölüm 2: Güç Gösterisi -->
+            <section class="section power-showcase">
+                <h2 class="section-title glitch-text" data-text="GÜCÜMÜZ">GÜCÜMÜZ</h2>
+                <div class="power-grid">
+                    <div class="power-item" data-power="territory">
+                        <div class="power-number">13</div>
+                        <div class="power-label">Bölge</div>
+                    </div>
+                    <div class="power-item" data-power="members">
+                        <div class="power-number">666</div>
+                        <div class="power-label">Üye</div>
+                    </div>
+                    <div class="power-item" data-power="operations">
+                        <div class="power-number">999</div>
+                        <div class="power-label">Operasyon</div>
+                    </div>
                 </div>
             </section>
 
-            <!-- İstatistikler -->
-            <section class="stats-section">
-                <h2 class="section-title">Forum İstatistikleri</h2>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-topics">0</div>
-                        <div class="stat-label">Toplam Konu</div>
+            <!-- Bölüm 3: Kurallar -->
+            <section class="section rules">
+                <h2 class="section-title glitch-text" data-text="KURALLAR">KURALLAR</h2>
+                <div class="rules-container">
+                    <div class="rule-item">
+                        <span class="rule-number">01</span>
+                        <p class="rule-text">Asla ihanet etme</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-comments">0</div>
-                        <div class="stat-label">Toplam Yorum</div>
+                    <div class="rule-item">
+                        <span class="rule-number">02</span>
+                        <p class="rule-text">Aile her şeyden önce gelir</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="total-users">0</div>
-                        <div class="stat-label">Üye Sayısı</div>
+                    <div class="rule-item">
+                        <span class="rule-number">03</span>
+                        <p class="rule-text">Sessizlik altındır</p>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="online-users">0</div>
-                        <div class="stat-label">Çevrimiçi</div>
-                    </div>
+                </div>
+            </section>
+
+            <!-- Bölüm 4: Katılım -->
+            <section class="section join">
+                <h2 class="section-title glitch-text" data-text="KATILIM">KATILIM</h2>
+                <div class="join-container">
+                    <p class="warning-text">Bu kapıdan girenlerin geri dönüşü yoktur</p>
+                    <button class="join-button" data-text="KATIL">
+                        <span class="button-text">KATIL</span>
+                        <span class="button-glitch"></span>
+                    </button>
                 </div>
             </section>
         </main>
 
-        <!-- Alt Bilgi -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>ZENCİMAFYA</h3>
-                    <p>Güvenli ve anonim forum platformu</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Hızlı Bağlantılar</h3>
-                    <a href="#">Kurallar</a>
-                    <a href="#">Gizlilik Politikası</a>
-                    <a href="#">İletişim</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Bağlantı Durumu</h3>
-                    <div class="connection-status">
-                        <span class="status-dot"></span>
-                        <span class="status-text">TOR + VPN AKTİF</span>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 ZENCİMAFYA. Tüm hakları saklıdır.</p>
-            </div>
-        </footer>
+        <!-- Gizli Mesajlar -->
+        <div class="hidden-messages">
+            <div class="message" data-message="1">SENİ İZLİYORUZ</div>
+            <div class="message" data-message="2">GERİ DÖNMEK İÇİN ÇOK GEÇ</div>
+            <div class="message" data-message="3">BİZ HER YERDEYİZ</div>
+        </div>
+
+        <!-- Ses Efektleri -->
+        <audio id="ambient-sound" loop>
+            <source src="/assets/sounds/ambient.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="glitch-sound">
+            <source src="/assets/sounds/glitch.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
-    <!-- Biz Kimiz? Bölümü -->
-    <div class="about-section">
-        <div class="about-header">
-            <h2>Biz Kimiz?</h2>
-            <div class="about-badge">Est. 2024</div>
-        </div>
-        
-        <div class="about-content">
-            <div class="about-text">
-                <p class="about-description">
-                    Zencimafya Forum, siber güvenlik ve etik hack dünyasına adım atmak isteyenler için 
-                    güvenli bir öğrenme ve paylaşım platformudur. Amacımız, yeni başlayanlardan 
-                    profesyonellere kadar her seviyeden kullanıcıya destek olmak ve bilgi paylaşımını 
-                    teşvik etmektir.
-                </p>
-                
-                <div class="about-features">
-                    <div class="feature-item">
-                        <span class="feature-icon">🔒</span>
-                        <h3>Güvenli Ortam</h3>
-                        <p>End-to-end şifreleme ve güvenli iletişim protokolleri</p>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <span class="feature-icon">🎓</span>
-                        <h3>Öğrenme Kaynağı</h3>
-                        <p>Detaylı eğitimler, workshop'lar ve kaynaklar</p>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <span class="feature-icon">🤝</span>
-                        <h3>Topluluk</h3>
-                        <p>Aktif ve destekleyici bir topluluk</p>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <span class="feature-icon">⚡</span>
-                        <h3>Güncel Bilgi</h3>
-                        <p>Sürekli güncellenen içerik ve güvenlik haberleri</p>
-                    </div>
-                </div>
+    <!-- Cursor Efekti -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
 
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">1000+</span>
-                        <span class="stat-label">Üye</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">5000+</span>
-                        <span class="stat-label">Konu</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">Destek</span>
-                    </div>
-                </div>
-
-                <div class="about-rules">
-                    <h3>Topluluk Kuralları</h3>
-                    <ul>
-                        <li>Etik hack ve siber güvenlik odaklı içerik</li>
-                        <li>Saygılı ve yapıcı iletişim</li>
-                        <li>Bilgi paylaşımı ve işbirliği</li>
-                        <li>Gizlilik ve güvenlik önceliği</li>
-                    </ul>
-                </div>
-
-                <div class="about-join">
-                    <h3>Bize Katılın</h3>
-                    <p>
-                        Siber güvenlik dünyasında yolculuğunuza bizimle devam edin. 
-                        Yeni başlayanlar için özel eğitimler, deneyimli üyeler için 
-                        ileri düzey workshop'lar ve herkes için güvenli bir öğrenme 
-                        ortamı sunuyoruz.
-                    </p>
-                    <button class="terminal-button" onclick="window.location.href='register.html'">
-                        Hemen Katıl
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Scripts -->
+    <script src="/assets/js/glitch.js"></script>
+    <script src="/assets/js/cursor.js"></script>
+    <script src="/assets/js/audio.js"></script>
+    <script src="/assets/js/effects.js"></script>
     <script>
         // Sayfa yüklendiğinde
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Token kontrolü
-            if (!auth.isAuthenticated()) {
-                window.location.href = 'login.html';
-                return;
-            }
-
-            // Yükleme ekranını göster
-            showLoadingScreen();
+        document.addEventListener('DOMContentLoaded', () => {
+            // CRT efekti başlat
+            initCRTEffect();
             
-            try {
-                // Kullanıcı bilgilerini güncelle
-                updateUserInfo();
-                
-                // Kategorileri yükle
-                await loadCategories();
-                
-                // Son konuları yükle
-                await loadLatestTopics();
-                
-                // İstatistikleri güncelle
-                updateStats();
-                
-                // Event listener'ları ekle
-                setupEventListeners();
-            } catch (error) {
-                console.error('Sayfa yükleme hatası:', error);
-                showError('Sayfa yüklenirken bir hata oluştu');
-            } finally {
-                // Yükleme ekranını gizle
-                hideLoadingScreen();
-            }
+            // Glitch efektlerini başlat
+            initGlitchEffects();
+            
+            // Ses efektlerini başlat
+            initAudioEffects();
+            
+            // Mouse takibi
+            initCursorEffects();
+            
+            // Rastgele glitch efektleri
+            setInterval(() => {
+                if (Math.random() > 0.95) {
+                    triggerRandomGlitch();
+                }
+            }, 2000);
+            
+            // Gizli mesajları göster
+            initHiddenMessages();
         });
 
-        // Yükleme ekranını göster
-        function showLoadingScreen() {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                loadingScreen.classList.add('visible');
-            }
-        }
-
-        // Yükleme ekranını gizle
-        function hideLoadingScreen() {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                loadingScreen.classList.remove('visible');
-            }
-        }
-
-        // Kullanıcı bilgilerini güncelle
-        function updateUserInfo() {
-            const user = auth.getCurrentUser();
-            if (user) {
-                const usernameElement = document.getElementById('username');
-                const avatarElement = document.getElementById('user-avatar');
-                
-                if (usernameElement) {
-                    usernameElement.textContent = user.username;
-                }
-                
-                if (avatarElement && user.avatar) {
-                    avatarElement.src = user.avatar;
-                }
-            }
-        }
-
-        // Kategorileri yükle
-        async function loadCategories() {
-            const categoriesList = document.getElementById('categories-list');
-            if (!categoriesList) return;
-
-            try {
-                const categories = forum.getCategories();
-                
-                categoriesList.innerHTML = categories.map(category => `
-                    <div class="category-card" data-id="${category.id}">
-                        <div class="category-icon">${category.icon}</div>
-                        <div class="category-info">
-                            <h3 class="category-name">${category.name}</h3>
-                            <p class="category-description">${category.description}</p>
-                        </div>
-                        <div class="category-stats">
-                            <span class="topic-count">${category.topicCount || 0} Konu</span>
-                            <span class="comment-count">${category.commentCount || 0} Yorum</span>
-                        </div>
-                    </div>
-                `).join('');
-
-                // Kategori tıklama olaylarını ekle
-                document.querySelectorAll('.category-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const categoryId = card.dataset.id;
-                        window.location.href = `forum.html?category=${categoryId}`;
-                    });
-                });
-            } catch (error) {
-                console.error('Kategori yükleme hatası:', error);
-                showError('Kategoriler yüklenirken bir hata oluştu');
-            }
-        }
-
-        // Son konuları yükle
-        async function loadLatestTopics() {
-            const topicsList = document.getElementById('topics-list');
-            if (!topicsList) return;
-
-            try {
-                const topics = forum.getTopics();
-                
-                topicsList.innerHTML = topics.slice(0, 5).map(topic => `
-                    <div class="topic-card" data-id="${topic.id}">
-                        <div class="topic-info">
-                            <h3 class="topic-title">${topic.title}</h3>
-                            <div class="topic-meta">
-                                <span class="author">${topic.author.username}</span>
-                                <span class="date">${new Date(topic.createdAt).toLocaleDateString()}</span>
-                            </div>
-                        </div>
-                        <div class="topic-stats">
-                            <span class="view-count">${topic.viewCount} Görüntülenme</span>
-                            <span class="comment-count">${topic.commentCount} Yorum</span>
-                        </div>
-                    </div>
-                `).join('');
-
-                // Konu tıklama olaylarını ekle
-                document.querySelectorAll('.topic-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const topicId = card.dataset.id;
-                        window.location.href = `topic.html?id=${topicId}`;
-                    });
-                });
-            } catch (error) {
-                console.error('Konu yükleme hatası:', error);
-                showError('Konular yüklenirken bir hata oluştu');
-            }
-        }
-
-        // İstatistikleri güncelle
-        function updateStats() {
-            const topics = forum.getTopics();
-            const comments = forum.getComments();
-            const users = auth.getUsers();
-
-            document.getElementById('total-topics').textContent = topics.length;
-            document.getElementById('total-comments').textContent = comments.length;
-            document.getElementById('total-users').textContent = users.length;
-            document.getElementById('online-users').textContent = users.filter(u => u.isOnline).length;
-        }
-
-        // Event listener'ları ekle
-        function setupEventListeners() {
-            // Çıkış yapma
-            const logoutLink = document.getElementById('logout-link');
-            if (logoutLink) {
-                logoutLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    auth.logout();
-                    window.location.href = 'login.html';
-                });
-            }
-
-            // Profil sayfası
-            const profileLink = document.getElementById('profile-link');
-            if (profileLink) {
-                profileLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const user = auth.getCurrentUser();
-                    if (user) {
-                        window.location.href = `profile.html?id=${user.id}`;
-                    }
-                });
-            }
-
-            // Ayarlar sayfası
-            const settingsLink = document.getElementById('settings-link');
-            if (settingsLink) {
-                settingsLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'settings.html';
-                });
-            }
-        }
-
-        // Hata mesajı göster
-        function showError(message) {
-            // Hata mesajı gösterimi için bir modal veya toast eklenebilir
-            console.error(message);
-            alert(message);
-        }
+        // Katılım butonu
+        document.querySelector('.join-button').addEventListener('click', () => {
+            // Ekranı karart
+            document.body.classList.add('fade-to-black');
+            
+            // Ürpertici ses efekti
+            playScarySound();
+            
+            // 3 saniye sonra yönlendir
+            setTimeout(() => {
+                window.location.href = '/initiation.html';
+            }, 3000);
+        });
     </script>
 </body>
 </html> 

@@ -1,0 +1,323 @@
+/* Glitch Efektleri */
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes glitch-text {
+    0% {
+        text-shadow: 0.05em 0 0 #ff0000, -0.05em -0.025em 0 #00ff00,
+                     0.025em 0.05em 0 #0000ff;
+    }
+    14% {
+        text-shadow: 0.05em 0 0 #ff0000, -0.05em -0.025em 0 #00ff00,
+                     0.025em 0.05em 0 #0000ff;
+    }
+    15% {
+        text-shadow: -0.05em -0.025em 0 #ff0000, 0.025em 0.025em 0 #00ff00,
+                     -0.05em -0.05em 0 #0000ff;
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 #ff0000, 0.025em 0.025em 0 #00ff00,
+                     -0.05em -0.05em 0 #0000ff;
+    }
+    50% {
+        text-shadow: 0.025em 0.05em 0 #ff0000, 0.05em 0 0 #00ff00,
+                     0 -0.05em 0 #0000ff;
+    }
+    99% {
+        text-shadow: 0.025em 0.05em 0 #ff0000, 0.05em 0 0 #00ff00,
+                     0 -0.05em 0 #0000ff;
+    }
+    100% {
+        text-shadow: -0.025em 0 0 #ff0000, -0.025em -0.025em 0 #00ff00,
+                     -0.025em -0.05em 0 #0000ff;
+    }
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 1;
+    }
+    5% {
+        opacity: 0.8;
+    }
+    10% {
+        opacity: 1;
+    }
+    15% {
+        opacity: 0.9;
+    }
+    20% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.7;
+    }
+    30% {
+        opacity: 1;
+    }
+    35% {
+        opacity: 0.8;
+    }
+    40% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 1;
+    }
+    55% {
+        opacity: 0.7;
+    }
+    60% {
+        opacity: 1;
+    }
+    65% {
+        opacity: 0.8;
+    }
+    70% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.9;
+    }
+    80% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Glitch Overlay */
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+    animation: flicker 0.15s infinite;
+}
+
+/* Glitch Text */
+.glitch-text {
+    position: relative;
+    font-family: 'Creepster', cursive;
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0.05em 0 0 #ff0000, -0.025em -0.025em 0 #00ff00,
+                 0.025em 0.05em 0 #0000ff;
+    animation: glitch-text 0.5s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff0000;
+    animation: glitch 0.3s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: 2px 0 #00ff00;
+    animation: glitch 0.3s infinite reverse;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+/* Flicker Text */
+.flicker-text {
+    font-family: 'Terminal', monospace;
+    font-size: 1.2rem;
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+    animation: flicker 0.5s infinite;
+}
+
+/* Blood Drip Effect */
+.blood-drip {
+    position: relative;
+    height: 2px;
+    background: #ff0000;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.blood-drip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #ff0000, transparent);
+    animation: drip 2s infinite;
+}
+
+@keyframes drip {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Power Numbers */
+.power-number {
+    font-family: 'Creepster', cursive;
+    font-size: 3rem;
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 10px #ff0000;
+    }
+    50% {
+        text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000;
+    }
+    100% {
+        text-shadow: 0 0 10px #ff0000;
+    }
+}
+
+/* Join Button */
+.join-button {
+    position: relative;
+    padding: 15px 40px;
+    font-family: 'Creepster', cursive;
+    font-size: 1.5rem;
+    color: #ff0000;
+    background: transparent;
+    border: 2px solid #ff0000;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.join-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 0, 0, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.join-button:hover::before {
+    left: 100%;
+}
+
+.join-button:hover {
+    background: #ff0000;
+    color: #000;
+    box-shadow: 0 0 20px #ff0000;
+}
+
+/* Hidden Messages */
+.hidden-messages {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.message {
+    position: absolute;
+    font-family: 'Creepster', cursive;
+    font-size: 2rem;
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s;
+}
+
+.message.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ff0000;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+}
+
+.cursor-trail {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #ff0000;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.5;
+    transition: all 0.3s;
+} 

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+                            http://www.google.com/schemas/sitemap-image/1.1
+                            http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
+
+    <!-- Ana Sayfa -->
+    <url>
+        <loc>https://zencimafya.com/</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://zencimafya.com/assets/images/logo.png</image:loc>
+            <image:title>Zencimafya Logo</image:title>
+        </image:image>
+    </url>
+
+    <!-- Hakkımızda Sayfası -->
+    <url>
+        <loc>https://zencimafya.com/about</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://zencimafya.com/assets/images/about.jpg</image:loc>
+            <image:title>Zencimafya Hakkında</image:title>
+        </image:image>
+    </url>
+
+    <!-- Üyeler Sayfası -->
+    <url>
+        <loc>https://zencimafya.com/members</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Kurallar Sayfası -->
+    <url>
+        <loc>https://zencimafya.com/rules</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- İletişim Sayfası -->
+    <url>
+        <loc>https://zencimafya.com/contact</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Blog Sayfası -->
+    <url>
+        <loc>https://zencimafya.com/blog</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Galeri Sayfası -->
+    <url>
+        <loc>https://zencimafya.com/gallery</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://zencimafya.com/assets/images/gallery/1.jpg</image:loc>
+            <image:title>Zencimafya Galeri 1</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://zencimafya.com/assets/images/gallery/2.jpg</image:loc>
+            <image:title>Zencimafya Galeri 2</image:title>
+        </image:image>
+    </url>
+
+    <!-- SSS Sayfası -->
+    <url>
+        <loc>https://zencimafya.com/faq</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Gizlilik Politikası -->
+    <url>
+        <loc>https://zencimafya.com/privacy</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Kullanım Koşulları -->
+    <url>
+        <loc>https://zencimafya.com/terms</loc>
+        <lastmod>2024-03-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+</urlset> 
