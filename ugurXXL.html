@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UgurHUB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .age-verify {
+            background: #1b1b1b;
+            max-width: 1024px;
+            width: 100%;
+            padding: 45px 20px;
+            text-align: center;
+            border-radius: 0;
+            position: relative;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: #fff;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0.5;
+        }
+
+        .language-selector img {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+        }
+
+        .logo {
+            margin-bottom: 35px;
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .logo span {
+            background: #ff9000;
+            color: #000;
+            padding: 0 6px;
+            border-radius: 2px;
+            font-weight: 900;
+        }
+
+        .warning-title {
+            font-size: 34px;
+            margin-bottom: 25px;
+            color: #fff;
+            font-weight: 400;
+        }
+
+        .warning-text {
+            color: #cccccc;
+            margin-bottom: 35px;
+            line-height: 1.5;
+            font-size: 14px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+
+        .verify-button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            font-weight: 600;
+            min-width: 220px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .enter-button {
+            background: #ff9000;
+            color: #000;
+        }
+
+        .enter-button:hover {
+            background: #ff8000;
+        }
+
+        .exit-button {
+            background: #272727;
+            color: #fff;
+        }
+
+        .exit-button:hover {
+            background: #323232;
+        }
+
+        .footer-text {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text a {
+            color: #ff9000;
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        #mainContent {
+            display: none;
+        }
+
+        .funny-agreement {
+            display: none;
+            color: #ccc;
+            line-height: 1.6;
+            text-align: left;
+            padding: 25px;
+            background: #272727;
+            margin: 20px auto;
+            max-width: 720px;
+            font-size: 14px;
+        }
+
+        .funny-agreement h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        .rta-logo {
+            margin-top: 10px;
+            opacity: 0.5;
+        }
+
+        .rta-logo img {
+            height: 24px;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .age-verify { padding: 30px 15px; }
+            .logo { font-size: 32px; margin-bottom: 25px; }
+            .warning-title { font-size: 24px; }
+            .button-container { 
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .verify-button { 
+                width: 100%;
+                max-width: 280px;
+            }
+            .warning-text {
+                font-size: 13px;
+                padding: 0 15px;
+            }
+        }
+
+        /* Matrix yağmuru efekti */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .matrix-char {
+            position: absolute;
+            color: #00ff00;
+            font-family: 'VT323', monospace;
+            font-size: 14px;
+            animation: matrix-fall 3s linear infinite;
+        }
+
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Ana konteyner */
+        .container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, rgba(0,0,0,0.9) 70%);
+        }
+
+        /* Uyarı çerçevesi */
+        .warning-frame {
+            border: 3px solid #ff0000;
+            border-radius: 10px;
+            padding: 30px;
+            background: rgba(0,0,0,0.8);
+            box-shadow: 0 0 50px rgba(255,0,0,0.5);
+            animation: pulse 2s ease-in-out infinite;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 50px rgba(255,0,0,0.5); }
+            50% { box-shadow: 0 0 100px rgba(255,0,0,0.8); }
+        }
+
+        /* Başlık */
+        .main-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #ff0000;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        /* Alt başlık */
+        .subtitle {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ff4444;
+            font-weight: 700;
+        }
+
+        /* Uyarı mesajları */
+        .warning-messages {
+            margin: 30px 0;
+        }
+
+        .warning-item {
+            background: rgba(255,0,0,0.1);
+            border-left: 4px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .warning-item h3 {
+            color: #ff0000;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .warning-item p {
+            color: #ff6666;
+            line-height: 1.6;
+        }
+
+        /* Fidye bilgileri */
+        .ransom-info {
+            background: rgba(255,0,0,0.15);
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .ransom-amount {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ff0000;
+            text-shadow: 0 0 15px #ff0000;
+            margin: 20px 0;
+        }
+
+        .countdown {
+            font-size: 1.8rem;
+            color: #ff4444;
+            margin: 20px 0;
+            font-family: 'VT323', monospace;
+        }
+
+        /* Butonlar */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: 2px solid #ff0000;
+            background: transparent;
+            color: #ff0000;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: #ff0000;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255,0,0,0.8);
+            transform: scale(1.05);
+        }
+
+        .btn-danger {
+            background: #ff0000;
+            color: #000;
+        }
+
+        .btn-danger:hover {
+            background: #cc0000;
+            color: #fff;
+        }
+
+        /* İkonlar */
+        .icon {
+            font-size: 2rem;
+            margin: 0 10px;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Ek efektler */
+        .scanner-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff0000, transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .corner-warning {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            color: #ff6666;
+            font-family: 'VT323', monospace;
+        }
+
+        .thank-you-message {
+            display: none;
+            color: #ff9000;
+            font-size: 24px;
+            margin: 30px 0 20px;
+            font-weight: 600;
+        }
+
+        .continue-button {
+            display: none;
+            background: #ff9000;
+            color: #000;
+            padding: 12px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            font-weight: 600;
+            margin: 20px auto;
+        }
+
+        .continue-button:hover {
+            background: #ff8000;
+        }
+
+        .button-container.hidden {
+            display: none;
+        }
+
+        /* Terminal Styles */
+        #mainContent {
+            background: #000;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .terminal-header {
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-title {
+            font-size: 24px;
+            color: #ff0000;
+            text-shadow: 0 0 10px rgba(255,0,0,0.5);
+        }
+
+        .terminal-status {
+            color: #ff0000;
+            font-size: 14px;
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+        }
+
+        .terminal-output {
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+
+        .terminal-line {
+            margin: 5px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .terminal-line.error {
+            color: #ff0000;
+        }
+
+        .terminal-line.warning {
+            color: #ffff00;
+        }
+
+        .terminal-line.success {
+            color: #00ff00;
+        }
+
+        .terminal-progress {
+            width: 100%;
+            height: 20px;
+            background: #111;
+            margin: 10px 0;
+            border: 1px solid #00ff00;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #00ff00;
+            transition: width 0.5s;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .video-container {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0,255,0,0.1);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            from { top: 0; }
+            to { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div id="ageVerification" class="age-verify">
+        <div class="language-selector">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADWSURBVDiNpdMxS0JRGMbx3z3dGhQCaXBpaeslWhqiL9AQRFNNfYGWxj5ENLbVkODQ4tTQEERQQx8gGhwiQQjk4dbwvnC7N7te8Iwv/H+c53nOK6SUGGWmRtpuQAjhBE94wD5+8tQmhHAJ4B7buEIHn/hAE0dYxW5K6b0/P4NmjLGGE5zgDFvYQIIFzOMS9ymlVgjhABsxxhqA6X/e9hpnKaVuPz/GXQjhDXODNgAY6/lZ4Bwt1AdtAJYxg1d8j9gAz6iglFLq/WcDQgjlGONySqk7yq//AX7RJyXwk8nKAAAAAElFTkSuQmCC" alt="Language">
+            English
+        </div>
+        <div class="logo">Ugur<span>HUB</span></div>
+        <h1 class="warning-title">Daha önce Tayland'a gittiniz mi?</h1>
+        <p class="warning-text" id="warningText">
+            This website contains age-restricted materials including nudity and explicit depictions of sexual activity. By entering, you affirm that you are at least 18 years of age or the age of majority in the jurisdiction you are accessing the website from and you consent to viewing sexually explicit content.
+        </p>
+        <div class="funny-agreement" id="funnyAgreement">
+            <h3>Kullanıcı Sözleşmesi</h3>
+            <p>Dikkat: Bu mesajı görüyorsanız çoktan onaylamış sayılırsınız, siteyi kapatmak sizi durumdan kurtarmamakla beraber zencimafyayı evinizin önünde bulmanız ile sonuçlanabilir!</p>
+            <br>
+            <p>Ben, aşağıda adı sanı olmayan bir internet sitesindeki bu tuşa tuşuna basmakla;</p>
+            <br>
+            <p>Tüm kişisel bilgilerimi, düşüncelerimi, favori dondurma aromamı, küflü kolamı, sabah ilk kalktığımda düşündüğüm şeyi</p>
+            <p>Vücudumu, ruhumu, ve gelecekte olası yapay zekâ kopyalarımı,</p>
+            <p>Hafta sonlarımı, tatil planlarımı ve Netflix izleme geçmişimi,</p>
+            <p>Her "Evet" dediğim ama sonra pişman olduğum kararları,</p>
+            <p>Kendim dahil olmak üzere</p>
+            <br>
+            <p>...tamamen bu internet sitesine sonsuz, geri alınamaz ve kuantum boyutta geçerli bir şekilde teslim ettiğimi kabul ve taahhüt ederim.</p>
+            <br>
+            <p>Ayrıca, site sahibi isterse beni sabah 7'de arayabilir, tatil planlarıma dahil olabilir ve en sevdiğim pizzadan bir dilim talep edebilir.</p>
+        </div>
+        <div class="thank-you-message" id="thankYouMessage">
+            Onayladığınız için teşekkür ederiz!
+        </div>
+        <button class="continue-button" id="continueButton" onclick="continueTo()">
+            Siteye Devam Et
+        </button>
+        <div class="button-container" id="verifyButtons">
+            <button class="verify-button enter-button" onclick="handleVerification(true)">Evet, gittim</button>
+            <button class="verify-button exit-button" onclick="handleVerification(false)">Hayır, gitmedim</button>
+        </div>
+        <p class="footer-text">
+            Our <a href="#" target="_blank">parental controls page</a> explains how you can easily block access to this site.
+        </p>
+        <div class="rta-logo">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAABlBMVEUAAAD///+l2Z/dAAAAAnRSTlP/AOW3MEoAAAA2SURBVDjLY2AYBaNgFBAgW+DNmzdEKQTKkacQrpAshdjiZCkczUCjYDQDB8FoGQnDYLQQJB8AANHJBYHvXl9PAAAAAElFTkSuQmCC" alt="RTA">
+        </div>
+        <div class="copyright">© UgurHUB 2024</div>
+    </div>
+
+    <div id="mainContent">
+        <div class="scan-line"></div>
+        <div class="matrix-rain" id="matrixRain"></div>
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-title">ZENCİMAFYA SORGU PANELİ v2.1.7</div>
+                <div class="terminal-status">BAĞLANTI DURUMU: <span class="blink">AKTİF</span></div>
+            </div>
+            <div class="terminal-output" id="terminalOutput">
+                <!-- Terminal çıktıları buraya gelecek -->
+            </div>
+            <div class="video-container" id="videoContainer">
+                <video id="targetVideo" controls>
+                    <source src="klipler/ugurboy.mp4" type="video/mp4">
+                    <source src="klipler/2.webm" type="video/webm">
+                    <source src="klipler/3.webm" type="video/webm">
+                    Video oynatıcınız bu formatı desteklemiyor.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix yağmuru efekti
+        function createMatrixRain() {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'absolute';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            document.getElementById('matrixRain').appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            const drops = [];
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+
+            function draw() {
+                ctx.fillStyle = 'rgba(0,0,0,0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#0F0';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            setInterval(draw, 33);
+        }
+
+        // Terminal çıktı fonksiyonu
+        function addTerminalLine(text, type = '', delay = 0) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const line = document.createElement('div');
+                    line.className = `terminal-line ${type}`;
+                    line.innerHTML = text;
+                    document.getElementById('terminalOutput').appendChild(line);
+                    resolve();
+                }, delay);
+            });
+        }
+
+        // Ana işlem fonksiyonu
+        async function startProcess() {
+            await addTerminalLine('> Sisteme giriş yapılıyor...', '', 1000);
+            await addTerminalLine('> Güvenlik duvarları aşılıyor...', 'warning', 2000);
+            await addTerminalLine('> Tayland CCTV sistemlerine bağlanılıyor...', '', 3000);
+            await addTerminalLine('> Yüz tanıma algoritması çalıştırılıyor...', '', 4000);
+            await addTerminalLine('> Eşleşme bulundu!', 'success', 5000);
+            await addTerminalLine('> UYARI: Hedef Tayland\'da tespit edildi!', 'error', 6000);
+            await addTerminalLine('> Kamera görüntüleri alınıyor...', '', 7000);
+
+            // Geri sayım
+            for(let i = 5; i > 0; i--) {
+                await addTerminalLine(`> Video yükleniyor... ${i}sn`, 'warning', 1000);
+            }
+
+            // Video gösterimi
+            document.getElementById('videoContainer').style.display = 'block';
+            document.getElementById('targetVideo').play();
+        }
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            createMatrixRain();
+            startProcess();
+        });
+
+        function handleVerification(isYes) {
+            const warningText = document.getElementById('warningText');
+            const funnyAgreement = document.getElementById('funnyAgreement');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            const continueButton = document.getElementById('continueButton');
+            const verifyButtons = document.getElementById('verifyButtons');
+            
+            // İlk uyarı metnini gizle
+            warningText.style.display = 'none';
+            // Komik sözleşmeyi göster
+            funnyAgreement.style.display = 'block';
+            // Onay butonlarını gizle
+            verifyButtons.style.display = 'none';
+            // Teşekkür mesajı ve devam butonunu göster
+            thankYouMessage.style.display = 'block';
+            continueButton.style.display = 'block';
+        }
+
+        function continueTo() {
+            document.getElementById('ageVerification').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+        }
+    </script>
+</body>
+</html> 
