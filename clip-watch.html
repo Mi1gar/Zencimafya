@@ -395,6 +395,13 @@
                         <div class="suggested-meta">MortalReminder · 214 izlenme</div>
                     </div>
                 </div>
+                <div class="suggested-card" onclick="openClip('klipler/shen.mkv','Shen Gameplay','MortalReminder','Shen ile mükemmel oyun ve takım koordinasyonu örnekleri.','567 izlenme','4:32')">
+                    <img class="suggested-thumb" src="aatrox_mainpage.jpg" alt="Shen Gameplay">
+                    <div class="suggested-info">
+                        <div class="suggested-title2">Shen Gameplay</div>
+                        <div class="suggested-meta">MortalReminder · 567 izlenme</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -417,7 +424,14 @@
     }
     // Klip kaynağına göre anahtar belirle
     var src = localStorage.getItem('clip_src') || '';
-    var viewsKey = src.includes('3.webm') ? 'views_klip3' : 'views_klip2';
+    var viewsKey;
+    if (src.includes('3.webm')) {
+        viewsKey = 'views_klip3';
+    } else if (src.includes('shen.mkv')) {
+        viewsKey = 'views_klip_shen';
+    } else {
+        viewsKey = 'views_klip2';
+    }
     document.getElementById('clipViews').textContent = getOrSetViews(viewsKey) + ' izlenme';
 
     // Önerilen kliplerden birine tıklanınca aynı şekilde yönlendir

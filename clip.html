@@ -226,6 +226,18 @@
                     <div class="ph-desc">Takım arkadaşının base'de dans etmesiyle başlayan eğlenceli anlar.</div>
                 </div>
             </div>
+            <div class="ph-card" onclick="openClip('klipler/shen.mkv','Shen Gameplay','MortalReminder','Shen ile mükemmel oyun ve takım koordinasyonu örnekleri.',document.getElementById('views3').textContent,'4:32')">
+                <video class="ph-thumb-video" src="klipler/shen.mkv" poster="aatrox_mainpage.jpg" preload="none" muted loop></video>
+                <div class="ph-card-content">
+                    <div class="ph-channel">MortalReminder</div>
+                    <div class="ph-title">Shen Gameplay</div>
+                    <div class="ph-meta">
+                        <span class="ph-views" id="views3"></span>
+                        <span class="ph-duration">4:32</span>
+                    </div>
+                    <div class="ph-desc">Shen ile mükemmel oyun ve takım koordinasyonu örnekleri.</div>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -250,6 +262,7 @@
     }
     document.getElementById('views1').textContent = getOrSetViews('views_klip2') + ' izlenme';
     document.getElementById('views2').textContent = getOrSetViews('views_klip3') + ' izlenme';
+    document.getElementById('views3').textContent = getOrSetViews('views_klip_shen') + ' izlenme';
 
     // Klip kartına tıklayınca bilgileri localStorage'a kaydet ve yönlendir
     function openClip(src, title, channel, desc, views, duration) {
